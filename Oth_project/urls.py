@@ -18,5 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('' , include('Post.urls' , namespace = 'oth')),
+    path('' , include('Post.urls' , namespace = 'oth_post')),
+    path('' , include('Oth_app.urls')),
+    path('' , include('Contact.urls')),
 ]

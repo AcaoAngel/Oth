@@ -63,6 +63,7 @@ my_dirs = list()
 for i in INSTALLED_APPS[6:]:
     my_dirs.append(str(BASE_DIR)+"\\"+i)
     my_dirs.append(str(BASE_DIR)+"\\"+i+"\\"+"templates")
+    my_dirs.append(str(BASE_DIR)+"\\"+i+"\\"+"templates"+"\\"+"superior")
 #-------------------------------------------------------
 
 TEMPLATES = [

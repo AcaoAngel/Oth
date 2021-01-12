@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu</title>
+    <style>
+        #menu{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-transform: uppercase;
+        }
+
+        #menu li{
+            display: inline;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="menu">
+        <li><a href="{% url 'profiles:home' %}">Home</a></li>
+        <li><a href="{% url 'profiles:home' %}">My accouts</a></li><!--not created yet-->
+        <li><a href="{% url 'Post:all_posts' %}">Posts</a></li>
+        <li><a href="{% url 'profiles:home' %}">Who we are</a></li><!--not created yet-->
+        <li><a href="{% url 'Contact:contact' %}">Contact me</a></li>
+    </ul>
+</body>
+</html>

@@ -8,7 +8,15 @@
     </title>
 </head>
 <body>
-    <h1>Pohjan mini, Sivun nimi ja menu</h1><hr><hr>
+    {% if user.is_authenticated %}
+        <h1>Hello, your are logged as {{ user.username }}</h1>
+        <a href="{% url 'profiles:sign_out' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'profiles:sign_up' %}">Register</a>
+        <a href="{% url 'profiles:sign_in' %}">Login</a>
+    {% endif %}
+    
+    <hr><hr>
     
 
     {% block content %}{% endblock %}

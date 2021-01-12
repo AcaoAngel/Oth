@@ -6,3 +6,4 @@ class Contact_form(forms.Form):
     subject=forms.CharField(label="Subject", required=True, max_length=35)
     email=forms.EmailField(label="Email", required=True, max_length=60)
     content=forms.CharField(label="Content", widget=forms.Textarea)
+

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Post',
     'Oth_app',
     'Contact',
+    'profiles',
 ]
 
 MIDDLEWARE = [
@@ -57,21 +58,17 @@ ROOT_URLCONF = 'Oth_project.urls'
 #-----------------------------------------------------
 # Getting dinamically the path, so django server can find templates in different computers
 
-import os
+my_dirs = list()
 
-cwd_windows_path = os.getcwd()
-cwd_python_path = cwd_windows_path.replace(os.sep, '/')
-
-print(cwd_python_path)
-templates = cwd_python_path+"/Oth_app/templates"
-models_templates = templates+"/models_templates"
-
+for i in INSTALLED_APPS[6:]:
+    my_dirs.append(str(BASE_DIR)+"\\"+i)
+    my_dirs.append(str(BASE_DIR)+"\\"+i+"\\"+"templates")
 #-------------------------------------------------------
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [templates, models_templates],
+        'DIRS': my_dirs,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -146,3 +143,7 @@ EMAIL_USE_TLS=True
 EMAIL_PORT=587
 EMAIL_HOST_USER="pythondevelopper0@gmail.com"
 EMAIL_HOST_PASSWORD="lynda_angel01"
+
+LOGIN_URL = '/log_in/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

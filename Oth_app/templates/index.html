@@ -1,15 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>OTH-Omataloushallinta</title>
 	<meta charset="utf-8">
 	<meta name= "viewport" content= "width=device-width, initial-scale=1.0">
-	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"> 
-	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome_free/css/all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css' %}"> 
+	<link rel="stylesheet" type="text/css" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
 	<!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<<<<<<< HEAD
 	<!-- <link rel="shortcut icon" type="image/jpg" href="{% static 'favicon.ico' %}"/>  -->
 	<link rel="preconnect" href="https://fonts.gstatic.com/"> 
+=======
+	<link rel="preconnect" href="https://fonts.gstatic.com/">
+>>>>>>> f9201eb22f5caf34cef368b57b9cd968687a5e62
 
 	
 </head>
@@ -50,11 +54,19 @@
 			<!-- images slider  -->
 		<div class= "slides">
 			<div class="slides">
+<<<<<<< HEAD
 						
 				<div class="slide"><img src="img/raha05.jpg" ></div>				  
    				<div class="slide"><img src="img/raha08.jpg"></div>
    				<div class="slide"><img src="img/raha09.jpg"></div>
    				<div class="slide"><img src="img/raha02.jpg"></div>   
+=======
+					
+   				<div class="slide"><img src="{% static '/media/img/raha05.jpg' %}"></div>		
+   				<div class="slide"><img src="{% static 'media/img/raha08.jpg' %}"></div>
+   				<div class="slide"><img src="{% static 'media/img/raha09.jpg' %}"></div>
+   				<div class="slide"><img src="{% static 'media/img/raha02.jpg' %}"></div>   
+>>>>>>> f9201eb22f5caf34cef368b57b9cd968687a5e62
 				
 			</div>
 		</div>

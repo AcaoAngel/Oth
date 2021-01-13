@@ -64,6 +64,8 @@ my_dirs = list()
 for i in INSTALLED_APPS[6:]:
     my_dirs.append(str(BASE_DIR)+"\\"+i)
     my_dirs.append(str(BASE_DIR)+"\\"+i+"\\"+"templates")
+    my_dirs.append(str(BASE_DIR)+"\\"+i+"\\"+"media")
+    my_dirs.append(str(BASE_DIR)+"\\"+i+"\\"+"media"+"\\"+"img")
     my_dirs.append(str(BASE_DIR)+"\\"+i+"\\"+"templates"+"\\"+"superior")
 #-------------------------------------------------------
 
@@ -137,8 +139,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# STATIC_ROOT = str(BASE_DIR)+'\\'+'static' 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR,  'static')  
+STATICFILES_DIRS = [
+    BASE_DIR / "static",#unused
+    '/var/www/static/',#unused
+]
+
+#Email configuations
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST="smtp.gmail.com"
 EMAIL_USE_TLS=True

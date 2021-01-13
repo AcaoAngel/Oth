@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <title>menu</title>
-    <style>
+    <!-- <style>
         #menu{
             margin: 0;
             padding: 0;
@@ -16,15 +18,40 @@
             display: inline;
             margin: 0 20px;
         }
-    </style>
+    </style> -->
 </head>
 <body>
-    <ul id="menu">
+    <!-- <ul id="menu">
         <li><a href="{% url 'profiles:home' %}">Home</a></li>
-        <li><a href="{% url 'profiles:home' %}">My accouts</a></li><!--not created yet-->
+        <li><a href="{% url 'profiles:home' %}">My accouts</a></li>
         <li><a href="{% url 'Post:all_posts' %}">Posts</a></li>
-        <li><a href="{% url 'profiles:home' %}">Who we are</a></li><!--not created yet-->
+        <li><a href="{% url 'profiles:home' %}">Who we are</a></li>
         <li><a href="{% url 'Contact:contact' %}">Contact me</a></li>
-    </ul>
+    </ul> -->
+
+
+
+    <nav>
+		<div class="menu-nav">
+			<ul>
+				<li class="active"><a href="{% url 'profiles:index' %}"><i class="fa fa-home" ></i>Kotisivu</a> </li>
+				<li class="#"><a href="{% url 'profiles:index' %}">Uutiset</a></i></li>
+                <li class="#"><a href="{% url 'Post:all_posts' %}">Julkaisut</a></li>
+                <li class="#"><a href="{% url 'profiles:home' %}">Who we are</a></li>
+				<li class="#"><a href="{% url 'Contact:contact' %}"><i class="fa fa-phone" ></i>Ota yhteyttä</a></li>
+				
+	
+			</ul>
+	
+		</div>
+	</nav>
+
+
+
+
+
+
+
+    
 </body>
 </html>

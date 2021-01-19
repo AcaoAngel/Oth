@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Oth_app',
     'Contact',
     'profiles',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -138,12 +139,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-# STATIC_ROOT = str(BASE_DIR)+'\\'+'static' 
+ 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",#unused
-    '/var/www/static/',#unused
+STATICFILES_DIRS = [#Here comes the addresses for static files
+    BASE_DIR / "Post",#unused
 ]
 
 #Email configuations

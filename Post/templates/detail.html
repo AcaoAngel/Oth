@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,7 @@
 </head>
 <body>
     {% extends "base.html" %}
+    {% load static %}
 
     {% block title %}Details blogs{% endblock %}
 
@@ -14,6 +16,8 @@
 
         {{post}} <br>
         {{post.content}}
+        {{post.img}}
+        <img src="{% static post.img %}" alt="post img">
 
         <hr>
         <a href="{% url 'Post:edit_post' post.id %}">Edit Post</a>

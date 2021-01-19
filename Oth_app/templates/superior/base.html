@@ -1,8 +1,14 @@
+{% load static %} 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css' %}"> 
+	<link rel="stylesheet" type="text/css" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    
     <title>
         {% block title %} {% endblock %}
     </title>
@@ -11,14 +17,19 @@
     {% include "menu.html" %}
     {% include "profiles_menu.html" %} <!-- this menu is in the profiles app -->
     
-    <hr><hr>
+    <hr>
     
 
     {% block content %}{% endblock %}
 
-    <hr><hr>
+    <hr>
 
-    <p>Footer copyright lynda Angel</p>
+    <footer>
+		<p>
+			Copyright &copy; LynCao - 2021-2022 - All Right Reserved
+		</p>
+		
+	</footer>
 
 
 </body>

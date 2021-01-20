@@ -11,9 +11,11 @@ class Account_value(models.Model):
                                     on_delete=models.CASCADE,#When user deleted profile should be deleted too
                                     null=False, blank=False)#This line tells that cant be a profile without a user 
     account_value = models.DecimalField(max_digits=11, decimal_places=2)
+    def __str__(self):
+        return str(self.user) + "--" + str(self.account_value)
 
 class Movements(models.Model):
-    user = models.OneToOneField(User, 
+    user = models.ForeignKey(User, 
                                     on_delete=models.CASCADE,#When user deleted profile should be deleted too
                                     null=False, blank=False)#This line tells that cant be a profile without a user 
     date = models.DateField(default=date.today)
@@ -32,18 +34,24 @@ class Movements(models.Model):
 
     def __str__(self):
         info = f"""{self.user.username}
-            account value: {self.account_value}
+            id:            {self.id}
             date:          {self.date}
             amount:        {self.amount}
             payee_payer:   {self.payee_payer}
             event:         {self.event}
             message:       {self.message}"""
         return info
+  
 
-@receiver(post_save, sender=Movements)#<---indicates that the function is a receiver of a signal: https://adriennedomingus.com/blog/signals-in-django
+@receiver(post_save, sender=Account_value)#<---indicates that the function is a receiver of a signal: https://adriennedomingus.com/blog/signals-in-django
 def update_account_value(sender, instance, **kwargs):
-    Account_value.account_value = Account_value.account_value + Movements.amount
-    instance.account_value.save()
+    # Account_value.account_value = Account_value.account_value + Movements.amount
+    print("getting in update account_value")
+    print(instance.user.id)
+    editor = Account_value.objects.get(user=instance.user.id)
+    # editor.account_value += instance.amount
+    # print(editor)
+# post_save.connect(update_account_value, sender=Movements)
 
 # @receiver(post_save, sender=User)#<---indicates that the function is a receiver of a signal: https://adriennedomingus.com/blog/signals-in-django
 # def save_profile_user(sender, instance, **kwargs):

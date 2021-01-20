@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    {% extends "base.html" %}
 
-    {% block title %}Details blogs{% endblock %}
+{% extends "base.html" %}
 
-    {% block content %}
+{% block body %}
 
-        {{post}} <br>
-        {{post.content}}
-
-        <hr>
-        <a href="{% url 'Post:edit_post' post.id %}">Edit Post</a>
-
-    {% endblock %}
+<div class="jumbotron banner">
+  <a class="btn btn-primary btn-lg" href="{% url 'Post:edit_post' post.id %}" role="button">Muokkaa julkaisuasi </a>   
+                              
+</div>
+          <div class="card single_post">
+            <img class="card-img-top" src="{{post.img.url}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{post}}</h5>
+              <p class="card-text">{{post.content|safe}}</p> 
+            </div>
+          </div>
+          
+{% endblock body %}
 
 
-</body>
-</html>
+  

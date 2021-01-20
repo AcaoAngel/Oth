@@ -8,12 +8,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css' %}"> 
 	<link rel="stylesheet" type="text/css" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
 	<!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<<<<<<< HEAD
-	<!-- <link rel="shortcut icon" type="image/jpg" href="{% static 'favicon.ico' %}"/>  -->
-	<link rel="preconnect" href="https://fonts.gstatic.com/"> 
-=======
 	<link rel="preconnect" href="https://fonts.gstatic.com/">
->>>>>>> f9201eb22f5caf34cef368b57b9cd968687a5e62
+
 
 	
 </head>
@@ -41,7 +37,7 @@
 			<ul>
 				<li class="active"><a href="#"><i class="fa fa-home" ></i>Kotisivu</a> </li>
 				<li class="#"><a href="uutiset.html">Uutiset</a></i></li>
-				<li class="#"><a href="doc/post.html?">Julkaisut</a></li>
+				<li class="#"><a href="{% url 'Post:all_posts' %}">Julkaisut</a></li>
 				<li class="#"><a href="ota_yhteyta.html"><i class="fa fa-phone" ></i>Ota yhteyttä</a></li>
 				
 	
@@ -51,22 +47,16 @@
 	</nav>
 
 
+
+
 			<!-- images slider  -->
 		<div class= "slides">
-			<div class="slides">
-<<<<<<< HEAD
-						
-				<div class="slide"><img src="img/raha05.jpg" ></div>				  
-   				<div class="slide"><img src="img/raha08.jpg"></div>
-   				<div class="slide"><img src="img/raha09.jpg"></div>
-   				<div class="slide"><img src="img/raha02.jpg"></div>   
-=======
-					
+			<div class="slides">			
    				<div class="slide"><img src="{% static '/media/img/raha05.jpg' %}"></div>		
    				<div class="slide"><img src="{% static 'media/img/raha08.jpg' %}"></div>
    				<div class="slide"><img src="{% static 'media/img/raha09.jpg' %}"></div>
    				<div class="slide"><img src="{% static 'media/img/raha02.jpg' %}"></div>   
->>>>>>> f9201eb22f5caf34cef368b57b9cd968687a5e62
+
 				
 			</div>
 		</div>

@@ -21,7 +21,7 @@ class Movements(models.Model):
                                     on_delete=models.CASCADE,#When user deleted profile should be deleted too
                                     null=False, blank=False)#This line tells that cant be a profile without a user 
     date = models.DateField(null=True, blank=True, default=date.today)
-    amount = models.DecimalField(max_digits=11, decimal_places=2)
+    amount = models.DecimalField(max_digits=11, decimal_places=2, help_text="Insert a negative number if you are paying")
     payee_payer = models.CharField(max_length=50)
     EVENT_CHOICES = [
         ("card", "Card purchase"),
@@ -36,16 +36,6 @@ class Movements(models.Model):
     message = models.TextField(default="This is a default text", blank=True)
     account_value_before = models.DecimalField(max_digits=11, decimal_places=2, help_text="leave empty, generated automatically", default=0)
     account_value_after = models.DecimalField(max_digits=11, decimal_places=2,  help_text="leave empty, generated automatically", default=0)
-
-    def __str__(self):
-        info = f"""{self.user.username}
-            id:            {self.id}
-            date:          {self.date}
-            amount:        {self.amount}
-            payee_payer:   {self.payee_payer}
-            event:         {self.event}
-            message:       {self.message}"""
-        return info
   
 
 @receiver(post_save, sender=Movements)#<-this decorator waits until new movement is created to aply account_value update
@@ -55,13 +45,31 @@ def update_account_value(sender, instance, **kwargs):# instance is the sender ob
     signal for updating the account´s related account_value field calculating 
     the the current amount after paying or receiving money
     """
-
+    pay = ["card", "o_transfer_out", "payment"]
+    print(instance.EVENT_CHOICES)
+    if instance.EVENT_CHOICES in pay:
+        print("got in event choices")
+        if instance.amount > 0:
+            print("number greater the 0")
+            instance.amount = instance.amount *-1
+            print("converted number is", instance.amount)
+            instance.save()
     editor = Account_value.objects.get(user=instance.user.id)
     instance.account_value_before = editor.account_value
     editor.account_value += instance.amount
     instance.account_value_after = editor.account_value
-    instance.save()
     editor.save()
+    
+    #hack to avoid save method from sending a signal. Without it we get recursive error 
+    #EXPLANATION: If you look at the django model source code, specifically save_base(), 
+    # you'll see that the pre_save() and post_save() signals are both wrapped in a conditional:
+    # We can directly manipulate the meta options of a model or instance through
+    # the _meta API which means we're able to 'disable' the signals from firing by setting 
+    # auto_created = True on the instance we want to save.
+    instance._meta.auto_created = True
+    instance.save()
+    instance._meta.auto_created = False
+    
 
 # @receiver(post_save, sender=Movements)#<-this decorator waits until new movement is created to aply account_value update
 # def update_account_value(sender, instance, **kwargs):

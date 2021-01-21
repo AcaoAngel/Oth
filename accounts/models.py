@@ -45,15 +45,7 @@ def update_account_value(sender, instance, **kwargs):# instance is the sender ob
     signal for updating the account´s related account_value field calculating 
     the the current amount after paying or receiving money
     """
-    pay = ["card", "o_transfer_out", "payment"]
-    print(instance.EVENT_CHOICES)
-    if instance.EVENT_CHOICES in pay:
-        print("got in event choices")
-        if instance.amount > 0:
-            print("number greater the 0")
-            instance.amount = instance.amount *-1
-            print("converted number is", instance.amount)
-            instance.save()
+    
     editor = Account_value.objects.get(user=instance.user.id)
     instance.account_value_before = editor.account_value
     editor.account_value += instance.amount

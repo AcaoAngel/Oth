@@ -1,23 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    {% extends "base.html" %}
 
-    {% block title %}Create blog{% endblock %}
+{% extends "post_templates/base.html" %}
+{% load bootstrap4 %}
+{% block body %}
+ 
+<div class='Post_form'>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    {% bootstrap_form form %}
+    {% buttons %}
+    
+        
+        <button type="submit"  class="btn btn-primary" >Tallenna julkaisu</button>
+        
+    {% endbuttons %}
+  </form>
+</div>
 
-    {% block content %}
 
-	  <form method="post" enctype="multipart/form-data">
+{% endblock body %}   
   
-	  	{% csrf_token %}
-	  	{{form}}
-	  	
-	    <button type="submit"	class="btn btn-primary">Save Post</button>
-	  </form>
-
-    {% endblock %}

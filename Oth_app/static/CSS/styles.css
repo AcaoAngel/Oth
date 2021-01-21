@@ -8,6 +8,7 @@ body{
 	overflow-x: hidden;
 	
 	
+	
 }
 
 
@@ -235,6 +236,7 @@ div.slides {
 
 
 
+
 /* footer */
 
 footer{
@@ -247,6 +249,22 @@ footer{
 	justify-content: space-around;
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media print {
 	footer {page-break-after: always;}
@@ -340,3 +358,5 @@ footer{
 		
 	}	
 }  
+
+

@@ -1,21 +1,54 @@
-{% load static %} 
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css' %}"> 
-	<link rel="stylesheet" type="text/css" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
-	<!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <link rel="preconnect" href="https://fonts.gstatic.com/">
+	<title>OTH-Omataloushallinta</title>
+	<meta charset="utf-8">
+	<meta name= "viewport" content= "width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css' %}"> 
+	<link rel="stylesheet" type="text/css" href="{% static ' font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com/">
+
+	
+</head>
+
+<body>
+
+
+
+	<!-- balise pour le haut de page -->
+	<header>
+
+		<div class= "title-box">
+       		<!-- page tiltle -->
+       		<h2 > OTH-Omataloushallinta</h2>	
+       		<!-- page slogan -->
+       		<p >Älä epäröi hoitaa talouttasi!</p>
+		</div>
+
+	<!-- menu de navigation -->
+    <nav>
+		<div class="menu-nav">
+			<ul>
+				<li class="active"><a href="{% url 'profiles:index' %}"><i class="fa fa-home" ></i>Kotisivu</a> </li>
+                <li class="#"><a href="{% url 'Post:all_posts' %}">Julkaisut</a></li>
+                <li class="#"><a href="{% url 'profiles:index' %}">Tietoa Oth:sta</a></li>
+				<li class="#"><a href="{% url 'Contact:contact' %}"><i class="fa fa-phone" ></i>Ota yhteyttä</a></li>	
+	
+			</ul>
+	
+		</div>
+	</nav>
+
     
     <title>
         {% block title %} {% endblock %}
     </title>
 </head>
 <body>
-    {% include "menu.html" %}
-    {% include "profiles_menu.html" %} <!-- this menu is in the profiles app -->
+    <!-- {% include "menu.html" %} -->
+    {% include "profiles_menu.html" %}  
     
     <hr>
     
@@ -24,13 +57,8 @@
 
     <hr>
 
-    <footer>
-		<p>
-			Copyright &copy; LynCao - 2021-2022 - All Right Reserved
-		</p>
-		
-	</footer>
 
 
-</body>
-</html>
+
+
+

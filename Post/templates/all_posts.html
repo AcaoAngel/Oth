@@ -1,31 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    {% extends "base.html" %}
 
-    {% block title %}All posts{% endblock %}
+{% extends "post_templates/base.html" %}
+<!-- {% block title  %} allpost
+{% endblock title %} -->
+{% block body %}
 
-    {% block content %}
+<div class="jumbotron banner">
+    <a class="btn btn-primary btn-lg" href="{% url 'Post:create_post' %}" role="button">Luo uusi julkaisu </a>
+    
+</div>
+        {% for post in all_posts %}
+        <div class='col-md-4'>
+          <div class="card">
+            {% if post.img %}
+            <img class="card-img-top" src="{{post.img.url}}" alt="Card image cap">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{post.title}}</h5>
+              <p class="card-text">{{post.content|safe|truncatewords:10}}</p>
+              <a href="{% url 'Post:post' post.id %}" class="btn btn-primary">Lue lisää</a>
+            </div> 
+          </div>
+        </div>
+        {% endfor %}
+        
+{% endblock body %} 
 
-      <h1>Welcome in our Blog</h1>
-  
-      <a href="{% url 'Post:create_post' %}">Add new Post</a>
-      
-      
-      {% for post in all_posts %}
-      
-        <h3><a href="{% url 'Post:post' post.id %}">{{post.title}}</a></h3>
-      
-      {% endfor %}
-
-    {% endblock %}
 
 
-</body>
-</html>
 

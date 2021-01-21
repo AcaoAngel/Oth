@@ -15,11 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('' , include('Post.urls' , namespace = 'post')),
+    # path('' , include('Post.urls' , namespace = 'Post')),
+    path('' , include('Post.urls' , namespace = 'Post')),
     path('' , include('Oth_app.urls', namespace='oth')),
     path('' , include('Contact.urls', namespace='contact')),
     path('' , include('profiles.urls', namespace='profiles')),
-]
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+ 

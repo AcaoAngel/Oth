@@ -1,28 +1,8 @@
-<<<<<<< HEAD
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    {% extends "base.html" %}
-    {% load static %}
-=======
->>>>>>> posti-kehitety
-
-{% extends "base.html" %}
+{% extends "post_templates/base.html" %}
 
 {% block body %}
 
-<<<<<<< HEAD
-        {{post}} <br>
-        {{post.content}}
-        {{post.img}}
-        <img src="{% static post.img %}" alt="post img">
-=======
 <div class="jumbotron banner">
   <a class="btn btn-primary btn-lg" href="{% url 'Post:edit_post' post.id %}" role="button">Muokkaa julkaisuasi </a>   
                               
@@ -36,7 +16,6 @@
           </div>
           
 {% endblock body %}
->>>>>>> posti-kehitety
 
 
   

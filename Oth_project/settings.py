@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Oth_app',
     'Contact',
     'profiles',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -93,12 +94,15 @@ WSGI_APPLICATION = 'Oth_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'PostDB',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': '127.0.0.1',
-        'DATABASE_PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        #------------Configuration for postgresql----------------
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'PostDB',
+        # 'USER': 'postgres',
+        # 'PASSWORD': '1234',
+        # 'HOST': '127.0.0.1',
+        # 'DATABASE_PORT': '5432',
     }
 }
 
@@ -138,12 +142,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-# STATIC_ROOT = str(BASE_DIR)+'\\'+'static' 
+ 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",#unused
-    '/var/www/static/',#unused
+STATICFILES_DIRS = [#Here comes the addresses for static files
+    BASE_DIR / "Post",#unused
 ]
 
 #Email configuations

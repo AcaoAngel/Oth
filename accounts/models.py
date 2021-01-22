@@ -10,16 +10,23 @@ class Account_value(models.Model):
     user = models.ForeignKey(User, 
                                     on_delete=models.CASCADE,#When user deleted profile should be deleted too
                                     null=False, blank=False)#This line tells that cant be a profile without a user 
+    account_name = models.CharField(max_length=100, default="Default account name")
     account_value = models.DecimalField(max_digits=11, decimal_places=2)
+    info = models.TextField(max_length=500, default="Default info text")
+    save_percent = models.DecimalField(max_digits=4, decimal_places=2, default=10)
+    saving_time = models.IntegerField(help_text="Write here month amount for saving goal", default=12)
     date = models.DateField(null=True, blank=True, default=date.today)
     
     def __str__(self):
-        return f"{self.user}: {self.account_value}: {self.date}"
+        return f"{self.user}: {self.account_name}: {self.account_value}"
 
 class Movements(models.Model):
-    user = models.ForeignKey(User, 
+    # user = models.ForeignKey(User, 
+    #                                 on_delete=models.CASCADE,#When user deleted profile should be deleted too
+    #                                 null=False, blank=False)#This line tells that cant be a profile without a user 
+    account_id = models.ForeignKey(Account_value,
                                     on_delete=models.CASCADE,#When user deleted profile should be deleted too
-                                    null=False, blank=False)#This line tells that cant be a profile without a user 
+                                    null=False, blank=False, default=1)#This line tells that cant be a profile without a user
     date = models.DateField(null=True, blank=True, default=date.today)
     amount = models.DecimalField(max_digits=11, decimal_places=2, help_text="Insert a negative number if you are paying")
     payee_payer = models.CharField(max_length=50)
@@ -36,6 +43,9 @@ class Movements(models.Model):
     message = models.TextField(default="This is a default text", blank=True)
     account_value_before = models.DecimalField(max_digits=11, decimal_places=2, help_text="leave empty, generated automatically", default=0)
     account_value_after = models.DecimalField(max_digits=11, decimal_places=2,  help_text="leave empty, generated automatically", default=0)
+
+    def __str__(self):
+        return f"{self.account_id}: {self.date}: {self.amount}: {self.payee_payer}: {self.event}: "
   
 
 @receiver(post_save, sender=Movements)#<-this decorator waits until new movement is created to aply account_value update
@@ -46,7 +56,8 @@ def update_account_value(sender, instance, **kwargs):# instance is the sender ob
     the the current amount after paying or receiving money
     """
     
-    editor = Account_value.objects.get(user=instance.user.id)
+    editor = Account_value.objects.get(id=instance.account_id.id)#instance.this_table_field.foreign_key_field
+    print(editor)
     instance.account_value_before = editor.account_value
     editor.account_value += instance.amount
     instance.account_value_after = editor.account_value
@@ -62,6 +73,32 @@ def update_account_value(sender, instance, **kwargs):# instance is the sender ob
     instance.save()
     instance._meta.auto_created = False
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # @receiver(post_save, sender=Movements)#<-this decorator waits until new movement is created to aply account_value update
 # def update_account_value(sender, instance, **kwargs):

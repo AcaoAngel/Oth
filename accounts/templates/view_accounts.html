@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Movements {% endblock %}</title>
+</head>
+
+{% block content %}
+
+<body>
+    {% for user_accounts in object_list %}
+    <a href="{% url 'accounts:account_detail' user_accounts.id %}">{{user_accounts.account_name}} Amount: {{user_accounts.account_value}}</a>
+    {% empty %}
+    <p>No accounts yet.</p>
+    {% endfor %}
+    <hr>
+    <a href="{% url 'accounts:create_account' %}">Create new account</a>
+    <a href="{% url 'accounts:movements_form' %}">Movements</a>
+</body>
+
+{% endblock %}
+
+</html>

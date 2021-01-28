@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %} Movements {% endblock %}
+
+{% block content %}
+
+<body>
+    <div>
+        <form action="/movements_form/" method="POST">
+            {% csrf_token %}
+            {{p_m_form}}
+            <input type="submit" value="Save">
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -5,9 +5,6 @@ from django.shortcuts import render
 # def home(request):
 #     return render(request, "home.html")
 
-def accounts(request):
-    return render(request, "accounts.html")
-
 def blog(request):
     return render(request, "blog.html")
 

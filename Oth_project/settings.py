@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'Oth_app',
     'Contact',
     'profiles',
-    'accounts',
+    'accounts.apps.AccountsConfig',#when using signals its better to write the spacific path for the app
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %} Accounts {% endblock %}
+
+{% block content %}
+
+<body>
+    <div>
+        <form action="/create_account/" method="POST", enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- {{form.as_table}} -->
+            {% for field in form %}
+                <label>{{ field.label_tag }}</label>
+                {{ field }}
+                <hr>
+            {% endfor %}
+            <input type="submit" value="Save">
+        </form>
+    </div>
+</body>
+
+{% endblock %}

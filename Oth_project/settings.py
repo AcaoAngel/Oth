@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fontawesome-free',
     'bootstrap4',
+    'django_forms_bootstrap',
     'ckeditor',
     'ckeditor_uploader' ,
     'Post',
@@ -160,7 +161,7 @@ STATICFILES_DIRS = [
 # ]
 
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'oth/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR , "media")
 
 
@@ -255,3 +256,6 @@ EMAIL_HOST_PASSWORD="lynda_angel01"
 LOGIN_URL = '/log_in/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+

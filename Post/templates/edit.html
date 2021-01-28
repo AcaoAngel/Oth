@@ -1,13 +1,13 @@
 
-{% extends "post_templates/base.html" %}
 {% load bootstrap4 %}
-{% block body %}
+
 
 <div class='Post_form'>
     <form method="post" enctype="multipart/form-data">
 
       {% csrf_token %}
-      {{ form.media }} 
+      {{ form.media }}
+     
       {% bootstrap_form form %}
 
       {% buttons %}
@@ -17,5 +17,13 @@
     </form>
   </div>
 
-{% endblock body %}
+
+
+
+
+ 
+
+
+
+
 

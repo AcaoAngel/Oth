@@ -37,7 +37,7 @@ def create_post(request):
 
 	context	= {
 		'form' : form ,
-		'post': post,
+		
 	}
 	return render(request , 'create.html' , context)
 
@@ -57,7 +57,7 @@ def edit_post(request , id):
 
 	context	= {
 		'form' : form ,
-		'post': post,
+		
 		
 	}
 	return render(request , 'edit.html' , context)	
@@ -65,3 +65,4 @@ def edit_post(request , id):
 
 
 
+  

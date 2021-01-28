@@ -1,14 +1,19 @@
 
 .single_post{
     width: 100%;
+    position: unset;
 }
 
 .banner{
     width: 100%;
+    
 }
 
 .Post_form{
     width: 100%;
+  
+  
+    
 }
 
 .massage_div{
@@ -26,3 +31,5 @@
 .messages li{
     padding: 15px;
 }
+
+

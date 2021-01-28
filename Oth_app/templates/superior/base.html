@@ -20,6 +20,8 @@
 	<!-- balise pour le haut de page -->
 	<header>
 
+
+
 		<div class= "title-box">
        		<!-- page tiltle -->
        		<h2 > OTH-Omataloushallinta</h2>	
@@ -43,13 +45,58 @@
 
     
     <title>
-        {% block title %} {% endblock %}
+		{% block title %} {% endblock %}
+		{% block post %} Post {% endblock %}
     </title>
-</head>
-<body>
+
     <!-- {% include "menu.html" %} -->
     {% include "profiles_menu.html" %}  
-    
+	
+	<title>
+		{% block body %} 
+		
+		<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'post-static/css/style.css' %}">
+    <title>Julkaisut</title>
+  </head>
+
+		
+		{% endblock %}
+    </title>
+
+
+	<title>
+		{% block banner %}
+		<div class="jumbotron banner">
+			<a class="btn btn-primary btn-lg" href="{% url 'Post:create_post' %}" role="button">Luo uusi julkaisu </a>    
+		</div>
+
+		{% endblock banner %}
+	</title>
+
+
+
+		<!-- pied de page-->
+		<footer>
+			<p>
+				Copyright &copy; LynCao - 2021-2022 - All Right Reserved
+			</p>
+			
+		</footer>
+
+		
+
+
+
     <hr>
     
 
@@ -59,6 +106,22 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+	
+</head>
+<body>   
+
+
+	
 
 
 

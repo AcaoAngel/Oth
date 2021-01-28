@@ -1,7 +1,7 @@
 
-{% extends "post_templates/base.html" %}
+
 {% load bootstrap4 %}
-{% block body %}
+
  
 <div class='Post_form'>
   <form method="post" enctype="multipart/form-data">
@@ -9,14 +9,18 @@
     {{ form.media }}
     {% bootstrap_form form %}
     {% buttons %}
-    
-        
-        <button type="submit"  class="btn btn-primary" >Tallenna julkaisu</button>
-        
+        <button type="submit"  class="btn btn-primary" >Tallenna julkaisu</button>      
     {% endbuttons %}
   </form>
 </div>
 
 
-{% endblock body %}   
+
   
+
+
+
+
+
+
+

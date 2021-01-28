@@ -27,7 +27,12 @@ urlpatterns = [
     path('' , include('Contact.urls', namespace='contact')),
     path('' , include('profiles.urls', namespace='profiles')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+   
+
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
  
+# if settings.DEBUG: # new
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

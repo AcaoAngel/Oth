@@ -236,6 +236,44 @@ div.slides {
 
 
 
+/* post - allposts styles */
+
+.single_post{
+    width: 100%;
+}
+
+.banner{
+    width: 100%;
+    
+}
+
+.Post_form{
+	width: 100%;
+	
+    
+}
+
+.massage_div{
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.messages{
+    background-color: #2e2e2e;
+    color: white;
+    list-style-type: none;
+}
+
+.messages li{
+    padding: 15px;
+}
+
+
+
+
+
+
 
 /* footer */
 

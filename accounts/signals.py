@@ -18,7 +18,8 @@ def payment(sender, instance, created, **kwargs):# instance is the sender objet(
         editor.save()
         save_without_signal(instance)
     else: #For editing case
-        update_recursively_movements(instance)
+        account_value_tmp = update_current_movement(instance)
+        update_recursively_movements(instance, account_value_tmp)
         
 
 @receiver(post_delete, sender=Movements)
@@ -27,33 +28,44 @@ def undo_payment(sender, instance, **kwargs):
     # editor.account_value = instance.account_value_before#bring back the previous account value
     editor.account_value -= instance.amount#Calculate the new account value
     # instance.account_value_after = editor.account_value#Save the new account value in the movement for references
-    update_recursively_movements()
     editor.save()
+    print(instance.account_value_after)
+    update_recursively_movements(instance, account_value_tmp=instance.account_value_before)
 
-def update_recursively_movements(instance):
-    x = Movements.objects.filter(account_id = instance.account_id.id)#get all the movements of the instanciated user
-    first_row = True
-    account_value_tmp = int()
-    for i in x:
-        if i.date >= instance.date and first_row == True:# Only aply changes for currend edited movement and after it 
-            print(i)
-            editor = Account_value.objects.get(id=instance.account_id.id)
-            previous_amount = instance.account_value_after - instance.account_value_before
-            editor.account_value -= previous_amount#Undo the original movement in the account
-            editor.account_value += instance.amount#Calculate the new account value
-            instance.account_value_after = instance.account_value_before + instance.amount#Save the new account value in the movement for references
-            account_value_tmp = instance.account_value_after
-            editor.save()
-            save_without_signal(instance)
-            first_row = False
+def update_current_movement(instance):
+    current_movement = Movements.objects.get(id=instance.id)#get the object of the current movement
+    editor = Account_value.objects.get(id=instance.account_id.id)#get the object of the linked account
+    previous_amount = instance.account_value_after - instance.account_value_before#before changing the account_value_before and after we get the previous amount
+    editor.account_value -= previous_amount#Undo the previos movement in the account
+    editor.account_value += instance.amount#Calculate the new account value
+    instance.account_value_after = instance.account_value_before + instance.amount#Save the new account value in the movement for references
+    account_value_tmp = instance.account_value_after
+    editor.save()
+    save_without_signal(instance)
+    return account_value_tmp
 
-        elif i.date >= instance.date and first_row == False:
+
+def update_recursively_movements(instance, account_value_tmp):#in instance function takes the user
+    """In this case is not possible to only set if i.date > instance.date becouse when added movements
+    from the admin the time can be exactly the same for some movements when we use 'save and add another' options
+    so works better to allways skip the current edited movement
+
+    Args:
+        instance (Django query object): [Takes the object of the current movement]
+        account_value_tmp (int): the account_value_bejore or after depending of 
+        the accion, for editing its passed the account_value_after, for deleting its needed the account_value_before
+    """
+    user_movements = Movements.objects.filter(account_id = instance.account_id.id)#get all the movements of the instanciated user
+
+    # account_value_tmp = int()
+    for i in user_movements:
+        if i.id > instance.id:
             print("editting", i)
             i.account_value_before = account_value_tmp
             i.account_value_after = account_value_tmp + i.amount
             account_value_tmp = i.account_value_after
             save_without_signal(i)
-            
+ 
 
 
 def save_without_signal(instance):

@@ -2,6 +2,8 @@ from django.shortcuts import render , get_object_or_404 , redirect
 from .models import Post
 from .forms import PostForm
 from django.contrib import messages
+from django.views.generic import ListView, DetailView, CreateView
+
 
 def all_posts(request):
 	all_posts = Post.objects.filter(active=True)
@@ -25,9 +27,9 @@ def post(request , id):
 def create_post(request):
 	
 	if request.method == 'POST':
-		form = PostForm(request.POST)
+		form = PostForm(data=request.POST, files = request.FILES)
 		if form.is_valid():
-			new_form = form.save(commit=False)
+			new_form = form.save()
 			new_form.user = request.user
 			new_form.save()
 			messages.success(request, 'Julkaisu on luotu onnistuneesti')
@@ -40,6 +42,16 @@ def create_post(request):
 		
 	}
 	return render(request , 'create.html' , context)
+
+# class create_post(CreateView):
+#     template_name = "create.html"
+#     model = Post
+#     fields = ['user', 'title', 'content', 'img']
+
+#     def form_valid(self, form):
+#         form.save()
+#         return redirect("/view_accounts/")
+
 
 
 def edit_post(request , id):

@@ -22,6 +22,9 @@ def post(request , id):
 	return render(request , 'detail.html' , context)	
 
 
+
+
+
 def create_post(request):
 	
 	if request.method == 'POST':
@@ -32,15 +35,21 @@ def create_post(request):
 			new_form.save()
 			messages.success(request, 'Julkaisu on luotu onnistuneesti')
 			return redirect('/allposts')
-	else:
-		form = PostForm()
+	# else:
+	# 	form = PostForm()
 
-	context	= {
-		'form' : form ,
+	# context	= {
+	# 	'form' : form ,
 		
-	}
-	return render(request , 'create.html' , context)
+	# }
 
+	
+	form = PostForm()
+
+	
+	# return render(request , 'create.html' , context)
+
+	return render(request , 'create.html' , {"form": form})
 
 def edit_post(request , id):
 	post = get_object_or_404(Post , id=id)

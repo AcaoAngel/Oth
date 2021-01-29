@@ -10,6 +10,6 @@ urlpatterns = [
 	re_path(r'^post/create$', views.create_post, name='create_post'),
 	re_path(r'^post/(?P<id>\d+)/edit$', views.edit_post , name = 'edit_post'),
 	
-	
+	# re_path(r'^post/create$', views.create_post.as_view() , name='create_post'),
 ]
 

@@ -2,10 +2,10 @@
 
 {% block title %}Registrate{% endblock %}
 
-{% block content %}
+{% block body %}
     <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_table }}
         <input type="submit" name="submit">
     </form>    
-{% endblock content %}
+{% endblock  %}

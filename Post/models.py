@@ -7,7 +7,7 @@ from ckeditor.fields import RichTextField
 
 
 class Post(models.Model) :
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
 	title = models.CharField(max_length = 50)
 	content = RichTextField() #TODO learn about rich text fields: https://www.youtube.com/watch?v=mF5jzSXb1dc
 	img = models.ImageField(upload_to = 'post_img/', null=True, blank=True)

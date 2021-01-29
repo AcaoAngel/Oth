@@ -3,13 +3,14 @@ from .models import Post
 from .forms import PostForm
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.models import User
 
 
 def all_posts(request):
 	all_posts = Post.objects.filter(active=True)
 
 	context = {
-		'all_posts' : all_posts , 
+		'all_posts' : all_posts ,
 	}
 	return render(request , 'all_posts.html' , context)
 
@@ -21,63 +22,49 @@ def post(request , id):
 	context = {
 		'post' : post ,
 	}
-	return render(request , 'detail.html' , context)	
+	return render(request , 'detail.html' , context)
 
 
 
 
 
 def create_post(request):
-	
-	if request.method == 'POST':
-		form = PostForm(data=request.POST, files = request.FILES)
-		if form.is_valid():
-			new_form = form.save()
-			new_form.user = request.user
-			new_form.save()
-			messages.success(request, 'Julkaisu on luotu onnistuneesti')
-			return redirect('/allposts')
-	# else:
-	# 	form = PostForm()
+	current_user = User.objects.get(id=request.user.id)
+	if request.user.is_authenticated and current_user.is_staff == 1:
 
-	# context	= {
-	# 	'form' : form ,
-		
-	# }
-	form = PostForm()	
-	# return render(request , 'create.html' , context)
-	return render(request , 'create.html' , {"form": form})
+	    if request.method == 'POST':
+	    	form = PostForm(data=request.POST, files = request.FILES)
+	    	if form.is_valid():
+	    		new_form = form.save(commit=False)
+	    		print(request.user, type(request.user))
+	    		new_form.user = request.user
+	    		new_form.save()
+	    		messages.success(request, 'Julkaisu on luotu onnistuneesti')
+	    		return redirect('/allposts')
+	    form = PostForm()
+	    return render(request , 'create.html' , {"form": form})
+	else:
+		return render(request, "permisions_denied.html" )
 
-# class create_post(CreateView):
-#     template_name = "create.html"
-#     model = Post
-#     fields = ['user', 'title', 'content', 'img']
 
-#     def form_valid(self, form):
-#         form.save()
-#         return redirect("/view_accounts/")
 
 def edit_post(request , id):
-	post = get_object_or_404(Post , id=id)
-	if request.method == 'POST':
-		form = PostForm(request.POST , instance=post)
-		if form.is_valid():
-			new_form = form.save(commit=False)
-			new_form.user = request.user
-			new_form.save()
-			return redirect('/allposts') 
-			
-	else:
-		form = PostForm(instance=post)
-
-	context	= {
-		'form' : form ,
-		
-		
-	}
-	return render(request , 'edit.html' , context)	
+    current_user = User.objects.get(id=request.user.id)
+    if request.user.is_authenticated and current_user.is_staff == 1:#permisions to create and edit posts, change to is_superuser for su permisions
+        post = get_object_or_404(Post, id=id)
+        if request.method == 'POST':
+            form = PostForm(request.POST , instance=post, files = request.FILES)
+            if form.is_valid():
+                new_form = form.save(commit=False)
+                new_form.user = request.user
+                new_form.save()
+                return redirect('/allposts')
+        form = PostForm()
+        return render(request , 'edit.html', {'form':form})
+    else:
+        return render(request, "permisions_denied.html")
 
 
 
 
-  
+

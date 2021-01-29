@@ -2,11 +2,11 @@
 
 {% block title %}Log in{% endblock %}
 
-{% block content %}
+{% block body %}
     <form method="POST">
         {% csrf_token %}
         {{ form.as_table }}
         <input type="submit" name="submit">
     </form>
 
-{% endblock content %}
+{% endblock %}

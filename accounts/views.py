@@ -4,6 +4,7 @@ from .models import Account_value, Movements
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.detail import SingleObjectMixin
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -16,25 +17,46 @@ from django.contrib.auth.models import User
 #     return render(request, "view_accounts.html", {"user_account":account})
 
 class view_accounts(ListView):
-    # model = Account_value
-    template_name = "view_accounts.html"
 
     def get_queryset(self):
-        current_user = Account_value.objects.filter(user_id=self.request.user.id)
-        print(current_user)
-        return current_user
+        if self.request.user.is_authenticated:
+            self.template_name = "view_accounts.html"
+            print("getting into authenticated")
+            current_user_account = Account_value.objects.filter(user_id=self.request.user.id)
+
+            return current_user_account
+            
+        print("getting in else")
+        self.template_name = "access_denied_accounts.html"
 
 
-class account_detail(DetailView):
-    template_name = "account_detail.html"
-    model = Account_value
+def account_detail(request, id):
+    # print("************args",id)
+    print("*******ID***********", type(id), "******", id)
 
-    """The view_accounts.html is sending the id of the clicked account in int format,
-    since DetailView handle it as an object we must converting in the table object
-    using this method
-    """
-    def get_object(self, queryset=None):
-        return Account_value.objects.get(id=self.kwargs.get("id"))
+    account = Account_value.objects.get(id=id)
+    movements = Movements.objects.filter(account_id_id=id)
+    for i in movements:
+        print(i)
+    context = {'account':account, 'movements':movements}
+
+    return render(request, "account_detail.html", context)
+
+
+# class account_detail(DetailView):
+#     template_name = "account_detail.html"
+#     model = Account_value
+
+#     """The view_accounts.html is sending the id of the clicked account in int format,
+#     since DetailView handle it as an object we must convert it in the table object
+#     using this method
+#     """
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['account_value'] = Account_value.objects.get(id=self.kwargs.get("id"))
+#         context['movements'] = Movements.objects.filter(account_id_id=self.request.account_id)
+#         return context
 
 #------------------------------------------------------------------------------------
 class create_account(CreateView):

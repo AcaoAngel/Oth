@@ -39,7 +39,6 @@ class Movements(models.Model):
     date = models.DateTimeField(null=True, blank=True, default=timezone.now())
     amount = models.DecimalField(max_digits=11, decimal_places=2, help_text="Insert a negative number if you are paying", default=10)
     payee_payer = models.CharField(max_length=50, default="default payer")
-    move_to_account = models.ForeignKey(Account_value, on_delete=models.CASCADE, null=True, blank=True)
     event = models.CharField(max_length=14,choices=EVENT_CHOICES, default="card")
     message = models.TextField(default="This is a default text", blank=True)
     account_value_before = models.DecimalField(max_digits=11, decimal_places=2, help_text="leave empty, generated automatically", default=0)

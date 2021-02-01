@@ -52,15 +52,17 @@ def edit_post(request , id):
     current_user = User.objects.get(id=request.user.id)
     if request.user.is_authenticated and current_user.is_staff == 1:#permisions to create and edit posts, change to is_superuser for su permisions
         post = get_object_or_404(Post, id=id)
-        if request.method == 'POST':
-            form = PostForm(request.POST , instance=post, files = request.FILES)
+        if request.method == 'GET':
+        	form = PostForm(instance = post)#Get the previous form info
+        else:
+            form = PostForm(request.POST, files = request.FILES, instance=post)
             if form.is_valid():
-                new_form = form.save(commit=False)
+                new_form = form.save(commit=False)#when there are fields that must be filled automatically after save we use commit=False
                 new_form.user = request.user
                 new_form.save()
                 return redirect('/allposts')
-        form = PostForm()
-        return render(request , 'edit.html', {'form':form})
+        
+        return render(request , 'edit.html', {'form':form})#we pass as content previous form to fill the fields in the edit post html
     else:
         return render(request, "permisions_denied.html")
 

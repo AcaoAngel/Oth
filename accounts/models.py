@@ -6,8 +6,8 @@ from django.utils import timezone
 
 class Account_value(models.Model):
     user = models.ForeignKey(User, 
-                                    on_delete=models.CASCADE,#When user deleted profile should be deleted too
-                                    null=False, blank=False)#This line tells that cant be a profile without a user 
+                                    on_delete=models.CASCADE,#When user deleted account should be deleted too
+                                    null=False, blank=False)#This line tells that cant be an account without a user 
     account_name = models.CharField(max_length=100, default="Default account name")
     account_value = models.DecimalField(max_digits=11, decimal_places=2)
     info = models.TextField(max_length=500, default="Default info text")
@@ -22,15 +22,7 @@ class Account_value(models.Model):
         return f"{self.id}: {self.user}: {self.account_name}: {self.account_value}"
 
 class Movements(models.Model):
-    # user = models.ForeignKey(User, 
-    #                                 on_delete=models.CASCADE,#When user deleted profile should be deleted too
-    #                                 null=False, blank=False)#This line tells that cant be a profile without a user 
-    account_id = models.ForeignKey(Account_value,
-                                    on_delete=models.CASCADE,#When user deleted profile should be deleted too
-                                    null=False, blank=False)#This line tells that cant be a profile without a user
-    date = models.DateTimeField(null=True, blank=True, default=timezone.now())
-    amount = models.DecimalField(max_digits=11, decimal_places=2, help_text="Insert a negative number if you are paying", default=10)
-    payee_payer = models.CharField(max_length=50, default="default payer")
+    
     EVENT_CHOICES = [
         ("card", "Card purchase"),
         # ("a_save", "Auto save"), We try using only save, if its necessary wee add this line for autosave like e-possu from nordea
@@ -40,6 +32,14 @@ class Movements(models.Model):
         ("payment", "Payment transfer"),
         ("deposit", "Deposit"),
     ]
+    MOVE_TO_ACCOUNT_CHOICES = []
+    account_id = models.ForeignKey(Account_value,
+                                    on_delete=models.CASCADE,#When account deleted movements should be deleted too
+                                    null=False, blank=False)#This line tells that cant be a movement without an account
+    date = models.DateTimeField(null=True, blank=True, default=timezone.now())
+    amount = models.DecimalField(max_digits=11, decimal_places=2, help_text="Insert a negative number if you are paying", default=10)
+    payee_payer = models.CharField(max_length=50, default="default payer")
+    move_to_account = models.ForeignKey(Account_value, on_delete=models.CASCADE, null=True, blank=True)
     event = models.CharField(max_length=14,choices=EVENT_CHOICES, default="card")
     message = models.TextField(default="This is a default text", blank=True)
     account_value_before = models.DecimalField(max_digits=11, decimal_places=2, help_text="leave empty, generated automatically", default=0)

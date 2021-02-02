@@ -40,6 +40,15 @@
 			  <ul class="langs navbar-text"><a href="#" class="active">FI</a><span>           </span><a href="#">EN</a></ul> 
 			</div> -->
 
+				
+				{% if user.is_authenticated %}
+				<li class="#">{{ user.username }}</li>
+			    <li class="#"><a href="{% url 'profiles:sign_out' %}">Logout</a></li>
+                {% else %}
+				<li class="#"><a href="{% url 'profiles:sign_up' %}">Register</a>
+				<a href="{% url 'profiles:sign_in' %}">Login</a></li>
+                {% endif %}
+			</ul>
 			</div>
 		</nav>
 		
@@ -51,7 +60,6 @@
     </title>
 
     <!-- {% include "menu.html" %} -->
-    {% include "profiles_menu.html" %}  
     
   
 	{% block body %}	{% endblock body %}

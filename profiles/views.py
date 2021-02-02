@@ -7,8 +7,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 # Create your views here.
 
 #we create views using classes importing as parameter the functions
-class HomeView(TemplateView):
-    template_name = 'index.html'#template_name function save the url address.
+# class HomeView(TemplateView):
+#     template_name = 'index.html'#template_name function save the url address.
 
 class SignUpView(CreateView):
     template_name = 'profile_form.html'

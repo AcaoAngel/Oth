@@ -1,3 +1,5 @@
+
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -15,15 +17,15 @@
 
     <header>
 
-		<div class= "title-box">
-			<!-- page tiltle -->
-			<h2 > OTH-Omataloushallinta</h2>	
+		<!-- <div class= "title-box">
+				--page tiltle -->
+		 <!-- <h2 > OTH-Omataloushallinta</h2>	  -->
 			<!-- page slogan -->
-			<p >Älä epäröi hoitaa talouttasi!</p>
-	    </div>
+			 <!-- <p >Älä epäröi hoitaa talouttasi!</p> -->
+	   <!-- </div>  -->
     			 <!-- menu de navigation -->
 			<!-- menu de navigation -->
-		<nav>
+		 <nav>
 			<div class="menu-nav">
 			  <ul>
 				<li class="active"><a href="{% url 'profiles:index' %}"><i class="fa fa-home" ></i>Kotisivu</a> </li>
@@ -34,7 +36,7 @@
 					
 				{% if request.user.is_superuser %}
 				<li class="#"><a href="{% url 'admin:index' %}"><i ></i>Admin Menu</a></li>	
-				{% endif %}
+				{% endif %} -->
 			 
 			  <!-- <div >
 			  <ul class="langs navbar-text"><a href="#" class="active">FI</a><span>           </span><a href="#">EN</a></ul> 
@@ -57,12 +59,12 @@
 
     <title>
         {% block title %} {% endblock %}
-    </title>
+    </title> -->
 
-    <!-- {% include "menu.html" %} -->
+  
     
   
-	{% block body %}	{% endblock body %}
+	 {% block body %}	{% endblock body %}
 	
 	
 
@@ -74,7 +76,7 @@
 	Copyright &copy; LynCao - 2021-2022 - All Right Reserved
   </p>
 		{% endblock footer %}
-	</footer>
+	</footer> -->
 
 
 	
@@ -89,4 +91,4 @@
 
 
 </head>
-<body>   
+<body>    

@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+
+{% block body %}  
+
+<div class='massage_div'>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  
+  <div class='container'>
+     <div class='row mt-4'></div>
+  </div> 
+
+  {% endblock body %}

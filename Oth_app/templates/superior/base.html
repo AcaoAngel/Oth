@@ -31,8 +31,14 @@
 				<li class="#"><a href="{% url 'accounts:view_accounts' %}">Tilit</a></li>
 				<li class="#"><a href="{% url 'profiles:index' %}">Tietoa Oth:sta</a></li>
 				<li class="#"><a href="{% url 'Contact:contact' %}"><i class="fa fa-phone" ></i>Ota yhteyttä</a></li>	
-				<li class="#"><a href="{% url 'admin:index' %}"><i ></i>Admin</a></li>	
-				
+				<li class="#"><a href="{% url 'admin:index' %}"><i ></i>Admin</a></li>
+				{% if user.is_authenticated %}
+				<li class="#">{{ user.username }}</li>
+			    <li class="#"><a href="{% url 'profiles:sign_out' %}">Logout</a></li>
+                {% else %}
+				<li class="#"><a href="{% url 'profiles:sign_up' %}">Register</a>
+				<a href="{% url 'profiles:sign_in' %}">Login</a></li>
+                {% endif %}
 			</ul>
 			</div>
 		</nav>
@@ -45,7 +51,6 @@
     </title>
 
     <!-- {% include "menu.html" %} -->
-    {% include "profiles_menu.html" %}  
     
     
  

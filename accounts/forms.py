@@ -10,7 +10,7 @@ class Create_account_form(forms.ModelForm):
     account_name = forms.CharField(label='Account_name', required=True, max_length=100) 
     account_value = forms.IntegerField(label='Account value', required=True)
     info = forms.CharField(label="Content", widget=forms.Textarea)
-    save_percent = forms.DecimalField(label='Save percent', required=True)
+    save_percent = forms.DecimalField(label='Save percent', required=True, max_digits=11, decimal_places=2)
     saving_time = forms.IntegerField(label='Saving time', required=True)
     date = forms.DateField(label="Date", initial=date.today)
 
@@ -21,7 +21,7 @@ class Create_account_form(forms.ModelForm):
 class Pay_form(forms.ModelForm):
 
     date = forms.DateField(label="Date", initial=date.today)
-    amount = forms.DecimalField(label='Amount', required=True)
+    amount = forms.DecimalField(label='Amount', required=True, max_digits=11, decimal_places=2)
     payee_payer = forms.CharField(label='Payer/Payee', max_length=100, required=False)
     EVENT_CHOICES = [
         ("empty",""),
@@ -45,7 +45,7 @@ class Pay_form(forms.ModelForm):
 class Movement_form(forms.ModelForm):
 
     date = forms.DateField(label="Date", initial=date.today)
-    amount = forms.DecimalField(label='Amount', required=True)
+    amount = forms.DecimalField(label='Amount', required=True, max_digits=11, decimal_places=2)
     move_to_account = forms.ChoiceField(choices = accounts_list_for_choices())
     message = forms.CharField(label="Content", widget=forms.Textarea)
     # account_value_before = forms.DecimalField(label='Account value before', required=False)

@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.detail import SingleObjectMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from decimal import Decimal
 
 # Create your views here.
 
@@ -20,8 +21,6 @@ class view_accounts(ListView):
 
     def get_queryset(self):
         account = Account_value.objects.all()
-        choices = list()
-        another_list = list()
             
         if self.request.user.is_authenticated:
             self.template_name = "view_accounts.html"
@@ -32,13 +31,12 @@ class view_accounts(ListView):
 
 
 def account_detail(request, id):
-    # print("************args",id)
-    print("*******ID***********", type(id), "******", id)
 
     account = Account_value.objects.get(id=id)
+    print(type(account.id), account.id)
+    request.session["account_id"] = id 
     movements = Movements.objects.filter(account_id_id=id)
-    for i in movements:
-        print(i)
+
     context = {'account':account, 'movements':movements}
 
     return render(request, "account_detail.html", context)
@@ -56,7 +54,7 @@ class create_account(CreateView):
         return redirect("/view_accounts/")
 
 
-def movements_form(request):
+def movements_form(request, id):#account id is sended using the parameter through url
 
     if request.method=="POST":
         print("post done")
@@ -67,10 +65,10 @@ def movements_form(request):
             print("form is valid")
 
             form = form.save(commit = False)
-            form.account_id = request.user.id
+            form.account_id = Account_value.objects.get(id = id)#Account_value.objects.get(id=request.session["account_id"])
             form.date = request.POST["date"]
-            form.amount = request.POST["amount"]
-            form.payee_payer = request.POST["payee_payer"]
+            form.amount = Decimal(request.POST["amount"])
+            # form.payee_payer = request.POST["payee_payer"]
             form.move_to_account = request.POST["move_to_account"]
             # form.event = request.POST["event"]
             form.message = request.POST["message"]
@@ -80,8 +78,8 @@ def movements_form(request):
     movements_form = Movement_form()
     return render(request, "movements_form.html", {"p_m_form":movements_form})
 
-def pay_form(request):
-
+def pay_form(request):#Account id is sended using seccions, it is saved in account_id dictionary key and get it using request.session["account_id"]
+  
     if request.method=="POST":
 
         form=Pay_form(request.POST)
@@ -89,9 +87,10 @@ def pay_form(request):
         if form.is_valid():
 
             form = form.save(commit = False)
-            form.account_id = request.request.user.id
+            form.account_id = Account_value.objects.get(id=request.session["account_id"])
             form.date = request.POST["date"]
-            form.amount = request.POST["amount"]
+            form.amount = Decimal(request.POST["amount"])
+            print(type(form.amount))
             form.payee_payer = request.POST["payee_payer"]
             # form.move_to_account = request.POST["move_to_account"]
             form.event = request.POST["event"]

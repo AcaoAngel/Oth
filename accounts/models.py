@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
+import accounts.functions
 
 
 
@@ -28,7 +29,7 @@ class Movements(models.Model):
                                     null=False, blank=False)#This line tells that cant be a movement without an account
     date = models.DateField(null=True, blank=True, default=date.today())
     amount = models.DecimalField(max_digits=11, decimal_places=2, help_text="Insert a negative number if you are paying", default=10)
-    move_to_account = models.CharField(max_length=100, default = None, blank=True, null=True)
+    move_to_account = models.CharField(max_length=100, choices=accounts.functions.accounts_list_for_choices(), blank=True, null=True)
     payee_payer = models.CharField(max_length=50, default="default payer", blank=True, null=True)
     event = models.CharField(max_length=14, blank=True, null=True)
     message = models.TextField(default="This is a default text", blank=True)

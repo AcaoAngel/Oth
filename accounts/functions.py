@@ -1,9 +1,9 @@
-from .models import Account_value
+from accounts import models
 
 def accounts_list_for_choices():
-    account = Account_value.objects.all()
+    account = models.Account_value.objects.all()
     choices = list()
-    choices.append(("empty_field",""))
+    choices.append(("",""))
     inside_list = list()
     for i in account:
         inside_list = list(str(i.id))#as key we get the accoint id

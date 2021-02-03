@@ -36,7 +36,7 @@ class SignUpView(CreateView):
         user = authenticate(username=user, password=password)#save the user and pasword in the variable user
         login(self.request, user)#Pass the user data to the login function
         # messages.success(request,'Account was created for' + user)
-        return redirect('index')#Come back to the home page
+        return redirect('/')#Come back to the home page
 
 class SignInView(LoginView):
     template_name = 'templates/sign_in.html'

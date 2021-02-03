@@ -24,6 +24,12 @@
         <li style="font-weight: bold;">{{i.date.date}}  |  Event: {{i.event}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
     </ul>
     {% endfor %}
+
+    <hr>
+
+    <a href="{% url 'accounts:pay_form' %}">Insert new payment</a><br>
+    <a href="{% url 'accounts:movements_form' account.id %}">Move to own account</a><br>
+    
 </body>
 {% endblock %}
 

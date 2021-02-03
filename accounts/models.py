@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
+from datetime import date
+import accounts.functions
+
 
 
 
@@ -13,7 +15,7 @@ class Account_value(models.Model):
     info = models.TextField(max_length=500, default="Default info text")
     save_percent = models.DecimalField(max_digits=4, decimal_places=2, default=10)
     saving_time = models.IntegerField(help_text="Write here month amount for saving goal", default=12)
-    date = models.DateTimeField(null=True, blank=True, default=timezone.now())
+    date = models.DateField(null=True, blank=True, default=date.today())
 
     def get_absolute_url(self):
         return 
@@ -22,24 +24,14 @@ class Account_value(models.Model):
         return f"{self.id}: {self.user}: {self.account_name}: {self.account_value}"
 
 class Movements(models.Model):
-    
-    EVENT_CHOICES = [
-        ("card", "Card purchase"),
-        # ("a_save", "Auto save"), We try using only save, if its necessary wee add this line for autosave like e-possu from nordea
-        ("save", "Save"),
-        ("o_transfer_out","Own transfer(Send out)"),
-        ("o_transfer_in","Own transfer(Send in)"),
-        ("payment", "Payment transfer"),
-        ("deposit", "Deposit"),
-    ]
-    MOVE_TO_ACCOUNT_CHOICES = []
     account_id = models.ForeignKey(Account_value,
                                     on_delete=models.CASCADE,#When account deleted movements should be deleted too
                                     null=False, blank=False)#This line tells that cant be a movement without an account
-    date = models.DateTimeField(null=True, blank=True, default=timezone.now())
+    date = models.DateField(null=True, blank=True, default=date.today())
     amount = models.DecimalField(max_digits=11, decimal_places=2, help_text="Insert a negative number if you are paying", default=10)
-    payee_payer = models.CharField(max_length=50, default="default payer")
-    event = models.CharField(max_length=14,choices=EVENT_CHOICES, default="card")
+    move_to_account = models.CharField(max_length=100, choices=accounts.functions.accounts_list_for_choices(), blank=True, null=True)
+    payee_payer = models.CharField(max_length=50, default="default payer", blank=True, null=True)
+    event = models.CharField(max_length=14, blank=True, null=True)
     message = models.TextField(default="This is a default text", blank=True)
     account_value_before = models.DecimalField(max_digits=11, decimal_places=2, help_text="leave empty, generated automatically", default=0)
     account_value_after = models.DecimalField(max_digits=11, decimal_places=2,  help_text="leave empty, generated automatically", default=0)
@@ -47,6 +39,10 @@ class Movements(models.Model):
 
     def __str__(self):
         return f"""{self.id}: {self.date}: {self.account_id.user}: {self.amount}: {self.payee_payer}: {self.event}: {self.account_value_after}"""
+
+    
+    
+    
   
 
 

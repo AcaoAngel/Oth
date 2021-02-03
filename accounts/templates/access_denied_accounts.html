@@ -9,15 +9,10 @@
 <body>
     
     {% block body %}
+    <div class = log-alert>
 
         <h2>You must log in before accessing this area</h2>
-
-        <hr>
-        <a href="{% url 'accounts:create_account' %}">Create new account</a><br>
-        <a href="{% url 'accounts:movements_form' %}">New Payment</a>
-        <a href="{% url 'accounts:movements_form' %}">New own-accounts movement</a>
-
-
+    </div>   
     {% endblock %}
 
 

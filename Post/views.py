@@ -61,7 +61,7 @@ def edit_post(request , id):
                 new_form.user = request.user
                 new_form.save()
                 return redirect('/allposts')
-        
+        form = PostForm()
         return render(request , 'edit.html', {'form':form})#we pass as content previous form to fill the fields in the edit post html
     else:
         return render(request, "permisions_denied.html")

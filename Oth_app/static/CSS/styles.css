@@ -275,19 +275,38 @@ nav ul li a{
 /* post - allposts styles */
 
 .single_post{
-    width: 100%;
+	width: 100%;
+	
 }
 
-.banner{
-    width: 100%;
-    
-}
+
 
 .Post_form{
 	width: 100%;
 	
     
 }
+
+.post-container{
+	width: 1000px;
+	height: 1200px;
+	margin-left: 250px;
+	
+	
+
+}
+
+.card-body{
+	margin: 20px;
+	
+}
+
+.single{
+	width: 900px;
+	height: 700px;
+	margin-left: 300px;
+}
+
 
 .massage_div{
     width: 80%;

@@ -8,10 +8,15 @@
  
 
 
-<div class="jumbotron banner">
-    <a class="btn btn-primary btn-lg" href="{% url 'Post:create_post' %}" role="button">Luo uusi julkaisu </a>    
-</div>
 
+<div >
+
+    <a class="btn btn-primary btn-lg" href="{% url 'Post:create_post' %}" role="button">Luo uusi julkaisu </a>
+ 
+</div>      
+
+    <div class="post-container">
+      <div class='row mt-4'>
         {% for post in all_posts %}
         <div class='col-md-4'>
           <div class="card">
@@ -26,7 +31,15 @@
           </div>
         </div>
         {% endfor %}
+      </div>
+    </div>
 
+
+
+
+
+
+    
 {% endblock %}
 
         

@@ -23,3 +23,10 @@ def create_profile_user(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)#<---indicates that the function is a receiver of a signal: https://adriennedomingus.com/blog/signals-in-django
 def save_profile_user(sender, instance, **kwargs):
     instance.profile.save()
+
+
+# @receiver(post_save, sender=User)
+# def update_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+#     instance.profile.save()

@@ -1,94 +1,87 @@
 
+ {% load static %}
+ <!DOCTYPE html>
+ <html>
+ 
+ 
+	<head>
+		<title>OTH-Omataloushallinta</title>
+		<meta charset="utf-8">
+		<meta name= "viewport" content= "width=device-width, initial-scale=1.0"> 
+		<link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css' %}">   
+		<link rel="stylesheet" type="text/css" href="{% static ' font-awesome-4.7.0/css/font-awesome.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="preconnect" href="https://fonts.gstatic.com/"> 
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	</head> 
+   
 
-{% load static %}
-<!DOCTYPE html>
-<html>
-
-
-<head>
-	<title>OTH-Omataloushallinta</title>
-	<meta charset="utf-8">
-	<meta name= "viewport" content= "width=device-width, initial-scale=1.0">	
-	<link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css' %}">		
-	<link rel="stylesheet" type="text/css" href="{% static ' font-awesome-4.7.0/css/font-awesome.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="preconnect" href="https://fonts.gstatic.com/">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
-    <header>
-
-		<!-- <div class= "title-box">
-				--page tiltle -->
-		 <!-- <h2 > OTH-Omataloushallinta</h2>	  -->
-			<!-- page slogan -->
-			 <!-- <p >Älä epäröi hoitaa talouttasi!</p> -->
-	   <!-- </div>  -->
-    			 <!-- menu de navigation -->
-			<!-- menu de navigation -->
-		 <nav>
-			<div class="menu-nav">
-			  <ul>
-				<li class="active"><a href="{% url 'profiles:index' %}"><i class="fa fa-home" ></i>Kotisivu</a> </li>
-				<li class="#"><a href="{% url 'Post:all_posts' %}">Julkaisut</a></li>
-				<li class="#"><a href="{% url 'accounts:view_accounts' %}">Tilit</a></li>
-				<li class="#"><a href="{% url 'profiles:index' %}">Tietoa Oth:sta</a></li>
-				<li class="#"><a href="{% url 'Contact:contact' %}"><i class="fa fa-phone" ></i>Ota yhteyttä</a></li>	
-					
-				{% if request.user.is_superuser %}
-				<li class="#"><a href="{% url 'admin:index' %}"><i ></i>Admin Menu</a></li>	
-				{% endif %} -->
-			 
-			  <!-- <div >
-			  <ul class="langs navbar-text"><a href="#" class="active">FI</a><span>           </span><a href="#">EN</a></ul> 
-			</div> -->
-
-				
-				{% if user.is_authenticated %}
-				<li class="#">{{ user.username }}</li>
-			    <li class="#"><a href="{% url 'profiles:sign_out' %}">Logout</a></li>
-                {% else %}
-				<li class="#"><a href="{% url 'profiles:sign_up' %}">Register</a>
-				<a href="{% url 'profiles:sign_in' %}">Login</a></li>
-                {% endif %}
-			</ul>
-			</div>
-		</nav>
-		
-    </header>	
+	<body>
+    
 
 
+					   <!-- menu de navigation -->
+		<nav>
+			
+			<input type="checkbox" id= "check" >
+			<label for= "check " class="checkbtn">
+				 <i class="fas fa-bars"></i> 
+			 </label>
+			<label class="title-box" >OTH-Omataloushallinta </label> 
+			
+			
+			<ul>
+				<li><a class="active-home" href="{% url 'profiles:index' %}"><i class="fa fa-home" ></i>Koti</a> </li>
+				<li><a href="{% url 'Post:all_posts' %}">Julkaisut</a></li>
+				<li><a href="{% url 'accounts:view_accounts' %}">Tilit</a></li>
+				<li><a href="{% url 'profiles:index' %}">Tietoa Oth:sta</a></li>
+				<li><a href="{% url 'Contact:contact' %}"><i class="fa fa-phone" ></i>Ota yhteyttä</a></li>
+            	{% if request.user.is_superuser %}
+           		<li><a href="{% url 'admin:index' %}">Admin Menu</a></li>  
+            	{% endif %} 
+        
+        <!-- <div >
+         <ul class="langs navbar-text"><a href="#" class="active">FI</a><span>           </span><a href="#">EN</a></ul> 
+       </div>  -->
+ 
+         
+            	{% if user.is_authenticated %}
+            	<li class="#">{{ user.username }}</li>
+            	<li ><a href="{% url 'profiles:sign_out' %}">Logout</a></li>
+            	{% else %}
+            	<li ><a href="{% url 'profiles:sign_up' %}">Register</a>
+            	<a href="{% url 'profiles:sign_in' %}">Login</a></li>
+		    	{% endif %}
+
+	   		</ul>
+    	</nav>
+
+ 
     <title>
         {% block title %} {% endblock %}
-    </title> -->
-
-  
-    
+    </title> 
   
 	 {% block body %}	{% endblock body %}
 	
-	
-
-	
 
 	<footer>
-		{% block footer %}
-				  <p>
-	Copyright &copy; LynCao - 2021-2022 - All Right Reserved
-  </p>
-		{% endblock footer %}
-	</footer> -->
-
+		<h2 class="text-white">OTH-Omataloushallinta</h2>
+				  <p>Copyright &copy; LynCao - 2021-2022 - All Right Reserved</p>
+		
+	</footer> 
+  -->
 
 	
 
-    
+
                      <!-- Optional JavaScript -->
-                        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
 
 
 
 </head>
-<body>    
+<body>      

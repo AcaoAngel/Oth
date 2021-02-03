@@ -51,7 +51,7 @@
 
 	<!-- contenu sous form de boite-->	
 	<div class = "container">
-		<a href = "tili.html" class="box" >
+		<a href = "{% url 'accounts:view_accounts' %}" class="box" >
 
 			<div class= "icon"><i class="fa fa-money" aria-hidden="true"></i></div>
 			<div class="content">
@@ -81,39 +81,8 @@
 		</a>		
 	</div>
 
-	<!-- Paragraph to the page-->
-    <div class="paragraph">
-        <p ALIGN=LEFT >
-			Englanninkielisiä mobiilisovelluksia talouden hallintaan on tarjolla lukuisia. 
-			Useimpien sovellusten perusversiot ovat ilmaisia ja lisäominaisuuksia voi ostaa erikseen. 
-			Spendee on tsekkiläisen Cleevion taloudenhallintaan kehitetty sovellus ja ainakin iPhonella
-			testatessa suurin osa perustoiminnoista oli suomenkielisiä ja sen ansiosta käyttöönotto
-			helppoa. Kokonaan sovellus ei ole suomenkielinen, mutta käytetyt kuvakkeet ovat
-			selkeitä helpottaen sovelluksen käyttöä. Voit tehdä itsellesi budjetin ja 
-			kirjata helposti tulot ja menot sekä laittaa ne oikeisiin kategorioihin.
-			Voit myös merkitä, missä olet rahaa käyttänyt ja jälkikäteen on helppo seurata,
-			kuinka paljon olet käyttänyt rahaa esimerkiksi lempikahvilassasi.
-			Halutessasi tehdä useita budjetteja, perusversio tulee päivittää maksulliseen Premium-versioon. 
-			Expense IQ on singaporelaisen Handy Apps -yrityksen Android-laitteille kehittämä
-			talouden hoitoon tarkoitettu sovellus. Budjettien teko on helppoa ja niissä pysymistä voi seurata
-			erilaisten raporttien avulla. Kuittien liittäminen osaksi kirjanpitoa on helppoa ja sovellus muistuttaa
-			erääntyvistä laskuista. Expense IQ on optimoitu myös tableteille, jolloin sovelluksen käyttö on selkeää.
-			Muita ilmaisia perussovelluksia ovat muun muassa Daily Budget, Wally,
-			MoneyViz ja Money Lover. Kaikkiin näihin voit tallettaa tulot ja menot
-			sekä seurata kuluja erilaisin raportein. Daily Budget ja Wally muistuttavat
-			päivittäin lisäämään mahdolliset ostokset.
 
 
-		</p>
-	</div>	
-
-		<!-- pied de page-->
-		<footer>
-			<p>
-				Copyright &copy; LynCao - 2021-2022 - All Right Reserved
-			</p>
-			
-		</footer>
 	
 	{% endblock %}	
 

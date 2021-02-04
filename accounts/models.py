@@ -35,6 +35,7 @@ class Movements(models.Model):
     message = models.TextField(default="This is a default text", blank=True)
     account_value_before = models.DecimalField(max_digits=11, decimal_places=2, help_text="leave empty, generated automatically", default=0)
     account_value_after = models.DecimalField(max_digits=11, decimal_places=2,  help_text="leave empty, generated automatically", default=0)
+    move_to_account_prestate = models.BooleanField(max_length=100, default=False)
 
 
     def __str__(self):

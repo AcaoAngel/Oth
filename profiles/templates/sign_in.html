@@ -64,7 +64,12 @@
 			color: white !important;
 			border: 0 !important;
 			border-radius: 0.25rem 0 0 0.25rem !important;
+		    width: 40px;
 		}
+		.input-group-text span {
+    		margin: 0 auto;
+		}
+
 		.input_user,
 		.input_pass:focus {
 			box-shadow: none !important;
@@ -72,10 +77,19 @@
 		}
 
 		#messages{
-			background-color: grey;
+			background-color: rgb(245, 10, 10);
 			color: #fff;
 			padding: 10px;
 			margin-top: 10px;
+		}
+
+		.not-account{
+			color: white !important;
+		}
+
+		.message-error{
+			color: rgb(255, 15, 15) !important;
+
 		}
 	</style>
 
@@ -100,7 +114,7 @@
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
+								<span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
 							</div>
 								<input type="password" name="password" placeholder="Password..." class="form-control" >
 						</div>
@@ -116,7 +130,9 @@
                 {% endfor %}
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
+						<div class="not-account">
 						Don't have an account? <a href="{% url 'profiles:sign_up' %}" class="ml-2">Sign Up</a>
+						</div>
 					</div>
 			
 				</div>

@@ -30,29 +30,30 @@ def post(request , id):
 
 
 def create_post(request):
-	current_user = User.objects.get(id=request.user.id)
-	if request.user.is_authenticated and current_user.is_staff == 1:
-
-	    if request.method == 'POST':
-	    	form = PostForm(data=request.POST, files = request.FILES)
-	    	if form.is_valid():
-	    		new_form = form.save(commit=False)
-	    		print(request.user, type(request.user))
-	    		new_form.user = request.user
-	    		new_form.save()
-	    		messages.success(request, 'Julkaisu on luotu onnistuneesti')
-	    		return redirect('/allposts')
-	    form = PostForm()
-	    return render(request , 'create.html' , {"form": form})
-	else:
-		return render(request, "permisions_denied.html" )
+	
+    if request.user.is_authenticated and current_user.is_staff == 1:
+        current_user = User.objects.get(id=request.user.id)
+        if request.method == 'POST':
+        	form = PostForm(data=request.POST, files = request.FILES)
+        	if form.is_valid():
+        		new_form = form.save(commit=False)
+        		print(request.user, type(request.user))
+        		new_form.user = request.user
+        		new_form.save()
+        		messages.success(request, 'Julkaisu on luotu onnistuneesti')
+        		return redirect('/allposts')
+        form = PostForm()
+        return render(request , 'create.html' , {"form": form})
+    else:
+    	return render(request, "permisions_denied.html" )
 
 
 
 def edit_post(request , id ):
 	
-    current_user = User.objects.get(id=request.user.id)
+    
     if request.user.is_authenticated and current_user.is_staff == 1:#permisions to create and edit posts, change to is_superuser for su permisions
+        current_user = User.objects.get(id=request.user.id)
         post = get_object_or_404(Post, id=id)
         if request.method == 'GET':
         	form = PostForm(instance = post)#Get the previous form info

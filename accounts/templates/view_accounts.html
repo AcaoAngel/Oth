@@ -70,32 +70,7 @@
 
 <body>
 
-    <div class="container h-100">
-		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
-				<div class="d-flex justify-content-center">
-
-
-					<h3 id="form-title"> Ei ole vielä tili</h3>
-				</div>
-				<div class="d-flex justify-content-center form_container">
-					<form method="POST" action="">
-                        {% csrf_token %}
-						<div class="input-group mb-3">
-							<div class="d-flex justify-content-center mt-3 login_container">
-                                <div class="not-account">
-                                    <a href="{% url 'accounts:create_account' %}" class="btn login_btn" role="button">Luo uusi tili</a> 
-                                </div> 
-				   			</div>
-					</form>
-
-				</div>
-
-  
-
-			</div>
-		</div>
-	</div>
+    
 </body>
 
 </html>
@@ -115,7 +90,32 @@
     <li><a href="{% url 'accounts:account_detail' user_accounts.id %}">{{user_accounts.account_name}} Amount: {{user_accounts.account_value}}</a></li>
 </ul>
 {% empty %}
-<p>No accounts yet.</p>
+<div class="container h-100">
+	<div class="d-flex justify-content-center h-100">
+		<div class="user_card">
+			<div class="d-flex justify-content-center">
+
+
+				<h3 id="form-title"> Ei ole vielä tili</h3>
+			</div>
+			<div class="d-flex justify-content-center form_container">
+				<form method="POST" action="">
+					{% csrf_token %}
+					<div class="input-group mb-3">
+						<div class="d-flex justify-content-center mt-3 login_container">
+							<div class="not-account">
+								<a href="{% url 'accounts:create_account' %}" class="btn login_btn" role="button">Luo uusi tili</a> 
+							</div> 
+						   </div>
+				</form>
+
+			</div>
+
+
+
+		</div>
+	</div>
+</div>
 {% endfor %}
 <hr>
 <a href="{% url 'accounts:create_account' %}">Create new account</a><br>

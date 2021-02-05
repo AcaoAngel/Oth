@@ -36,16 +36,36 @@ def account_detail(request, id):
     return render(request, "account_detail.html", context)
 
 #------------------------------------------------------------------------------------
-class create_account(CreateView):
-    template_name = "account_value_form.html"
-    # success_message = "Your account was created successfully"
-    model = Account_value
-    # form_class = Create_account_form
-    fields = ['user', 'account_name', 'account_value', 'info', 'save_percent', 'saving_time']
+def create_account(request):
+    if request.method == "POST":
+        form = Create_account_form(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = User.objects.get(id = request.user.id)#Account_value.objects.get(id=request.session["account_id"])
+            form.account_name = request.POST["account_name"]
+            form.account_value = request.POST["account_value"]
+            form.info = request.POST["info"]
+            form.date = request.POST["date"]
+            form.save()
+            return redirect("/account_created/")
 
-    def form_valid(self, form):
-        form.save()
-        return redirect("/")
+        else:
+            return render(request, "account_value_form.html", {"form":form})
+            print("form is not valid")
+    
+    form = Create_account_form()
+    return render(request, "account_value_form.html", {"form":form})
+
+# class create_account(CreateView):
+#     template_name = "account_value_form.html"
+#     # success_message = "Your account was created successfully"
+#     model = Account_value
+#     # form_class = Create_account_form
+#     fields = ['user', 'account_name', 'account_value', 'info', 'save_percent', 'saving_time']
+
+#     def form_valid(self, form):
+#         form.save()
+#         return redirect("/")
 
 
 def movements_form(request):#account id is sended using the parameter through url
@@ -115,14 +135,15 @@ def pay_form(request):#Account id is sended using seccions, it is saved in accou
     return render(request, "pay_form.html", {"form":movements_form})
 
 def transaction_done(request):
-    # account_id = Account_value.objects.get(id=request.session["account_id"])
-    print(request.session["account_id"], type(request.session["account_id"]))
+
     context = {"account_id":request.session["account_id"]}
     return render(request, "transaction_done.html", context)
 
 
 
+def account_created(request):
 
+    return render(request, "account_created.html")
 
 
 

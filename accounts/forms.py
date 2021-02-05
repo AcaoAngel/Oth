@@ -7,17 +7,15 @@ from .functions import accounts_list_for_choices, validate_positive
 
 class Create_account_form(forms.ModelForm):
 
-    user = forms.CharField(label='User', required=True, max_length=100)
+    
     account_name = forms.CharField(label='Account_name', required=True, max_length=100) 
     account_value = forms.IntegerField(label='Account value', required=True)
     info = forms.CharField(label="Content", widget=forms.Textarea)
-    save_percent = forms.DecimalField(label='Save percent', required=True, max_digits=11, decimal_places=2)
-    saving_time = forms.IntegerField(label='Saving time', required=True)
     date = forms.DateField(label="Date", initial=date.today)
 
     class Meta():
         model = Account_value
-        fields = ['user' , 'account_name' , 'account_value']
+        fields = ["date", 'account_name' , 'account_value', "info", ]
 
 class Pay_form(forms.ModelForm):
 

@@ -108,3 +108,64 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         <input type="hidden" name="csrfmiddlewaretoken" value="lSURBeNoV0AJ3ZjyhhONNT6b0w4wc3o8JxT4eTsMnj8FyVHmCICoGXolTni5Q2Mh"> 
+                            {% csrf_token %}
+                       
+
+             
+                       <tr><th><label for="id_user">User:</label></th><td><select name="user" required id="id_user">
+                        
+                        <option value="" selected="">---------</option> 
+                      
+         
+                      </select> 
+                            <hr>
+                        
+                            <label><label for="id_account_name">Account name:</label></label>
+                            <input type="text" name="account_name" maxlength="100" required="" id="id_account_name">
+                            <hr>
+                        
+                            <label><label<label for="id_account_value">Account value:</label></label>
+                            <input type="number" name="account_value" step="0.01" required="" id="id_account_value">
+                            <hr>
+                        
+                             <label><label for="id_info">Info:</label></label> 
+                            <label><label for="id_info">Info:</label></label>
+                            
+                            <textarea name="info" cols="40" rows="7" maxlength="500" required="" id="id_info">Default info text</textarea>
+                            <hr>
+
+                            <label><label for="id_save_percent">Save percent:</label></label>
+                            <input type="number" name="save_percent" value="10" step="0.01" required="" id="id_save_percent">
+                            <hr>
+                        
+                            <label><label for="id_saving_time">Saving time:</label></label>
+                            <input type="number" name="saving_time" value="12" required="" id="id_saving_time">
+                            <hr>
+                        
+                        <input type="submit" class="btn btn-primary" value="Save">
+                        </form>
+                </div>
+ 
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+</div>

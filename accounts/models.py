@@ -10,7 +10,7 @@ class Account_value(models.Model):
     user = models.ForeignKey(User, 
                                     on_delete=models.CASCADE,#When user deleted account should be deleted too
                                     null=False, blank=False)#This line tells that cant be an account without a user 
-    account_name = models.CharField(max_length=100, default="Default account name")
+    account_name = models.CharField(max_length=100, default="")
     account_value = models.DecimalField(max_digits=11, decimal_places=2)
     info = models.TextField(max_length=500, default="Default info text")
     save_percent = models.DecimalField(max_digits=4, decimal_places=2, default=10)

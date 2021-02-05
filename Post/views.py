@@ -4,6 +4,7 @@ from .forms import PostForm
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.models import User
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 def all_posts(request):
@@ -48,7 +49,8 @@ def create_post(request):
 
 
 
-def edit_post(request , id):
+def edit_post(request , id ):
+	
     current_user = User.objects.get(id=request.user.id)
     if request.user.is_authenticated and current_user.is_staff == 1:#permisions to create and edit posts, change to is_superuser for su permisions
         post = get_object_or_404(Post, id=id)
@@ -61,9 +63,10 @@ def edit_post(request , id):
                 new_form.user = request.user
                 new_form.save()
                 return redirect('/allposts')
-        
+      
         return render(request , 'edit.html', {'form':form})#we pass as content previous form to fill the fields in the edit post html
     else:
+	
         return render(request, "permisions_denied.html")
 
 

@@ -59,12 +59,26 @@
 			color: white !important;
 			border: 0 !important;
 			border-radius: 0.25rem 0 0 0.25rem !important;
+			width: 40px;
 		}
+		.input-group-text span {
+    		margin: 0 auto;
+		}
+		
 		.input_user,
 		.input_pass:focus {
 			box-shadow: none !important;
             outline: 0px !important;
             
+		}
+
+		.already-account{
+			color: white !important;
+		}
+
+		.message-error{
+			color: rgb(255, 15, 15) !important;
+
 		}
 
 	</style>
@@ -90,31 +104,31 @@
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas "></i></span>
+								<span class="input-group-text"><i class="fa fa-user-circle "></i></span>
 							</div>
 							{{form.first_name}}
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas "></i></span>
+								<span class="input-group-text"><i class="fa fa-user-circle "></i></span>
 							</div>
 							{{form.last_name}}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+								<span class="input-group-text"><i class="fas fa-at"></i></span>
 							</div>
 							{{form.email}}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
+								<span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
 							</div>
 							{{form.password1}}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
+								<span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
 							</div>
 							{{form.password2}}
 						</div>
@@ -128,12 +142,16 @@
 				
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
+						<div class="message-error">
 						{{form.errors}}
+						</div>
 					</div>
 				</div>
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
-						Already have an account? <a href="{% url 'profiles:sign_in' %}" class="ml-2">Sign_in</a>
+						<div class="already-account">
+						   Already have an account? <a href="{% url 'profiles:sign_in' %}" class="ml-2">Sign_in</a>
+						</div>	   
 					</div>
 				</div>
 			</div>

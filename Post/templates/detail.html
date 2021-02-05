@@ -3,13 +3,18 @@
 
 {% block body %}
 
-<div class="jumbotron banner">
-  <a class="btn btn-primary btn-lg" href="{% url 'Post:edit_post' post.id %}" role="button">Muokkaa julkaisuasi </a>   
-                              
+<div >
+ 
+  
+ 
+    <a class="btn btn-primary btn-lg" href="{% url 'Post:edit_post' post.id %}" role="button">Muokkaa julkaisuasi </a>   
+    
+    
 </div>
-          <div class="card single_post">
-            <img class="card-img-top" src="{{post.img.url}}" alt="Card image cap">
-         
+          <div class=" card single">
+           
+              <img class="card-img-top" src="{{post.img.url}}" alt="Card image cap">
+          
             <div class="card-body">
               <h5 class="card-title">{{post}}</h5>
               <p class="card-text">{{post.content|safe}}</p> 
@@ -20,6 +25,8 @@
 
 
   
+
+
 
 
 

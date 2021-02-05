@@ -4,18 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+
     <title>{% block title %}Accounts Denied{% endblock %}</title>
 </head>
 <body>
     
     {% block body %}
-    <div class = log-alert>
 
-        <h2>You must log in before accessing this area</h2>
-    </div>   
+    <div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+                    <div class = 'log-alert'>
+                        <h2>You must log in before accessing this area</h2>
+                    </div>  
+                </div>    
+            </div>   
+        </div>         
+    </div>    
     {% endblock %}
 
 
 </body>
 </html>
+
+
+
+
 

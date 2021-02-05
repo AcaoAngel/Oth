@@ -3,14 +3,13 @@ from .models import Movements, Account_value
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete, post_init
 
-presave_move_to_account = int()
-
-@receiver(post_init, sender=Movements)# this decorator gives me the info before saving
-def save_to_global(sender, instance, **kwargs):# instance is the sender objet(Movement)
-    print("getting in post_init")
-    global presave_move_to_account 
-    presave_move_to_account = instance.move_to_account
-    print(presave_move_to_account)
+# presave_move_to_account = int()
+# @receiver(post_init, sender=Movements)# this decorator gives me the info before saving
+# def save_to_global(sender, instance, **kwargs):# instance is the sender objet(Movement)
+#     print("getting in post_init")
+#     global presave_move_to_account 
+#     presave_move_to_account = instance.move_to_account
+#     print(presave_move_to_account)
 
 @receiver(post_save, sender=Movements)#<-this decorator waits until new movement is created to aply account_value update
 def payment(sender, instance, created, **kwargs):# instance is the sender objet(Movement)
@@ -109,82 +108,23 @@ def movement_in_second_account(instance, created=None, previous_amount=0):
         created ([Boolean], optional): [description]. Defaults to None to implement delete statement.
         previous_amount ([Int], optional): [description]. Defaults to 0. This is a necessary variable for editing 
     """
-    
-
-
-
-
-    print(id, type(id))
     moved_to = Account_value.objects.get(id = instance.move_to_account)
     if created:#For creating
         print("getting in movement_in_second_account created")
-        moved_to.account_value += instance.amount
+        moved_to.account_value -= instance.amount
     elif created == False:#For editing
-        if presave_move_to_account:
+        if instance.move_to_account_prestate:
             print("updating when there was allready a movement")
-            moved_to.account_value -= previous_amount#Undo the previos movement in the account
-            moved_to.account_value += instance.amount#Calculate the new account value
+            print("previous amount ", previous_amount)
+            print("instance amount ", instance.amount)
+            moved_to.account_value += previous_amount#Undo the previos movement in the account
+            moved_to.account_value -= instance.amount#Calculate the new account value
         else:
             print("Update when there was not a movement")
-            moved_to.account_value -= previous_amount#update the second own account
-        print("getting in movement_in_second_account edited")
-        print(previous_amount)
-        moved_to.account_value -= previous_amount#Undo the previos movement in the account
-        moved_to.account_value += instance.amount#Calculate the new account value
+            moved_to.account_value -= instance.amount#update the second own account
     else:#For deleting
         print("getting in movement_in_second_account deleted")
-        moved_to.account_value -= previous_amount#Undo the previos movement in the account
+        moved_to.account_value += instance.amount#Undo the previos movement in the account
     moved_to.save()
+    instance.move_to_account_prestate = True #To know was a movement o not before save we use this function and update it here
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def create_movement_in_second_account(instance):
-#     """Here if we are moving we update the second account. HINT: Move to account is saved as string
-
-#     Args:
-#         instance ([Queryset object]): [is the object of the movement the user is operating with]
-#     """
-    
-#     moved_to = Account_value.objects.get(id = int(id))
-#     moved_to.account_value += instance.amount
-#     moved_to.save()
-
-
-# def edit_movement_in_second_account(instance, previous_amount):
-#     """Here if we are moving we update the second account. HINT: Move to account is saved as string
-
-#     Args:
-#         instance ([Queryset object]): [is the object of the movement the user is operating with]
-#     """
-    
-#     moved_to = Account_value.objects.get(id = int(id))
-#     editor.account_value -= previous_amount#Undo the previos movement in the account
-#     editor.account_value += instance.amount#Calculate the new account value
-#     moved_to.save()
-
-# def delete_movement_in_second_account(instance):
-#     moved_to = Account_value.objects.get(id = int(id))
-#     editor.account_value -= previous_amount#Undo the previos movement in the account
-#     moved_to.save()

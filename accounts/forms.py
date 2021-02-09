@@ -52,19 +52,6 @@ class Movement_form(forms.ModelForm):
     # account_value_before = forms.DecimalField(label='Account value before', required=False)
     # account_value_after = forms.DecimalField(label='Account value after', required=False)
 
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     account_id = cleaned_data.get("account_id")
-    #     print("account_id",account_id)
-    #     move_to_account = cleaned_data.get("move_to_account")
-    #     print("move_to_account", move_to_account)
-
-    #     if not account_id:
-    #         print("there is not an account id")
-    #     if account_id and move_to_account:
-    #         if account_id == move_to_account:
-    #             print("raising the error")
-    #             raise forms.ValidationError("You can not move money to the same account")
 
 
 
@@ -72,17 +59,18 @@ class Movement_form(forms.ModelForm):
         model = Movements
         fields = ['date' , 'amount', 'move_to_account', 'message']
 
-    def __init__(self, user, account_id, *args, **kwargs):
-        print(user.id)
+    def __init__(self, current_account, *args, **kwargs):
+        
         """Guide:
         https://simpleisbetterthancomplex.com/questions/2017/03/22/how-to-dynamically-filter-modelchoices-queryset-in-a-modelform.html
         Here in init we modificate the fields of the form using parameters got from the view, parameters are passed into this function
         and using fields[''].queryset we can modificate them on the time it is called from the view. 
         in the form use ModelChoiceField. It gives the whole name with id included, but that can be modified in the model class __str__
         """
-
+        print(current_account.user_id)
+        print(current_account.id)
         super(Movement_form, self).__init__(*args, **kwargs)
-        self.fields["move_to_account"].queryset = Account_value.objects.filter(user=user.id).exclude(id=account_id)
+        self.fields["move_to_account"].queryset = Account_value.objects.filter(user_id=current_account.user_id).exclude(id=current_account.id)
 
         # previous way to list the accounts but was not effective and returnet all the accounts instead of only user accounts
         # def accounts_list_for_choices():

@@ -8,7 +8,7 @@
     <div>
         <form action="" method="POST">
             {% csrf_token %}
-            <input type="submit" value="Save">
+            
             <h1>Insert new payment details</h1>
 
 
@@ -43,6 +43,9 @@
                 {{ field }}
                 <hr>
             {% endfor %}
+            
+            <input type="submit" value="Save">
+            <a href="{% url 'accounts:account_detail' account_id %}">Cancel</a>
             
         </form>
         

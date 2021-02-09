@@ -70,6 +70,8 @@ def create_account(request):
 
 def movements_form(request):#account id is sended using the parameter through url
 
+    current_account = get_object_or_404(Account_value, id = request.session["account_id"])
+
     # if request.method=="GET":
     #     current_account_id = get_object_or_404(Account_value, id = request.session["account_id"])
     #     print("got in GET",current_account_id)
@@ -78,7 +80,8 @@ def movements_form(request):#account id is sended using the parameter through ur
     if request.method=="POST":
         print("post done")
 
-        form=Movement_form(request.POST, request.user)
+        # form=Movement_form(request.POST, user = request.user, account_id = request.session["account_id"])
+        form=Movement_form(current_account, request.POST)
 
         if form.is_valid():
             print("form is valid")
@@ -88,7 +91,7 @@ def movements_form(request):#account id is sended using the parameter through ur
             form.date = request.POST["date"]
             form.amount = Decimal(request.POST["amount"]) * -1
             # form.payee_payer = request.POST["payee_payer"]
-            form.move_to_account = request.POST["move_to_account"]
+            form.move_to_account = request.POST["move_to_account"]#in the form info is sended as queryset but the model accept an int 
             # form.event = request.POST["event"]
             form.message = request.POST["message"]
             form.save()
@@ -98,11 +101,10 @@ def movements_form(request):#account id is sended using the parameter through ur
             return render(request, "pay_form.html", {"form":form})
             print("form is not valid")
         
-    current_account_id = get_object_or_404(Account_value, id = request.session["account_id"])
-    print("current account id is a ",type(current_account_id.id))
-    # form = Movement_form(initial={"account_id":Account_value.objects.get(id = request.session["account_id"])})
-    form = Movement_form(request.user, request.session["account_id"])
-    return render(request, "movements_form.html", {"form":form})
+    
+    
+    form = Movement_form(current_account)
+    return render(request, "movements_form.html", {"form":form, "account_id":request.session["account_id"]})#the account_id passed here is for the redirect link
 
 def pay_form(request):#Account id is sended using seccions, it is saved in account_id dictionary key and get it using request.session["account_id"]
   
@@ -132,7 +134,7 @@ def pay_form(request):#Account id is sended using seccions, it is saved in accou
             return render(request, "pay_form.html", {"form":form})
 
     movements_form = Pay_form()
-    return render(request, "pay_form.html", {"form":movements_form})
+    return render(request, "pay_form.html", {"form":movements_form, "account_id":request.session["account_id"]})
 
 def transaction_done(request):
 

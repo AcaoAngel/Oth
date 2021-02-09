@@ -8,7 +8,7 @@
     <div>
         <form action="" method="POST">
             {% csrf_token %}
-
+            <input type="submit" value="Save">
             <h1>Insert new payment details</h1>
 
 
@@ -43,8 +43,9 @@
                 {{ field }}
                 <hr>
             {% endfor %}
-            <input type="submit" value="Save">
+            
         </form>
+        
     </div>
 </body>
 </html>

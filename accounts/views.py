@@ -78,7 +78,7 @@ def movements_form(request):#account id is sended using the parameter through ur
     if request.method=="POST":
         print("post done")
 
-        form=Movement_form(request.POST)
+        form=Movement_form(request.POST, request.user)
 
         if form.is_valid():
             print("form is valid")
@@ -101,7 +101,7 @@ def movements_form(request):#account id is sended using the parameter through ur
     current_account_id = get_object_or_404(Account_value, id = request.session["account_id"])
     print("current account id is a ",type(current_account_id.id))
     # form = Movement_form(initial={"account_id":Account_value.objects.get(id = request.session["account_id"])})
-    form = Movement_form()
+    form = Movement_form(request.user, request.session["account_id"])
     return render(request, "movements_form.html", {"form":form})
 
 def pay_form(request):#Account id is sended using seccions, it is saved in account_id dictionary key and get it using request.session["account_id"]

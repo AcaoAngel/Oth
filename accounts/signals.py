@@ -127,4 +127,3 @@ def movement_in_second_account(instance, created=None, previous_amount=0):
         moved_to.account_value += instance.amount#Undo the previos movement in the account
     moved_to.save()
     instance.move_to_account_prestate = True #To know was a movement o not before save we use this function and update it here
-

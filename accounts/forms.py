@@ -1,7 +1,9 @@
 from django import forms
 from datetime import date
 from .models import Account_value, Movements
-from .functions import accounts_list_for_choices, validate_positive
+from .functions import validate_positive
+from django.forms import ModelChoiceField
+from django.contrib.auth.models import User
 
 
 
@@ -45,7 +47,7 @@ class Movement_form(forms.ModelForm):
     # account_id = forms.ModelChoiceField(label="From account", queryset=Movements.objects.filter(id=))
     date = forms.DateField(label="Date", initial=date.today)
     amount = forms.DecimalField(label='Amount', required=True, max_digits=11, decimal_places=2, validators=[validate_positive])
-    move_to_account = forms.ChoiceField(label="To account", choices = accounts_list_for_choices())
+    move_to_account = forms.ModelChoiceField(label="Moving to...", queryset=Account_value.objects.all())
     message = forms.CharField(label="Content", widget=forms.Textarea)
     # account_value_before = forms.DecimalField(label='Account value before', required=False)
     # account_value_after = forms.DecimalField(label='Account value after', required=False)
@@ -69,3 +71,29 @@ class Movement_form(forms.ModelForm):
     class Meta():
         model = Movements
         fields = ['date' , 'amount', 'move_to_account', 'message']
+
+    def __init__(self, user, account_id, *args, **kwargs):
+        print(user.id)
+        """Guide:
+        https://simpleisbetterthancomplex.com/questions/2017/03/22/how-to-dynamically-filter-modelchoices-queryset-in-a-modelform.html
+        Here in init we modificate the fields of the form using parameters got from the view, parameters are passed into this function
+        and using fields[''].queryset we can modificate them on the time it is called from the view. 
+        in the form use ModelChoiceField. It gives the whole name with id included, but that can be modified in the model class __str__
+        """
+
+        super(Movement_form, self).__init__(*args, **kwargs)
+        self.fields["move_to_account"].queryset = Account_value.objects.filter(user=user.id).exclude(id=account_id)
+
+        # previous way to list the accounts but was not effective and returnet all the accounts instead of only user accounts
+        # def accounts_list_for_choices():
+        #     account = models.Account_value.objects.all()
+        #     choices = list()
+        #     choices.append(("",""))
+        #     inside_list = list()
+        #     for i in account:
+        #         inside_list = list(str(i.id))#as key we get the accoint id
+        #         inside_list.append(i.account_name)
+        #         choices.append(tuple(inside_list))
+        #     print(choices)
+        #     return choices
+        

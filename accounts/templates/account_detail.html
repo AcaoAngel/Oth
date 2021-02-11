@@ -101,10 +101,10 @@
         <li style="font-weight: bold;">{{i.date.date}}  |  Event: {{i.event}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
         {% if i.move_to_account %}
         <a href="{% url 'accounts:edit_movement_form' i.id %}">Edit</a>
-        <!-- <a href="{% url 'accounts:account_detail' i.id sure_delete=i.account_id.id %}">Delete</a> -->
+        <a href="{% url 'accounts:account_detail' i.id %}">Delete</a>
         {% else %}
         <a href="{% url 'accounts:edit_pay_form' i.id %}">Edit</a>
-        <!-- <a href="{% url 'accounts:account_detail' i.id sure_delete=i.account_id.id %}">Delete</a> -->
+        <a href="{% url 'accounts:account_detail' i.id %}">Delete</a>
         {% endif %}
     </ul>
     {% endfor %}

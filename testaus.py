@@ -622,3 +622,387 @@ display:flex;
 		</script>
 
 
+--------------------------------------
+
+account form
+
+
+
+{% extends "base.html" %}
+
+{% block title %} Accounts {% endblock %}
+
+{% block body %}
+
+    
+<!DOCTYPE html>
+<html>    
+<head>
+	<title>Luo tili</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+   
+	<style>
+		
+		.user_card {
+            width: 400px;
+            height: 650px;
+			margin-top: 20px;
+            margin-bottom: 30px;
+            margin-left: -1800px;
+			background: #090a0a;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 1rem;
+            z-index: 999;
+            border: 2px solid rgba(255,255,255,0.2);
+           
+
+            
+		}
+
+        .justify-content-center h3{
+          
+            margin-top: 10px;
+            font-size: 35px;
+            margin-right: 5px;
+            font-family: 'Kenia', cursive;
+            font-weight:bold;
+        }
+
+        .libele{
+            color: azure;
+            margin-left: 20px;
+            margin-top: 20px;
+            font-family: 'Kenia', cursive;
+            font-size: 15px;
+        }
+        .libele label{
+           
+           margin-left: 0px;
+           margin-right: 50px;
+           width: 70px;
+           height: 24px;
+       }
+
+       textarea{
+           width: 340px;
+       }
+       .btn-primary{
+           background: #0e24a0 !important;
+           color: white !important;
+           margin-top: -20px;
+           margin-left: 267px;
+           font-size: 20px;
+           font-weight:bold;
+       }
+	</style>
+</head>
+<body>
+
+	<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+                    
+                    <h3 id="form-title">Luo tili</h3>
+                    {{form.errors}}
+                </div>
+                <div class= 'libele'>
+                    <form action="/create_account/" method="POST" ,="" enctype="multipart/form-data">  
+                              <!-- <input type="hidden" name="csrfmiddlewaretoken" value="lSURBeNoV0AJ3ZjyhhONNT6b0w4wc3o8JxT4eTsMnj8FyVHmCICoGXolTni5Q2Mh">  -->
+                        {% csrf_token %}
+                                
+                        {% for field in form %}
+                            <label>{{ field.label_tag }}</label>
+                            {{ field }}
+                            <hr>
+                            {% endfor %}
+                    </form>
+                        <input type="submit" class="btn btn-primary" value="Save">
+                </div>    
+			</div>
+        </div>
+
+    </div>
+
+
+</body>
+</html>  
+
+
+                               
+                 
+                           <!-- <tr><th><label for="id_user">User:</label></th><td><select name="user" required id="id_user">
+                            
+                            <option value="" selected="">---------</option> 
+                          
+             
+                          </select> 
+                                <hr>
+                            
+                                <label><label for="id_account_name">Account name:</label></label>
+                                <input type="text" name="account_name" maxlength="100" required="" id="id_account_name">
+                                <hr>
+                            
+                                <label><label<label for="id_account_value">Account value:</label></label>
+                                <input type="number" name="account_value" step="0.01" required="" id="id_account_value">
+                                <hr>
+                            
+                                 <label><label for="id_info">Info:</label></label> 
+                                <label><label for="id_info">Info:</label></label>
+                                
+                                <textarea name="info" cols="40" rows="7" maxlength="500" required="" id="id_info">Default info text</textarea>
+                                <hr>
+    
+                                <label><label for="id_save_percent">Save percent:</label></label>
+                                <input type="number" name="save_percent" value="10" step="0.01" required="" id="id_save_percent">
+                                <hr>
+                            
+                                <label><label for="id_saving_time">Saving time:</label></label>
+                                <input type="number" name="saving_time" value="12" required="" id="id_saving_time">
+                                <hr> -->
+
+ {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- <body>
+                        <div>
+                            <form action="/create_account/" method="POST", enctype="multipart/form-data">
+                                {% csrf_token %}  -->
+                                {{form.as_table}}
+                                {% for field in form %}
+                                    <label>{{ field.label_tag }}</label>
+                                    {{ field }}
+                                    <hr>
+                                {% endfor %}
+                                <input type="submit" value="Save">
+                            </form>
+                        </div>
+                    </body>  
+                    
+                   
+
+
+
+
+   -----------------------
+
+   account account_detail
+
+          {% extends "base.html" %}
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <h2>Account information</h2>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+   
+
+    {% block title %} Movements {% endblock %}
+
+
+{% block body %}
+
+
+	<style>
+		
+		.user_card {
+            width: 700px;
+            height: min-content;
+			margin-top: 90px;
+            margin-bottom: 30px;
+            margin-left: -1800px;
+			background-color: #9ABBFB;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 1rem;
+            z-index: 999;
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 2px 2px 5px 2px #ccc; 
+            display:flex;
+
+            
+		}
+
+        
+        #form-title{
+            color: #042496;
+            margin-top: -10px;
+            font-size: 35px;
+            margin-right: 5px;
+            font-family: 'Kenia', cursive;
+            font-weight:bold;
+      }
+
+      .libele{
+            color: #042496;
+            margin-left: 20px;
+            margin-top: 40px;
+            font-size: 15px;
+            font-family: 'Kenia', cursive;
+        }
+
+        .libele a{
+            color: #041657;
+           
+            font-size:20px;
+            font-weight:bold;
+            font-family: 'Kenia', cursive;
+        }
+        
+	</style>
+</head>
+<body>
+
+    <body>
+    
+
+        <div class="container h-100">
+            <div class="d-flex justify-content-center h-100">
+                <div class="user_card">
+                    <div class="d-flex justify-content-center">
+                        
+                        <h3 id="form-title">Account information</h3>
+                      
+                    </div>
+                    <div class= 'libele'>
+
+        <ul>
+            <li style="font-weight: bold;">{{account.account_name}}</li>
+            <li style="font-weight: bold;">{{account.account_value}}</li>
+            <li style="font-weight: bold;">{{account.info}}</li>
+            <li style="font-weight: bold;">{{account.save_percent}}</li>
+            <li style="font-weight: bold;">{{account.saving_time}}</li>
+        </ul><hr>
+        <h2>Movements</h2>
+        {% for i in movements %}
+        <ul>
+            <li style="font-weight: bold;">{{i.date.date}}  |  Event: {{i.event}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
+        </ul>
+        {% endfor %}
+    
+        <hr>
+    
+        <a href="{% url 'accounts:pay_form' %}">Insert new payment</a><br>
+        <a href="{% url 'accounts:movements_form' %}">Move to own account</a><br>
+        
+    </div>
+</div> </div>
+</div>
+
+    </body>
+    {% endblock %}
+    
+    </html>
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+    </head>
+   
+    <body>
+        <h2>Account information</h2>
+        <ul>
+            <li style="font-weight: bold;">{{account.account_name}}</li>
+            <li style="font-weight: bold;">{{account.account_value}}</li>
+            <li style="font-weight: bold;">{{account.info}}</li>
+            <li style="font-weight: bold;">{{account.save_percent}}</li>
+            <li style="font-weight: bold;">{{account.saving_time}}</li>
+        </ul><hr>
+        <h2>Movements</h2>
+        {% for i in movements %}
+        <ul>
+            <li style="font-weight: bold;">{{i.date.date}}  |  Event: {{i.event}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
+        </ul>
+        {% endfor %}
+    
+        <hr>
+    
+        <a href="{% url 'accounts:pay_form' %}">Insert new payment</a><br>
+        <a href="{% url 'accounts:movements_form' %}">Move to own account</a><br>
+        
+    </body>
+   
+    
+    </html> -->
+    
+    
+    
+    
+    
+    
+
+
+--------          

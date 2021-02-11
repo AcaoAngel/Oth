@@ -27,6 +27,8 @@ def payment(sender, instance, created, **kwargs):# instance is the sender objet(
         save_without_signal(instance)
         if instance.move_to_account:#Here if we are moving we update the second account. HINT: Move to account is saved as string
             movement_in_second_account(instance, created)
+            instance.move_to_account_prestate = True #To know was a movement o not before save we use this function and update it here
+            save_without_signal(instance)
     else: #For editing case
         account_value_tmp = update_current_movement(instance, created)
         update_recursively_movements(instance, account_value_tmp)
@@ -34,22 +36,25 @@ def payment(sender, instance, created, **kwargs):# instance is the sender objet(
 
 @receiver(post_delete, sender=Movements)
 def undo_payment(sender, instance, **kwargs):
-    editor = Account_value.objects.get(id=instance.account_id.id)
-    # editor.account_value = instance.account_value_before#bring back the previous account value
+    print("getting in post delete receiver")
+    editor = Account_value.objects.get(id=instance.account_id.id)# ACCOUNT moving the money object
     editor.account_value -= instance.amount#Calculate the new account value
-    # instance.account_value_after = editor.account_value#Save the new account value in the movement for references
-    editor.save()
-    print(instance.account_value_after)
+    
     update_recursively_movements(instance, account_value_tmp=instance.account_value_before)
     if instance.move_to_account:#Here if we are moving we update the second account. HINT: Move to account is saved as string
         movement_in_second_account(instance)
+        print("second account id is: ",instance)
+        linked_movement = Movements.objects.get(id = instance.second_account_movement_id)
+        delete_without_signal(linked_movement)
+
+    editor.save()
 
 
 #-----------Functions for signals------------------------
 
 def update_current_movement(instance, created):
-    current_movement = Movements.objects.get(id=instance.id)#get the object of the current movement
-    editor = Account_value.objects.get(id=instance.account_id.id)#get the object of the linked account
+    # instance = Movements.objects.get(id=instance.id)#get the object of the current movement
+    editor = Account_value.objects.get(id=instance.account_id.id)#the second account
     previous_amount = instance.account_value_after - instance.account_value_before#before changing the account_value_before and after we get the previous amount
     editor.account_value -= previous_amount#Undo the previos movement in the account
     editor.account_value += instance.amount#Calculate the new account value if there was a movement
@@ -62,26 +67,47 @@ def update_current_movement(instance, created):
     return account_value_tmp
 
 
-def update_recursively_movements(instance, account_value_tmp):#in instance function takes the user
-    """In this case is not possible to only set if i.date > instance.date becouse when added movements
+def update_recursively_movements(instance, account_value_tmp):#Instance is the actual movement
+    """This function update in the rest of account movements the account_value_before and account_value_after variables 
+    for the account paying and the account receiving if it is the case. 
+    
+    OTHER OPTION NOT WORKING WELL: In this case is not possible to only set if i.date > instance.date becouse when added movements
     from the admin the time can be exactly the same for some movements when we use 'save and add another' options
-    so works better to allways skip the current edited movement
+    so works better to allways skip the current edited movement.
 
     Args:
         instance (Django query object): [Takes the object of the current movement]
         account_value_tmp (int): the account_value_bejore or after depending of 
         the accion, for editing its passed the account_value_after, for deleting its needed the account_value_before
     """
-    user_movements = Movements.objects.filter(account_id = instance.account_id.id)#get all the movements of the instanciated user
+    account_movements = Movements.objects.filter(account_id = instance.account_id.id)#get all the movements of the instanciated account(account moving)
 
     # account_value_tmp = int()
-    for i in user_movements:
+    for i in account_movements:#Update the movements for the rest of movements in the moving account
         if i.id > instance.id:#skip all the previous movements including the actual
             print("editting", i)
             i.account_value_before = account_value_tmp
             i.account_value_after = account_value_tmp + i.amount
             account_value_tmp = i.account_value_after
             save_without_signal(i)
+        
+    if instance.move_to_account:#Update the rest of the movements in the second account
+        account_value_tmp = Movements.objects.get(id = instance.second_account_movement_id).account_value_before
+        print("got in instance.move_to_acco1unt")
+        print("account value temp is:", account_value_tmp)
+        second_account_movements = Movements.objects.filter(account_id = instance.move_to_account)#get all the movements of the instanciated account(second account)
+        print(second_account_movements)
+        for i in second_account_movements:
+            print("i id id:", i.id)
+            print("instance second account movement id is:", instance.second_account_movement_id)
+            if i.id > instance.second_account_movement_id:#skip all the previous movements including the actual of the second account
+                print("editting", i)
+                i.account_value_before = account_value_tmp
+                i.account_value_after = account_value_tmp + i.amount
+                account_value_tmp = i.account_value_after
+                save_without_signal(i)
+        
+
  
 
 
@@ -98,6 +124,11 @@ def save_without_signal(instance):
     instance.save()
     instance._meta.auto_created = False
 
+def delete_without_signal(instance):
+    instance._meta.auto_created = True
+    instance.delete()
+    instance._meta.auto_created = False
+
 
 
 def movement_in_second_account(instance, created=None, previous_amount=0):
@@ -108,22 +139,53 @@ def movement_in_second_account(instance, created=None, previous_amount=0):
         created ([Boolean], optional): [description]. Defaults to None to implement delete statement.
         previous_amount ([Int], optional): [description]. Defaults to 0. This is a necessary variable for editing 
     """
-    moved_to = Account_value.objects.get(id = instance.move_to_account)
+    account_receiving = Account_value.objects.get(id = instance.move_to_account)
     if created:#For creating
         print("getting in movement_in_second_account created")
-        moved_to.account_value -= instance.amount
+        account_receiving.account_value -= instance.amount
+        second_account_movement(instance, created, account_receiving)
     elif created == False:#For editing
         if instance.move_to_account_prestate:
             print("updating when there was allready a movement")
             print("previous amount ", previous_amount)
             print("instance amount ", instance.amount)
-            moved_to.account_value += previous_amount#Undo the previos movement in the account
-            moved_to.account_value -= instance.amount#Calculate the new account value
+            account_receiving.account_value += previous_amount#Undo the previos movement in the account
+            account_receiving.account_value -= instance.amount#Calculate the new account value
         else:
             print("Update when there was not a movement")
-            moved_to.account_value -= instance.amount#update the second own account
+            account_receiving.account_value -= instance.amount#update the second own account
     else:#For deleting
         print("getting in movement_in_second_account deleted")
-        moved_to.account_value += instance.amount#Undo the previos movement in the account
-    moved_to.save()
-    instance.move_to_account_prestate = True #To know was a movement o not before save we use this function and update it here
+        account_receiving.account_value += instance.amount#Undo the previos movement in the account
+    account_receiving.save()
+    
+
+
+def second_account_movement(instance, created, account_receiving):#Instance: movement moving the money. account_receiving: the money receiver account
+    # instance = Movements.objects.get(id=instance.id)#the account moving the money
+    # account_receiving = Account_value.objects.get(id=instance.move_to_account)#the account receiving the money
+    if created:
+        movement_info = Movements()
+        movement_info.account_id = account_receiving
+        movement_info.date = instance.date
+        movement_info.amount = instance.amount * -1
+        movement_info.moved_from_account = instance.account_id.id
+        movement_info.message = instance.message
+        movement_info.account_value_before = account_receiving.account_value + instance.amount #we use plus because instance.amount is a negative number
+        print(account_receiving.account_value,"....", instance.amount)
+        movement_info.account_value_after = account_receiving.account_value
+        movement_info.move_to_account_prestate = True
+        print("movement info id is: " ,movement_info.id, type(movement_info.id))
+        movement_info.second_account_movement_id = instance.id
+        save_without_signal(movement_info)
+        instance.second_account_movement_id = movement_info.id#we dont need to save it here becouse is savend in future step
+    elif created == False:
+        pass
+    else:
+        pass
+
+
+
+
+
+

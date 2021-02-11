@@ -22,9 +22,7 @@ class Create_account_form(forms.ModelForm):
 class Pay_form(forms.ModelForm):
 
     date = forms.DateField(label="Date", initial=date.today)
-    amount = forms.DecimalField(label='Amount', required=True, max_digits=11, decimal_places=2, 
-                                validators=[validate_positive]
-                                )
+    amount = forms.DecimalField(label='Amount', required=True, max_digits=11, decimal_places=2, validators=[validate_positive])
     payee_payer = forms.CharField(label='Payer/Payee', max_length=100, required=False)
     EVENT_CHOICES = [
         ("empty",""),

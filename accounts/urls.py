@@ -11,5 +11,7 @@ urlpatterns = [
     path('account_detail/<int:id>/', views.account_detail, name="account_detail"),#id is passed in the clicked link
     path('transaction_done/', views.transaction_done, name="transaction_done"),
     path('account_created/', views.account_created, name="account_created"),
+    path('pay_form/<int:id>/', views.edit_pay_form, name="edit_pay_form"),
+    path('movements_form/<int:id>/', views.edit_movement_form, name="edit_movement_form"),
       
 ]

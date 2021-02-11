@@ -82,4 +82,3 @@ class Movement_form(forms.ModelForm):
         #         choices.append(tuple(inside_list))
         #     print(choices)
         #     return choices
-        

@@ -95,16 +95,17 @@
                             {{ field }}
                             <hr>
                             {% endfor %}
-                    </form>
+                    
                         <input type="submit" class="btn btn-primary" value="Save">
                         <a href="{% url 'accounts:view_accounts'  %}">Back</a><br>
+                    </form>
                 </div>    
 			</div>
         </div>
 
     </div>
 
-
+{% endblock %}
 </body>
 </html>
 

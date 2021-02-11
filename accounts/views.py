@@ -89,7 +89,10 @@ def movements_form(request):#account id is sended using the parameter through ur
             form = form.save(commit = False)
             form.account_id = Account_value.objects.get(id = request.session["account_id"])#Account_value.objects.get(id=request.session["account_id"])
             form.date = request.POST["date"]
-            form.amount = Decimal(request.POST["amount"]) * -1
+            if Decimal(request.POST["amount"])>0:
+                form.amount = Decimal(request.POST["amount"]) * -1
+            else:
+                form.amount = Decimal(request.POST["amount"])
             # form.payee_payer = request.POST["payee_payer"]
             form.move_to_account = request.POST["move_to_account"]#in the form info is sended as queryset but the model accept an int 
             # form.event = request.POST["event"]
@@ -98,7 +101,7 @@ def movements_form(request):#account id is sended using the parameter through ur
             # return render(request, 'transaction_done.html', {"accont_id":account_id})
             return redirect("/transaction_done/")
         else:
-            return render(request, "pay_form.html", {"form":form})
+            return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
             print("form is not valid")
         
     
@@ -118,10 +121,12 @@ def pay_form(request):#Account id is sended using seccions, it is saved in accou
             account_id = Account_value.objects.get(id=request.session["account_id"])
             form.account_id = account_id
             form.date = request.POST["date"]
-            if request.POST["event"] != "deposit":
-                form.amount = Decimal(request.POST["amount"]) * -1
-            else:
-                form.amount = Decimal(request.POST["amount"])
+            if Decimal(request.POST["amount"])<0:#change the amount to positive if curstomer insert a negative number, 
+                #next if handle wheter it shold be positive or negative
+                print("got the negative number")
+                form.amount =Decimal(request.POST["amount"]) * -1
+            if request.POST["event"] != "deposit":#we get allways a positive, so if there is not a deposit we change it to negative
+                form.amount *= -1
             print(type(form.amount))
             form.payee_payer = request.POST["payee_payer"]
             # form.move_to_account = request.POST["move_to_account"]
@@ -131,7 +136,8 @@ def pay_form(request):#Account id is sended using seccions, it is saved in accou
             # return render(request, 'transaction_done.html', {"accont_id":account_id})
             return redirect("/transaction_done/")
         else:#send the form again in case of errors
-            return render(request, "pay_form.html", {"form":form})
+            print("form is not valid")
+            return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
 
     movements_form = Pay_form()
     return render(request, "pay_form.html", {"form":movements_form, "account_id":request.session["account_id"]})

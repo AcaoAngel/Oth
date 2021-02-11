@@ -31,9 +31,30 @@ def account_detail(request, id):
     request.session["account_id"] = id 
     movements = Movements.objects.filter(account_id_id=id)
 
+    if sure_delete:
+        print(sure_delete)
+    else:
+        print("no sure delete", sure_delete)
+
     context = {'account':account, 'movements':movements}
 
     return render(request, "account_detail.html", context)
+
+def sure_delete(request, id):
+    account = Account_value.objects.get(id=id)
+    print(type(account.id), account.id)
+    request.session["account_id"] = id 
+    movements = Movements.objects.filter(account_id_id=id)
+
+    if sure_delete:
+        print(sure_delete)
+    else:
+        print("no sure delete", sure_delete)
+
+    context = {'account':account, 'movements':movements, 'sure_delete':sure_delete}
+
+    return render(request, "account_detail.html", context)
+
 
 #------------------------------------------------------------------------------------
 def create_account(request):

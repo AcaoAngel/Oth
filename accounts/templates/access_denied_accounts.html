@@ -7,10 +7,59 @@
     <head>
 
     <title>{% block title %}Accounts Denied{% endblock %}</title>
-</head>
-<body>
+
+
     
     {% block body %}
+
+    <style>
+
+        .user_card {
+			width: 450px;
+            height: 200px;
+            border-radius: 1rem;
+            z-index: 999;
+            border: 2px solid rgba(255,255,255,0.2);
+
+
+        }   
+        .log-alert{
+	        color: rgb(250, 51, 51);
+	        font-size: 10px;
+	        font-family: 'Kenia', cursive;
+            text-align: center;	
+        }
+        .not-account{
+            color: white !important;
+            font-family: 'Kenia', cursive;
+            text-align: center;	
+            padding-top: 15px;
+        }
+
+		.already-account{
+			color: white !important;
+            font-family: 'Kenia', cursive;
+            text-align: center;	
+            padding-top: 15px;
+		}
+        .already-account a {
+			padding-left: 20px;
+            font-weight: bold;
+            font-size: 20px;
+		}
+
+        .not-account a{
+           padding-left: 30px;
+           font-weight: bold;
+           font-size: 20px;
+        }
+
+    </style>
+
+</head>
+<body></body>
+
+
 
     <div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
@@ -18,8 +67,17 @@
 				<div class="d-flex justify-content-center">
                     <div class = 'log-alert'>
                         <h2>You must log in before accessing this area</h2>
-                    </div>  
-                </div>    
+                    </div>    
+                </div>  
+                
+                <div class="already-account">
+                    Already have an account? <a href="{% url 'profiles:sign_in' %}" class="ml-2">Sign_in</a>
+                </div>	
+                
+                <div class="not-account">
+                    Don't have an account? <a href="{% url 'profiles:sign_up' %}" class="ml-2">Sign Up</a>
+                </div>
+
             </div>   
         </div>         
     </div>    
@@ -28,6 +86,8 @@
 
 </body>
 </html>
+
+
 
 
 

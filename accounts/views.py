@@ -25,14 +25,14 @@ class view_accounts(ListView):
 
 
 def account_detail(request, id):
-
+   
     account = Account_value.objects.get(id=id)
     print(type(account.id), account.id)
     request.session["account_id"] = id 
     movements = Movements.objects.filter(account_id_id=id)
-
+   
     context = {'account':account, 'movements':movements}
-
+        
     return render(request, "account_detail.html", context)
 
 #------------------------------------------------------------------------------------

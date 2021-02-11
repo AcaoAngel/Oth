@@ -5,3 +5,4 @@ allowedContent: {
        styles: 'height, width'
     }
 }
+

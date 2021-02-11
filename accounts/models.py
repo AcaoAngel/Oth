@@ -6,6 +6,7 @@ import accounts.functions
 
 
 
+
 class Account_value(models.Model):
     user = models.ForeignKey(User, 
                                     on_delete=models.CASCADE,#When user deleted account should be deleted too
@@ -21,7 +22,7 @@ class Account_value(models.Model):
         return 
     
     def __str__(self):
-        return f"{self.id}: {self.user}: {self.account_name}: {self.account_value}"
+        return f"{self.user.username}-->{self.account_name}: {self.account_value}"
 
 class Movements(models.Model):
     account_id = models.ForeignKey(Account_value,
@@ -29,17 +30,20 @@ class Movements(models.Model):
                                     null=False, blank=False)#This line tells that cant be a movement without an account
     date = models.DateField(null=True, blank=True, default=date.today())
     amount = models.DecimalField(max_digits=11, decimal_places=2, help_text="Insert a negative number if you are paying")
-    move_to_account = models.CharField(max_length=100, choices=accounts.functions.accounts_list_for_choices(), blank=True, null=True, default= None)
+    move_to_account = models.CharField(max_length=100, blank=True, null=True, default= None)
+    moved_from_account = models.CharField(max_length=100, blank=True, null=True, default= None)
     payee_payer = models.CharField(max_length=50, default="default payer", blank=True, null=True)
     event = models.CharField(max_length=14, blank=True, null=True)
     message = models.TextField(default="This is a default text", blank=True)
     account_value_before = models.DecimalField(max_digits=11, decimal_places=2, help_text="leave empty, generated automatically", default=0)
     account_value_after = models.DecimalField(max_digits=11, decimal_places=2,  help_text="leave empty, generated automatically", default=0)
     move_to_account_prestate = models.BooleanField(max_length=100, default=False)
+    second_account_movement_id = models.IntegerField(default=None, null=True, blank=True)
 
 
     def __str__(self):
-        return f"""{self.id}: {self.date}: {self.account_id.user}: {self.amount}: {self.payee_payer}: {self.event}: {self.account_value_after}"""
+        return f"""{self.id}: {self.date}: {self.account_id.user}: {self.amount}: {self.payee_payer}: {self.event}: {self.account_value_after} | Moved from {self.moved_from_account}(Delete only if None)"""
+
 
     
     

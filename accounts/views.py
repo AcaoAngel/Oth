@@ -30,10 +30,26 @@ def account_detail(request, id):
     print(type(account.id), account.id)
     request.session["account_id"] = id 
     movements = Movements.objects.filter(account_id_id=id)
-   
+
     context = {'account':account, 'movements':movements}
         
     return render(request, "account_detail.html", context)
+
+# def sure_delete(request, id):
+#     account = Account_value.objects.get(id=id)
+#     print(type(account.id), account.id)
+#     request.session["account_id"] = id 
+#     movements = Movements.objects.filter(account_id_id=id)
+
+#     if sure_delete:
+#         print(sure_delete)
+#     else:
+#         print("no sure delete", sure_delete)
+
+#     context = {'account':account, 'movements':movements, 'sure_delete':sure_delete}
+
+#     return render(request, "account_detail.html", context)
+
 
 #------------------------------------------------------------------------------------
 def create_account(request):
@@ -70,6 +86,8 @@ def create_account(request):
 
 def movements_form(request):#account id is sended using the parameter through url
 
+    current_account = get_object_or_404(Account_value, id = request.session["account_id"])
+
     # if request.method=="GET":
     #     current_account_id = get_object_or_404(Account_value, id = request.session["account_id"])
     #     print("got in GET",current_account_id)
@@ -78,7 +96,8 @@ def movements_form(request):#account id is sended using the parameter through ur
     if request.method=="POST":
         print("post done")
 
-        form=Movement_form(request.POST)
+        # form=Movement_form(request.POST, user = request.user, account_id = request.session["account_id"])
+        form=Movement_form(current_account, request.POST)
 
         if form.is_valid():
             print("form is valid")
@@ -86,23 +105,25 @@ def movements_form(request):#account id is sended using the parameter through ur
             form = form.save(commit = False)
             form.account_id = Account_value.objects.get(id = request.session["account_id"])#Account_value.objects.get(id=request.session["account_id"])
             form.date = request.POST["date"]
-            form.amount = Decimal(request.POST["amount"]) * -1
+            if Decimal(request.POST["amount"])>0:
+                form.amount = Decimal(request.POST["amount"]) * -1
+            else:
+                form.amount = Decimal(request.POST["amount"])
             # form.payee_payer = request.POST["payee_payer"]
-            form.move_to_account = request.POST["move_to_account"]
+            form.move_to_account = request.POST["move_to_account"]#in the form info is sended as queryset but the model accept an int 
             # form.event = request.POST["event"]
             form.message = request.POST["message"]
             form.save()
             # return render(request, 'transaction_done.html', {"accont_id":account_id})
             return redirect("/transaction_done/")
         else:
-            return render(request, "pay_form.html", {"form":form})
+            return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
             print("form is not valid")
         
-    current_account_id = get_object_or_404(Account_value, id = request.session["account_id"])
-    print("current account id is a ",type(current_account_id.id))
-    # form = Movement_form(initial={"account_id":Account_value.objects.get(id = request.session["account_id"])})
-    form = Movement_form()
-    return render(request, "movements_form.html", {"form":form})
+    
+    
+    form = Movement_form(current_account)#the parameter current account is passed to the init for rendering the options in move_to_account
+    return render(request, "movements_form.html", {"form":form, "account_id":request.session["account_id"]})#the account_id passed here is for the redirect link
 
 def pay_form(request):#Account id is sended using seccions, it is saved in account_id dictionary key and get it using request.session["account_id"]
   
@@ -116,10 +137,12 @@ def pay_form(request):#Account id is sended using seccions, it is saved in accou
             account_id = Account_value.objects.get(id=request.session["account_id"])
             form.account_id = account_id
             form.date = request.POST["date"]
-            if request.POST["event"] != "deposit":
-                form.amount = Decimal(request.POST["amount"]) * -1
-            else:
-                form.amount = Decimal(request.POST["amount"])
+            if Decimal(request.POST["amount"])<0:#change the amount to positive if curstomer insert a negative number, 
+                #next if handle wheter it shold be positive or negative
+                print("got the negative number")
+                form.amount =Decimal(request.POST["amount"]) * -1
+            if request.POST["event"] != "deposit":#we get allways a positive, so if there is not a deposit we change it to negative
+                form.amount *= -1
             print(type(form.amount))
             form.payee_payer = request.POST["payee_payer"]
             # form.move_to_account = request.POST["move_to_account"]
@@ -129,10 +152,89 @@ def pay_form(request):#Account id is sended using seccions, it is saved in accou
             # return render(request, 'transaction_done.html', {"accont_id":account_id})
             return redirect("/transaction_done/")
         else:#send the form again in case of errors
-            return render(request, "pay_form.html", {"form":form})
+            print("form is not valid")
+            return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
 
     movements_form = Pay_form()
-    return render(request, "pay_form.html", {"form":movements_form})
+    return render(request, "pay_form.html", {"form":movements_form, "account_id":request.session["account_id"]})
+
+
+
+
+
+
+
+def edit_pay_form(request, id):
+    current_obj = get_object_or_404(Movements, id=id)
+    
+
+    if request.method == 'POST':
+        form = Pay_form(request.POST, instance=current_obj)
+        if form.is_valid():
+            form = form.save(commit = False)
+            account_id = Account_value.objects.get(id=request.session["account_id"])
+            form.account_id = account_id
+            form.date = request.POST["date"]
+            if Decimal(request.POST["amount"])<0:#change the amount to positive if curstomer insert a negative number, 
+                #next if handle wheter it shold be positive or negative
+                print("got the negative number")
+                form.amount =Decimal(request.POST["amount"]) * -1
+            if request.POST["event"] != "deposit":#we get allways a positive, so if there is not a deposit we change it to negative
+                form.amount *= -1
+            print(type(form.amount))
+            form.payee_payer = request.POST["payee_payer"]
+            # form.move_to_account = request.POST["move_to_account"]
+            form.event = request.POST["event"]
+            form.message = request.POST["message"]
+            form.save()
+            # return render(request, 'transaction_done.html', {"accont_id":account_id})
+            return redirect("/transaction_done/")
+            
+        else:
+            print("form is not valid")
+            return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
+   
+    form = Pay_form(instance=current_obj, initial={"amount":current_obj.amount*-1})#the initial shows the amount as possitive number 
+    return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
+    
+
+def edit_movement_form(request, id):
+    current_obj = get_object_or_404(Movements, id=id)#we get the object to render it in the form call
+    current_account = get_object_or_404(Account_value, id = request.session["account_id"])#Need this object to the move_to_account field rendered in init
+
+    if request.method == 'POST':
+        form = Pay_form(request.POST, instance=current_obj)
+        if form.is_valid():
+            print("form is valid")
+
+            form = form.save(commit = False)
+            form.account_id = Account_value.objects.get(id = request.session["account_id"])#Account_value.objects.get(id=request.session["account_id"])
+            form.date = request.POST["date"]
+            if Decimal(request.POST["amount"])>0:
+                form.amount = Decimal(request.POST["amount"]) * -1
+            else:
+                form.amount = Decimal(request.POST["amount"])
+            form.move_to_account = request.POST["move_to_account"]#in the form info is sended as queryset but the model accept an int 
+            form.message = request.POST["message"]
+            form.save()
+            return redirect("/transaction_done/")
+            
+        else:
+            print("form is not valid")
+            return render(request, "movements_form.html", {"form":form, "account_id":request.session["account_id"]})
+   
+    form = Movement_form(current_account ,instance=current_obj, initial={"amount":current_obj.amount*-1})#the initial shows the amount as possitive number 
+    return render(request, "movements_form.html", {"form":form, "account_id":request.session["account_id"]})
+    
+
+
+
+
+
+
+
+
+
 
 def transaction_done(request):
 
@@ -144,7 +246,5 @@ def transaction_done(request):
 def account_created(request):
 
     return render(request, "account_created.html")
-
-
 
 

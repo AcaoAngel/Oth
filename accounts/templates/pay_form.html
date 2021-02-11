@@ -127,8 +127,12 @@
                 {{ field }}
                 <hr>
             {% endfor %}
+            
             <input type="submit" class="btn btn-primary" value="Save">
+            <a href="{% url 'accounts:account_detail' account_id %}">Cancel</a>
+            
         </form>
+        
     </div>
   </div>
 </div>
@@ -139,64 +143,3 @@
 </body>
 </html>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <body>
-
-  
-  <div>
-      <form action="" method="POST">
-          {% csrf_token %}
-
-          <h1>Insert new payment details</h1>
-
-
-          {% if messages %}
-              {% for message in messages %}
-                <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-              {% endfor %}
-          {% endif %}
-      
-          {% if form.errors %}
-              <div class="alert alert-error">
-                <h4>Please fix the following errors</h4>
-                <ul>
-                  {% for field in form %}
-                    {% if field.errors %}
-                      {% for error in field.errors %}
-                        <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
-                      {% endfor %}
-                    {% endif %}
-                  {% endfor %}
-                </ul>
-                {% if form.non_field_errors %}
-                  {{ form.non_field_errors }}
-                {% endif %}
-              </div>
-          {% endif %}
-
-
-
-          {% for field in form %}
-              <label>{{ field.label_tag }}</label>
-              {{ field }}
-              <hr>
-          {% endfor %}
-          <input type="submit" value="Save">
-      </form>
-  </div>
-</body>
-</html>
- -->

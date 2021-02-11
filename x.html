@@ -1,5 +1,4 @@
-
- {% load static %}
+{% load static %}
  <!DOCTYPE html>
  <html>
  
@@ -8,7 +7,7 @@
 		<title>OTH-Omataloushallinta</title>
 		<meta charset="utf-8">
 		<meta name= "viewport" content= "width=device-width, initial-scale=1.0"> 
-		<link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css' %}"/>   
+		<link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css' %}">   
 		<link rel="stylesheet" type="text/css" href="{% static ' font-awesome-4.7.0/css/font-awesome.min.css' %}">
 		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="preconnect" href="https://fonts.gstatic.com/"> 
@@ -42,11 +41,7 @@
             	{% endif %} 
 
             	{% if user.is_authenticated %}
-            	 <li class="user">{{ user.username }}</li>
-				
-				
-
-
+            	<li class="#">{{ user.username }}</li>
             	<li ><a href="{% url 'profiles:sign_out' %}">Logout</a></li>
             	{% else %}
             	<li ><a href="{% url 'profiles:sign_up' %}">Register</a>
@@ -65,7 +60,51 @@
         {% block title %} {% endblock %}
     </title> 
   
-	 {% block body %}	{% endblock body %}
+    <body>
+        <div>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Save">
+                <h1>Insert new payment details</h1>
+    
+    
+                {% if messages %}
+                    {% for message in messages %}
+                      <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+                    {% endfor %}
+                {% endif %}
+            
+                {% if form.errors %}
+                    <div class="alert alert-error">
+                      <h4>Please fix the following errors</h4>
+                      <ul>
+                        {% for field in form %}
+                          {% if field.errors %}
+                            {% for error in field.errors %}
+                              <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                            {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                      {% if form.non_field_errors %}
+                        {{ form.non_field_errors }}
+                      {% endif %}
+                    </div>
+                {% endif %}
+    
+    
+    
+                {% for field in form %}
+                    <label>{{ field.label_tag }}</label>
+                    {{ field }}
+                    <hr>
+                {% endfor %}
+                
+            </form>
+            
+        </div>
+    </body>
+    </html>
 	
 
 	<footer>
@@ -74,6 +113,7 @@
 		
 	</footer> 
 
+	
 
 
                      <!-- Optional JavaScript -->
@@ -84,5 +124,5 @@
 
 
 
-
+</head>
 <body>      

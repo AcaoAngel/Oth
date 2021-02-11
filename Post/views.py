@@ -71,7 +71,7 @@ def create_post(request):
 
 def edit_post(request , id ):
 	
-    try:
+    try:#for current_user not found
         current_user = User.objects.get(id=request.user.id)
         if request.user.is_authenticated and current_user.is_staff == 1:#permisions to create and edit posts, change to is_superuser for su permisions
             current_user = User.objects.get(id=request.user.id)

@@ -4,31 +4,17 @@ from django.utils.translation import gettext_lazy as _
 
 
 
-def accounts_list_for_choices():
-    account = models.Account_value.objects.all()
-    choices = list()
-    choices.append(("",""))
-    inside_list = list()
-    for i in account:
-        inside_list = list(str(i.id))#as key we get the accoint id
-        inside_list.append(i.account_name)
-        choices.append(tuple(inside_list))
-    print(choices)
-    return choices
-
-
-
 def validate_positive(value):
-    if value < 0:
+    """Raise an error if user try to make a paymment or movement with amount value to 0
+
+    Args:
+        value (amount value): Amount value inserted by user in pay_form or movement_form
+
+    Raises:
+        ValidationError: [Message to the user for correction of the field value]
+    """
+    if value == 0:
         raise ValidationError(
-            _('Amount must be a positive number'),
+            _('Please inster an amount value, it can not be 0'),
             params={'value': value},
         )
-
-def validate_not_same_account(value, id):
-    def innerfn(value):
-        if value == id:
-            raise ValidationError(
-                _('You can not send to same account'),
-                params={'value': value},
-            )

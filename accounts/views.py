@@ -25,7 +25,7 @@ class view_accounts(ListView):
 
 
 def account_detail(request, id):
-
+   
     account = Account_value.objects.get(id=id)
     print(type(account.id), account.id)
     request.session["account_id"] = id 
@@ -37,7 +37,7 @@ def account_detail(request, id):
         print("no sure delete", sure_delete)
 
     context = {'account':account, 'movements':movements}
-
+        
     return render(request, "account_detail.html", context)
 
 def sure_delete(request, id):

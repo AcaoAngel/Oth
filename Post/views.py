@@ -28,6 +28,25 @@ def post(request , id):
 
 
 def create_post(request):
+
+	# if request.method == 'POST':
+	# 	form = PostForm(data=request.POST, files=request.FILES)
+	# 	if form.is_valid():
+	# 		new_form = form.save(commit=False)
+	# 		new_form.user = request.user
+	# 		new_form.save()
+	# 		# messages.success(request, 'Julkaisu on luotu onnistuneesti')
+	# 		return redirect('/allposts')
+	# else:
+	# 	form = PostForm()
+
+	# context	= {
+	# 	'form' : form ,
+		
+	# }
+	# return render(request , 'create.html' , context)
+
+
     try:
         current_user = User.objects.get(id=request.user.id)
         if request.user.is_authenticated and current_user.is_staff:
@@ -47,7 +66,7 @@ def create_post(request):
         	return render(request, "permisions_denied.html" )
     except:
     	return render(request, "permisions_denied.html" )
-
+        
 
 
 def edit_post(request , id ):

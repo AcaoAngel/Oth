@@ -16,10 +16,10 @@
 	<style>
 		
 		.user_card {
-            width: 350px;
-            height: 820px;
-			margin-top: 5px;
-            margin-bottom: auto;
+            width: 400px;
+            height: 650px;
+			margin-top: 20px;
+            margin-bottom: 30px;
             margin-left: -1800px;
 			background: #090a0a;
 			position: relative;
@@ -30,138 +30,82 @@
 			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			border-radius: 5px;
+			border-radius: 1rem;
             z-index: 999;
+            border: 2px solid rgba(255,255,255,0.2);
+           
+
             
 		}
 
         .justify-content-center h3{
-            margin-top: -60px;
+          
+            margin-top: 10px;
+            font-size: 35px;
+            margin-right: 5px;
+            font-family: 'Kenia', cursive;
+            font-weight:bold;
         }
 
         .libele{
             color: azure;
+            margin-left: 20px;
+            margin-top: 20px;
+            font-family: 'Kenia', cursive;
+            font-size: 15px;
         }
+        .libele label{
+           
+           margin-left: 0px;
+           margin-right: 50px;
+           width: 70px;
+           height: 24px;
+       }
 
-
+       textarea{
+           width: 340px;
+       }
+       .btn-primary{
+           background: #0e24a0 !important;
+           color: white !important;
+           margin-top: -20px;
+           margin-left: 267px;
+           font-size: 20px;
+           font-weight:bold;
+       }
 	</style>
-
-
-
 </head>
 <body>
-    
 
 	<div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
 				<div class="d-flex justify-content-center">
                     
-                    <h3 id="form-title">Luo tili </h3>
+                    <h3 id="form-title">Luo tili</h3>
                     {{form.errors}}
-
-                    <div class= 'libele'>
-                        
-                            
-                        
-                        <form action="/create_account/" method="POST" ,="" enctype="multipart/form-data">
-                               
+                </div>
+                <div class= 'libele'>
+                    <form action="/create_account/" method="POST" ,="" enctype="multipart/form-data">  
                               <!-- <input type="hidden" name="csrfmiddlewaretoken" value="lSURBeNoV0AJ3ZjyhhONNT6b0w4wc3o8JxT4eTsMnj8FyVHmCICoGXolTni5Q2Mh">  -->
-                                {% csrf_token %}
+                        {% csrf_token %}
                                 
-                                {% for field in form %}
-                                    <label>{{ field.label_tag }}</label>
-                                    {{ field }}
-                                    <hr>
-                                {% endfor %}
-
-                                
-                 
-                           <!-- <tr><th><label for="id_user">User:</label></th><td><select name="user" required id="id_user">
-                            
-                            <option value="" selected="">---------</option> 
-                          
-             
-                          </select> 
-                                <hr>
-                            
-                                <label><label for="id_account_name">Account name:</label></label>
-                                <input type="text" name="account_name" maxlength="100" required="" id="id_account_name">
-                                <hr>
-                            
-                                <label><label<label for="id_account_value">Account value:</label></label>
-                                <input type="number" name="account_value" step="0.01" required="" id="id_account_value">
-                                <hr>
-                            
-                                 <label><label for="id_info">Info:</label></label> 
-                                <label><label for="id_info">Info:</label></label>
-                                
-                                <textarea name="info" cols="40" rows="7" maxlength="500" required="" id="id_info">Default info text</textarea>
-                                <hr>
-    
-                                <label><label for="id_save_percent">Save percent:</label></label>
-                                <input type="number" name="save_percent" value="10" step="0.01" required="" id="id_save_percent">
-                                <hr>
-                            
-                                <label><label for="id_saving_time">Saving time:</label></label>
-                                <input type="number" name="saving_time" value="12" required="" id="id_saving_time">
-                                <hr> -->
-                            
-                            <input type="submit" class="btn btn-primary" value="Save">
-                            <a href="{% url 'accounts:view_accounts'  %}">Back</a><br>
-                            
-
-                        </form>
-                    </body>
-                    </div>
-                    
-				</div>
-				   
- 
-            </div>
-
+                        {% for field in form %}
+                            <label>{{ field.label_tag }}</label>
+                            {{ field }}
+                            <hr>
+                            {% endfor %}
+                    </form>
+                        <input type="submit" class="btn btn-primary" value="Save">
+                        <a href="{% url 'accounts:view_accounts'  %}">Back</a><br>
+                </div>    
+			</div>
         </div>
-
 
     </div>
 
-</div>
-</div>
 
 </body>
+</html>
 
- {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!-- <body>
-                        <div>
-                            <form action="/create_account/" method="POST", enctype="multipart/form-data">
-                                {% csrf_token %}  -->
-                                {{form.as_table}}
-                                {% for field in form %}
-                                    <label>{{ field.label_tag }}</label>
-                                    {{ field }}
-                                    <hr>
-                                {% endfor %}
-                                <input type="submit" value="Save">
-                            </form>
-                        </div>
-                    </body>  -->
                     
-                   

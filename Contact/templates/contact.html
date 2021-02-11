@@ -4,17 +4,117 @@
 
 {% block body %}
 
+
+    
+<!DOCTYPE html>
+<html>    
+<head>
+	<title>Ota yhteyttä</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+   
+	<style>
+		
+		.user_card {
+            width: 400px;
+            height:650px;
+			margin-top: 10px;
+            margin-bottom: 30px;
+            margin-left: -1800px;
+			background: #090a0a;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 1rem;
+            z-index: 999;
+            border: 2px solid rgba(255,255,255,0.2);
+		}
+
+        #form-title{
+            color: #267af7;
+            margin-top: 5px;
+            font-size: 30px;
+            margin-right: -5px;
+            font-family: 'Kenia', cursive;
+            font-weight:bold;
+            
+        }
+
+        .libele{
+            color: rgb(243, 240, 255);
+            margin-left: 20px;
+            margin-top: 20px;
+            font-family: 'Kenia', cursive;
+            font-size: 15px;
+        }
+
+        .libele label{
+           
+            margin-left: 0px;
+            margin-right: 50px;
+            width: 70px;
+            height: 24px;
+        }
+
+        textarea{
+            width: 340px;
+        }
+
+        .send_btn{
+
+			
+			background: #0e24a0 !important;
+			color: white !important;
+            margin-top: 15px;
+            margin-left: 265px;
+            font-size: 20px;
+            font-weight:bold;
+
+
+        }
+  
+
+	</style>
+
+</head>
 <body>
-    <div>
-        <form action="/contact/" method="POST">
-            {% csrf_token %}
-            {{c_form}}
-            <input type="submit" value="Send">
-        </form>
+    
+
+	<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+		    <div class="user_card">
+			    <div class="d-flex justify-content-center">
+                   
+                    <h3 id="form-title"> Ota  yhteyttä </h3>
+                    <!-- {{form.errors}} -->
+                </div>
+                <div class= 'libele'>
+                    
+                    <form action="/contact/" method="POST">
+                        {% csrf_token %}
+                        {{c_form}}
+                           
+                    </form>
+                    <input class="btn send_btn" type="submit" value="Send">
+
+                </div>
+            </div>
+        </div>
     </div>
+
+
 </body>
-</html>
+</html>   
+
 {% endblock %}
+
+
 
 
 

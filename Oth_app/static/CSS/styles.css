@@ -4,7 +4,7 @@
 	text-decoration: none;
 	list-style: none;
 	box-sizing: border-box;
-	
+	z-index: 999;
 	
 }
 
@@ -16,9 +16,9 @@ body {
 	-o-background-size: 100%;
 	background-size: 100%;
 	height: calc(100vh - 80px);
+	z-index: 999;
 	
 	
-	  
 	 
 	
 	}
@@ -82,10 +82,6 @@ nav ul li a{
 	font-weight: bold;
 	font-family: 'Kenia', cursive;
 }	
-
-nav ul li user-N{
-	color: #fff;
-}
 
 
 
@@ -184,7 +180,7 @@ nav ul li user-N{
 	
 	position:relative;
 	width: 500px;
-	height: 700px;
+	height:min-content ;
 	
 	left: 900px;
 	display:flex;
@@ -282,14 +278,23 @@ nav ul li user-N{
 
 .single_post{
 	width: 100%;
+
 	
 }
+
 
 a.btn.btn-primary.btn-lg{         /*---luo uusi julkisu buttom---*/
 	background-color: black;
 	margin-top: 60px;
 	margin-left: 250px;
 }
+
+.edit{
+	margin-left: 40px;        /*---Muokkaa julkisu buttom---*/  
+
+}
+
+
 
 .Post_form{
 	
@@ -298,6 +303,9 @@ a.btn.btn-primary.btn-lg{         /*---luo uusi julkisu buttom---*/
 	margin-left: 250px;
 	z-index: 999;
 	margin-top: 30px;
+	border-radius: 1rem;
+    border: 2px solid rgba(255,255,255,0.2);
+
     
 }
 
@@ -307,57 +315,84 @@ a.btn.btn-primary.btn-lg{         /*---luo uusi julkisu buttom---*/
 }
 
 
-
+/* post containers */
 
 .post-container{
 	width: 1000px;
-	
+	height: min-content;
 	margin-left: 250px;
 	z-index: 999;
-	background-color: black;
+	
+       						/* background-color: black;-- */
 	box-sizing:content-box;
+	margin-top: 80px;
 }	
-
-
+.add button{         /* all_post.html --div class='Add'-- */
+	width: 0;
+	height: 0;
+}
 
 .card{
+
 	margin-top: 15px;
 	z-index: 999;
 	width: 300px;
-	height: 300px;
+	height: 350px;
 	margin-left: 8px;
 	margin-right: 10px;
 	margin-bottom:10px ;
+	background-color: black;
+	border-radius: 1rem;
+    z-index: 999;
+    border: 2px solid rgba(255,255,255,0.2);
 	
 }
 
+.card-body{
+
+
+}
 .card-body a  {
 	color:white;
 	background-color: #080808;
-	margin-top: 10px;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom:10px ;
+	margin-bottom:-10px ;
 	font-weight: bold;
+	cursor: pointer;
+  	position: absolute;
+  	height: 10%;
+	width: 30%;
+	border-radius: 8px;
+ 	 opacity: 1;
+ 	top:85%;
+	left:60%;
+	transform: translate(15%, 10%);
+
+	
 }
 
 .card-body h5  {
-	color:#361bd3
+	color:#361bd3;
+	margin-top: -20px;
+}
+
+.card-body p {
+	margin-top: -10px;
+	
 	
 }
 
-.img{
-	width: 300px;
-	height: 200px;
-
-
-}
 .single{
-	width: 900px;
-	height: 700px;
-	margin-left: 300px;
+	width: 60%;
+	height:min-content ;
+	margin-left: 290px;
 	z-index: 999;
+	margin-top: 70px;
+
 	
+}
+
+.card-img-top{
+	height: 50%;
 }
 
 
@@ -377,27 +412,21 @@ a.btn.btn-primary.btn-lg{         /*---luo uusi julkisu buttom---*/
     padding: 15px;
 }
 
-
-
-
-
-
-
 /* footer */
-
 footer{
 	
 	
-	position: fixed;
-	position:-ms-page;
 	left: 0;
-	bottom: 0;
+	padding-bottom: 0;
 	width: 100%;
 	background-color: black;
 	color: white;
 	text-align: center;
  	z-index:9999 ;
-	
+	margin-bottom: -250px;
+	margin-top: 500px;
+	position:absolute;
+  
 	
 }
 
@@ -406,6 +435,12 @@ footer{
 	font-size: 20px;
 
 }
+
+
+
+
+
+
 
 
 

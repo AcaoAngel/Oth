@@ -111,18 +111,23 @@
         <li style="font-weight: bold;">{{account.save_percent}}</li>
         <li style="font-weight: bold;">{{account.saving_time}}</li>
     </ul><hr>
-    <h2>Movements</h2>
+    <h2>Events</h2>
     {% for i in movements %}
     <ul>
         
-        {% if i.move_to_account %}
-        <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
-        <a href="{% url 'accounts:edit_movement_form' i.id %}" class="btn btn" role="button">Edit</a>
-        <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
+        {% if i.second_account_movement_id %}
+            <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
+            
+            {% if i.moved_from_account %}
+                <p>Movement received. You can only edit or delete from the sending account</p>
+            {% else %}
+                <a href="{% url 'accounts:edit_movement_form' i.id %}" class="btn btn" role="button">Edit</a>
+                <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
+            {% endif %}
         {% else %}
-        <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Payee/Payer: {{i.payee_payer}}  |  Event: {{i.event}}  |  Saldo after Payment: {{i.account_value_after}}</li>
-        <a href="{% url 'accounts:edit_pay_form' i.id %}" class="btn btn" role="button">Edit</a>
-        <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
+            <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after Payment: {{i.account_value_after}}</li>
+            <a href="{% url 'accounts:edit_pay_form' i.id %}" class="btn btn" role="button">Edit</a>
+            <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
         {% endif %}
     </ul>
     {% endfor %}

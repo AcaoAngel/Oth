@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
 
-
+{% block body %}
 
 
 
@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <h2>Account information</h2>
+    
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
@@ -25,7 +25,7 @@
 	<style>
 		
 		.user_card {
-            width: 700px;
+            width: 1000px;
             height: min-content;
 			margin-top: 90px;
             margin-bottom: 30px;
@@ -51,7 +51,7 @@
         
         #form-title{
             color: #042496;
-            margin-top: -10px;
+            margin-top: 10px;
             font-size: 35px;
             margin-right: 5px;
             font-family: 'Kenia', cursive;
@@ -62,7 +62,7 @@
             color: #042496;
             margin-left: 20px;
             margin-top: 40px;
-            font-size: 15px;
+            font-size: 20px;
             font-family: 'Kenia', cursive;
         }
 
@@ -73,12 +73,30 @@
             font-weight:bold;
             font-family: 'Kenia', cursive;
         }
-        
+        .btn{
+
+            background: #0e24a0 !important;
+            color: white !important;
+            margin-top: -40px;
+            margin-left: 10px;
+            font-size: 20px;
+            font-weight:bold;
+            float: right;
+
+
+
+        }
+
+
+
+
+
+
 	</style>
 </head>
 
 <body>
-    <h2>Account information</h2>
+    
     <div class="container h-100">
         <div class="d-flex justify-content-center h-100">
             <div class="user_card">
@@ -101,12 +119,12 @@
         
         {% if i.move_to_account %}
         <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
-        <a href="{% url 'accounts:edit_movement_form' i.id %}">Edit</a>
-        <a href="{% url 'accounts:sure_delete' account.id i.id %}">Delete</a>
+        <a href="{% url 'accounts:edit_movement_form' i.id %}" class="btn btn" role="button">Edit</a>
+        <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
         {% else %}
         <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Payee/Payer: {{i.payee_payer}}  |  Event: {{i.event}}  |  Saldo after Payment: {{i.account_value_after}}</li>
-        <a href="{% url 'accounts:edit_pay_form' i.id %}">Edit</a>
-        <a href="{% url 'accounts:sure_delete' account.id i.id %}">Delete</a>
+        <a href="{% url 'accounts:edit_pay_form' i.id %}" class="btn btn" role="button">Edit</a>
+        <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
         {% endif %}
     </ul>
     {% endfor %}

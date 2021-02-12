@@ -25,12 +25,12 @@
 		.user_card {
             width: 1000px;
             height: min-content;
-			margin-top: 90px;
+			margin-top: 60px;
             margin-bottom: 30px;
-            margin-left: -1800px;
+          
 			background-color: #9ABBFB;
 			position: relative;
-			display: flex;
+            float:center;
 			justify-content: center;
 			flex-direction: column;
 			padding: 10px;
@@ -41,7 +41,7 @@
             z-index: 999;
             border: 2px solid rgba(255,255,255,0.2);
             box-shadow: 2px 2px 5px 2px #ccc; 
-            display:flex;
+          
 
             
 		}
@@ -81,14 +81,57 @@
             font-weight:bold;
             float: right;
 
-
-
         }
 
 
+        .container-delete{
 
+            width:550px;
+            height: min-content;
+			margin-top: -650px;
+            margin-bottom: 60px;
+         margin-left: 500px;
+			background-color: #7ea7fa;
+			position: relative;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 1rem;
+            z-index: 999;
+            border: 5px solid rgba(8, 122, 236, 0.2);
+            box-shadow: 2px 2px 5px 2px blue; 
+            position: fixed;
 
+        }
 
+        .btnn{
+
+            background: #0e24a0 !important;
+            color: white !important;
+            margin-top: 30px;
+            margin-left: -5px;
+            font-size: 20px;
+            font-weight:bold;
+            float: right;
+            height: max-content;
+            margin-right: 15px;
+}
+
+#formtitle{
+            color: rgb(150, 54, 54);
+            margin-top: 25px;
+            font-size: 35px;
+            margin-right: 5px;
+            font-family: 'Kenia', cursive;
+            font-weight:bold;
+      }
+.usercard h3{
+    font-family: 'Kenia', cursive;
+    margin-top: 35px;
+}
 
 	</style>
 </head>
@@ -147,19 +190,30 @@
 
 
     <!-- box for confirmation before deleting a movement -->
+    
+    <div class="container-delete">
+        <div class="d-flex justify-content-center h-100">
+            <div class="usercard">
+                <div class="d-flex justify-content-center">
     {% if sure_delete %}
-        <h2>You are deleting movement:</h2>
+    
+    <style>.user_card {filter: blur(4px);
+    }
+</style>
+
+        <h2 id="formtitle">You are deleting movement:</h2>
+                </div> 
         <h3>{{deleting_movement.date.date}}  |  Event: {{deleting_movement.event}}  |  Amount: {{deleting_movement.amount}}  |  Saldo after movement: {{deleting_movement.account_value_after}}</h3>
         <h3>Are you sure?</h3>
-        <a href="{% url 'accounts:account_detail' account.id %}">no</a>
+        <a href="{% url 'accounts:account_detail' account.id %}" class="btn btnn" role="button">no</a>
         <form action="" method="POST">
             {% csrf_token %}
-            <input type="submit" class="btn btn-primary" value="Yes">
+            <input type="submit" class="btn btnn" value="Yes">
         </form>
     {% endif %} 
 
-
-
+</div> </div> 
+</div> </div> 
 
 </body>
 {% endblock %}

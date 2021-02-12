@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% block body %}
 
 
 
@@ -76,7 +76,7 @@
         
 	</style>
 </head>
-{% block body %}
+
 <body>
     <h2>Account information</h2>
     <div class="container h-100">
@@ -98,16 +98,22 @@
     <h2>Movements</h2>
     {% for i in movements %}
     <ul>
-        <li style="font-weight: bold;">{{i.date.date}}  |  Event: {{i.event}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
+        
         {% if i.move_to_account %}
+        <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
         <a href="{% url 'accounts:edit_movement_form' i.id %}">Edit</a>
-        <a href="{% url 'accounts:account_detail' i.id %}">Delete</a>
+        <a href="{% url 'accounts:sure_delete' account.id i.id %}">Delete</a>
         {% else %}
+        <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Payee/Payer: {{i.payee_payer}}  |  Event: {{i.event}}  |  Saldo after Payment: {{i.account_value_after}}</li>
         <a href="{% url 'accounts:edit_pay_form' i.id %}">Edit</a>
-        <a href="{% url 'accounts:account_detail' i.id %}">Delete</a>
+        <a href="{% url 'accounts:sure_delete' account.id i.id %}">Delete</a>
         {% endif %}
     </ul>
     {% endfor %}
+
+    
+
+
 
     <hr>
 
@@ -116,8 +122,24 @@
     <a href="{% url 'accounts:view_accounts'  %}">Back</a><br>
 </div>
 </div> </div>
-</div>    
-    
+</div> 
+
+
+    <!-- box for confirmation before deleting a movement -->
+    {% if sure_delete %}
+        <h2>You are deleting movement:</h2>
+        <h3>{{deleting_movement.date.date}}  |  Event: {{deleting_movement.event}}  |  Amount: {{deleting_movement.amount}}  |  Saldo after movement: {{deleting_movement.account_value_after}}</h3>
+        <h3>Are you sure?</h3>
+        <a href="{% url 'accounts:account_detail' account.id %}">no</a>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Yes">
+        </form>
+    {% endif %} 
+
+
+
+
 </body>
 {% endblock %}
 

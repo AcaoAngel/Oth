@@ -25,6 +25,7 @@ class view_accounts(ListView):
 
 
 def account_detail(request, id):
+    print("loading from account detail")
    
     account = Account_value.objects.get(id=id)
     print(type(account.id), account.id)
@@ -35,20 +36,24 @@ def account_detail(request, id):
         
     return render(request, "account_detail.html", context)
 
-# def sure_delete(request, id):
-#     account = Account_value.objects.get(id=id)
-#     print(type(account.id), account.id)
-#     request.session["account_id"] = id 
-#     movements = Movements.objects.filter(account_id_id=id)
+def sure_delete(request, id, movement_id):
+    print("loading from sure delete")
+    account = Account_value.objects.get(id=id)
+    print(type(account.id), account.id)
+    request.session["account_id"] = id 
+    movements = Movements.objects.filter(account_id_id=id)
+    deleting_movement = Movements.objects.get(id=movement_id)
+    if request.method == "POST":
+        
+        print("post done succesfully")
+        to_delete = Movements.objects.get(id = movement_id)
+        to_delete.delete()
+        return redirect("/transaction_done/")
 
-#     if sure_delete:
-#         print(sure_delete)
-#     else:
-#         print("no sure delete", sure_delete)
 
-#     context = {'account':account, 'movements':movements, 'sure_delete':sure_delete}
+    context = {'account':account, 'movements':movements, 'sure_delete':True, "deleting_movement":deleting_movement}
 
-#     return render(request, "account_detail.html", context)
+    return render(request, "account_detail.html", context)
 
 
 #------------------------------------------------------------------------------------

@@ -144,6 +144,15 @@
                 <p>{{message}}</p>
                 {% endfor %}
 				<div class="mt-4">
+					<div class="d-flex justify-content-center links"></div>
+						<ul class="message-error">
+							{% for key, value in form.errors.items %}
+							<li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
 						<div class="not-account">
 						Don't have an account? <a href="{% url 'profiles:sign_up' %}" class="ml-2">Sign Up</a>

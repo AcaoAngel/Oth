@@ -92,7 +92,7 @@
 			    <div class="d-flex justify-content-center">
                    
                     <h3 id="form-title"> Ota  yhteyttä </h3>
-                    <!-- {{form.errors}} -->
+                    
                 </div>
                 <div class= 'libele'>
                     
@@ -100,8 +100,10 @@
                         {% csrf_token %}
                         {{c_form}}
                            
+                        <input class="btn send_btn" type="submit" value="Send">
                     </form>
-                    <input class="btn send_btn" type="submit" value="Send">
+                    <p class="message-error">{{form.errors}}</p>
+                    
 
                 </div>
             </div>

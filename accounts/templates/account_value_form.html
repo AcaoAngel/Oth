@@ -20,7 +20,7 @@
             height: 650px;
 			margin-top: 20px;
             margin-bottom: 30px;
-            margin-left: -1800px;
+            margin-left:-5%;
 			background: #090a0a;
 			position: relative;
 			display: flex;
@@ -38,8 +38,8 @@
             
 		}
 
-        .justify-content-center h3{
-          
+        #form-title{
+            color: #267af7;
             margin-top: 10px;
             font-size: 35px;
             margin-right: 5px;
@@ -73,6 +73,15 @@
            font-size: 20px;
            font-weight:bold;
        }
+
+       .btn-back{
+        background: #0e24a0 !important;
+           color: white !important;
+           margin-top: -20px;
+           margin-left: -345px;
+           font-size: 20px;
+           font-weight:bold;
+       }
 	</style>
 </head>
 <body>
@@ -97,7 +106,7 @@
                             {% endfor %}
                     
                         <input type="submit" class="btn btn-primary" value="Save">
-                        <a href="{% url 'accounts:view_accounts'  %}">Back</a><br>
+                        <a href="{% url 'accounts:view_accounts'  %}" class="btn btn-back" role="button">Back</a><br>
                     </form>
                 </div>    
 			</div>

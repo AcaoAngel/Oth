@@ -8,13 +8,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
    
 
-    {% block title %} Movements {% endblock %}
+    
 
 
 
@@ -27,7 +26,7 @@
             height: min-content;
 			margin-top: 60px;
             margin-bottom: 30px;
-          
+            margin-left:-5%;
 			background-color: #9ABBFB;
 			position: relative;
             float:center;
@@ -51,7 +50,7 @@
             color: #042496;
             margin-top: 10px;
             font-size: 35px;
-            margin-right: 5px;
+            margin-right: 15px;
             font-family: 'Kenia', cursive;
             font-weight:bold;
       }
@@ -120,6 +119,24 @@
             margin-right: 15px;
 }
 
+        .bt{
+        
+            background: #0e24a0 !important;
+            color: white !important;
+            margin-top: 50px;
+            float:left;
+            font-size: 20px;
+            font-weight:bold;
+           
+            height: max-content;
+            margin-bottom: 40px;
+          
+
+          
+       
+        }
+
+
 #formtitle{
             color: rgb(150, 54, 54);
             margin-top: 25px;
@@ -145,49 +162,44 @@
                     
                     <h3 id="form-title">Account information</h3>
                   
-                </div>
+                    </div>
                 <div class= 'libele'>
-    <ul>
-        <li style="font-weight: bold;">{{account.account_name}}</li>
-        <li style="font-weight: bold;">{{account.account_value}}</li>
-        <li style="font-weight: bold;">{{account.info}}</li>
-        <li style="font-weight: bold;">{{account.save_percent}}</li>
-        <li style="font-weight: bold;">{{account.saving_time}}</li>
-    </ul><hr>
-    <h2>Events</h2>
-    {% for i in movements %}
-    <ul>
+                   <ul>
+                       <li style="font-weight: bold;">{{account.account_name}}</li>
+                       <li style="font-weight: bold;">{{account.account_value}}</li>
+                       <li style="font-weight: bold;">{{account.info}}</li>
+                       <li style="font-weight: bold;">{{account.save_percent}}</li>
+                       <li style="font-weight: bold;">{{account.saving_time}}</li>
+                   </ul><hr>
+                        <h2>Events</h2>
+                        {% for i in movements %}
+                    <ul>
         
-        {% if i.second_account_movement_id %}
-            <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}} | {{i.move_to_account}}</li>
+                        {% if i.second_account_movement_id %}
+                        <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}} | {{i.move_to_account}}</li>
             
-            {% if i.moved_from_account %}
-                <p>Movement received. You can only edit or delete from the sending account</p>
-            {% else %}
-                <a href="{% url 'accounts:edit_movement_form' i.id %}" class="btn btn" role="button">Edit</a>
-                <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
-            {% endif %}
-        {% else %}
-            <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after Payment: {{i.account_value_after}}</li>
-            <a href="{% url 'accounts:edit_pay_form' i.id %}" class="btn btn" role="button">Edit</a>
-            <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
-        {% endif %}
-    </ul>
-    {% endfor %}
+                        {% if i.moved_from_account %}
+                        <p>Movement received. You can only edit or delete from the sending account</p>
+                        {% else %}
+                        <a href="{% url 'accounts:edit_movement_form' i.id %}" class="btn btn" role="button">Edit</a>
+                        <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
+                        {% endif %}
+                        {% else %}
+                        <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after Payment: {{i.account_value_after}}</li>
+                        <a href="{% url 'accounts:edit_pay_form' i.id %}" class="btn btn" role="button">Edit</a>
+                        <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
+                        {% endif %}
+                    </ul>
+                     {% endfor %}
+                    <hr>
 
-    
-
-
-
-    <hr>
-
-    <a href="{% url 'accounts:pay_form' %}">Insert new payment</a><br>
-    <a href="{% url 'accounts:movements_form' %}">Move to own account</a><br>
-    <a href="{% url 'accounts:view_accounts'  %}">Back</a><br>
-</div>
-</div> </div>
-</div> 
-
+                    <a href="{% url 'accounts:pay_form' %}"class="btn bt">Insert new payment</a>
+                    <a href="{% url 'accounts:movements_form' %}"class="btn bt">Move to own account</a>
+                    <a href="{% url 'accounts:view_accounts'  %}"class="btn bt">Back</a>
+                </div>
+            </div>
+        </div> 
+    </div>
 
     <!-- box for confirmation before deleting a movement -->
     

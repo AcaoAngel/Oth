@@ -488,6 +488,7 @@ display:flex;
 <body>
 
 <div class ="tabs">
+<h3 id="title"> <h3 id="form-title">Account information</h3>
 	<div class="tab">
  		{% for user_accounts in object_list %}
 		<ul>

@@ -1,53 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>OTH-Omataloushallinta</title>
-	<meta charset="utf-8">
-	<meta name= "viewport" content= "width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css' %}"> 
-	<link rel="stylesheet" type="text/css" href="{% static ' -4.7.0/css/font-awesome.min.css' %}">
-	<!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-	<link rel="preconnect" href="https://fonts.gstatic.com/">
 
-	
-</head>
-
-<body>
-
-    {% block title %}Home{% endblock %}
-
+	{% block title %}Home{% endblock %}
+	 
     {% block body %}
 
-<!-- 
-	<style type="text/css">
-        body { 
-         background: url("https://www.avoin.jyu.fi/fi/uutiset/ota-raha-asiat-haltuun-oman-talouden-hallinta-kurssilla/@@images/e2d7f043-0cd7-db5d-ae65-446328cbb9f6.jpeg" ) no-repeat center center fixed; 
-         -webkit-background-size: cover;
-         -moz-background-size: cover;
-         -o-background-size: cover;
-         background-size: cover;
-        }
-    </style>   -->
-
-
-
-	
-
-			<!-- images slider  -->
-			<!-- <div class="slides">			
-   				<div class="slide"><img src="{% static '/media/img/raha05.jpg' %}" ></div>	
-   				<div class="slide"><img src="{% static 'media/img/raha08.jpg' %}"></div>
-   				<div class="slide"><img src="{% static 'media/img/raha09.jpg' %}"></div>
-   				<div class="slide"><img src="{% static 'media/img/raha02.jpg' %}"></div>
-
-				
-			</div> -->
-		</div>
-		
-	</header>
 
 	<!-- contenu sous form de boite-->	
 	<div class = "container">
@@ -57,6 +15,10 @@
 			<div class="content">
 					<h3>Tilit</h3>				
 			</div>
+
+
+			
+
 		</a>
 		<a href="yhteenveto.html" class="box">
 			<div class= "icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
@@ -84,11 +46,12 @@
 
 
 	
-	{% endblock %}	
+	{% endblock %}		
 
-	
-</body>
-</html>
+
+
+
+
 
 
 

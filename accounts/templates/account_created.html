@@ -1,24 +1,69 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %} Done {% endblock %}</title>
+
+    {% block body %}
+
+
+<head>
+
+
+	<style>
+        .tabs{
+        
+            position: absolute;
+            top:40%;
+            left: 50%;
+           
+            transform: translate(-50%, -50%);
+            width: 630px;
+            height: 200px;
+            background: #eee;
+            overflow: hidden;
+            box-shadow: 2px 2px 5px 2px #ccc; 
+            display:flex;
+            background-color: #9ABBFB;
+            z-index: 999;
+            font-family: 'Kenia', cursive;
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 2px 2px 5px 2px #ccc; 
+            display:flex;  
+
+			border-radius: 0.5rem;
+}
+
+	    .tab h1{
+            margin-left: 50px;
+            margin-top: 40px;
+        }
+        .back{
+            background: #0e24a0 !important;
+            color: white !important;
+            margin-top: 120px;
+            float: right;
+            margin-left: -345px;
+            font-size: 20px;
+            font-weight:bold;
+            font-family: 'Kenia', cursive;
+            }
+	
+
+    </style>
+
 </head>
 
-{% block body %}
-
 <body>
-    <h1>Account created succesfully</h1>
-
-    <a href="{% url 'accounts:view_accounts'  %}">Back</a><br>
 
 
-    
+    <div class ="tabs">
+        <div class ="tab">
+            <h1>Account created succesfully</h1>
+        </div> 
+        <div class ="btm">
+             <a href="{% url 'accounts:view_accounts'  %}" class="btn back" role="button">Back</a>
+         </div> 
+	</div>
 
-</body>
-
+   
 {% endblock %}
-
-</html>
+</body>

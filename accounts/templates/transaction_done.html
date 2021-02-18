@@ -5,16 +5,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} Done {% endblock %}</title>
+    {% block body %}
+
+	<style>
+
+
+
+
+
+
+        .tabs{
+        
+        position: absolute;
+        top:40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 1000px;
+        height: min-content;
+        background: #eee;
+        overflow: hidden;
+        box-shadow: 2px 2px 5px 2px #ccc; 
+        display:flex;
+        background-color: #9ABBFB;
+        z-index: 999;
+        
+        border: 2px solid rgba(255,255,255,0.2);
+                    box-shadow: 2px 2px 5px 2px #ccc; 
+                    display:flex;  
+                    border-radius: 0.5rem;
+        }
+        
+        .tab a{
+            color: #041657;
+            font-weight:bold;
+            font-size:20px;
+            font-family: 'Kenia', cursive;
+            margin-left: 30px;
+         
+        
+            
+        }
+        #form-title{
+            color: #042496;
+            margin-top: 20px;
+            font-size: 35px;
+         margin-left: 250px;
+            font-family: 'Kenia', cursive;
+            font-weight:bold;
+            margin-bottom: 35px;
+        }
+
+</style>
+
 </head>
 
-{% block body %}
+
 
 <body>
-    <h1>Transaction done succesfully</h1>
+    <div class ="tabs">
+		
+		<div class="tab">
+			<h1 id="form-title">Transaction done succesfully</h1>  
 
     <h3><a href="{% url 'accounts:account_detail' account_id %}">Come back to Account details</a></h3><br>
     <h3><a href="{% url 'accounts:pay_form' %}">Insert new payment</a></h3><br>
     <h3><a href="{% url 'accounts:movements_form' %}">Move to own account</a></h3><br>
+
+</div>
+ </div>
     
 
 </body>

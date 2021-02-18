@@ -20,7 +20,7 @@
             height: 680px;
 		      	margin-top: 20px;
             margin-bottom: 30px;
-            margin-left: -1800px;
+            margin-left: -5px;
        			background: #090a0a;
        			position: relative;
        			display: flex;
@@ -72,6 +72,16 @@
            font-size: 20px;
            font-weight:bold;
        }
+       .btn-{
+           background: #0e24a0 !important;
+           color: white !important;
+           margin-top: -70px;
+       
+           font-size: 20px;
+           font-weight:bold;
+          
+       }
+
 	</style>
 </head>
 
@@ -129,7 +139,7 @@
             {% endfor %}
             
             <input type="submit" class="btn btn-primary" value="Save">
-            <a href="{% url 'accounts:account_detail' account_id %}">Cancel</a>
+            <a href="{% url 'accounts:account_detail' account_id %}"class="btn btn-">Cancel</a>
             
         </form>
         

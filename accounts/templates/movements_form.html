@@ -17,7 +17,7 @@
 	<style>
 		
 		.user_card {
-            width: 400px;
+            width: 37%;
             height: 680px;
 		      	margin-top: 20px;
             margin-bottom: 30px;
@@ -38,9 +38,9 @@
 		}
 
     #form-title{
-            color: #267af7;
-            margin-top: 10px;
-            font-size: 25px;
+            color: hsl(216, 93%, 56%);
+            margin-top: 15%;
+            font-size: 20px;
             margin-right: 5px;
             font-family: 'Kenia', cursive;
             font-weight:bold;
@@ -60,6 +60,7 @@
            width: 70px;
            height: 24px;
            margin-bottom: 0px;
+           font-size: 17px;
        }
 
        textarea{
@@ -68,12 +69,42 @@
        .btn-primary{
            background: #0e24a0 !important;
            color: white !important;
-           margin-top: -20px;
+           margin-top: -5px;
            margin-left: 267px;
            font-size: 20px;
            font-weight:bold;
           
        }
+
+       .user_card li a{
+            margin-left: -10%;
+            font-size:25px;
+            color: red;
+            position: absolute;
+            width: 45px;
+            height: 35px;/*height: auto;*/
+            border: 0px solid #d6d6d6;
+            z-index: 99;
+            padding: 0px;
+            text-align: center;
+            background:  white;
+            transition: 0.5s all;
+            animation: pulsate 3s ease-in-out;
+            animation-iteration-count:infinite ;
+            border-radius: 3px;
+            margin-top: 3%;
+         }
+
+         .btn-{
+           background: #0e24a0 !important;
+           color: white !important;
+           margin-top: -65px;
+       
+           font-size: 20px;
+           font-weight:bold;
+          
+       }
+
 	</style>
 </head>
 
@@ -88,15 +119,14 @@
 				<div class="d-flex justify-content-center">
                     
                     <h3 id="form-title">Insert own-account movement details</h3>
-                   
+                    <li><a  href="{% url 'accounts:account_detail' account_id %}"><i class="fa fa-close" ></i></a></li>
                 </div>
                 <div class= 'libele'>
 
                   <div>
                       <form method="POST">
                           {% csrf_token %}
-                          
-                          
+
                           {% if messages %}
                               {% for message in messages %}
                                 <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
@@ -127,6 +157,7 @@
                               <hr>
                           {% endfor %}
                           <input type="submit" class="btn btn-primary" value="Save">
+                          <a href="{% url 'accounts:account_detail' account_id %}"class="btn btn-">Back</a>
                       </form>
                   </div>
                 </div>
@@ -137,6 +168,9 @@
               </body>
               </html>
               {% endblock %}
+
+
+
 
 
 

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fontawesome-free',
     'bootstrap4',
+    'crispy_forms',
     'django_forms_bootstrap',
     'ckeditor',
     'ckeditor_uploader' ,
@@ -72,6 +74,7 @@ for i in INSTALLED_APPS[6:]:
     my_dirs.append(str(BASE_DIR)+"\\"+i+"\\"+"media")
     my_dirs.append(str(BASE_DIR)+"\\"+i+"\\"+"media"+"\\"+"img")
     my_dirs.append(str(BASE_DIR)+"\\"+i+"\\"+"templates"+"\\"+"superior")
+    
 #-------------------------------------------------------
 
 TEMPLATES = [
@@ -251,7 +254,7 @@ EMAIL_HOST="smtp.gmail.com"
 EMAIL_USE_TLS=True
 EMAIL_PORT=587
 EMAIL_HOST_USER="pythondevelopper0@gmail.com"
-EMAIL_HOST_PASSWORD="lynda_angel01"
+EMAIL_HOST_PASSWORD="cgrnwmxmkrweiire"
 
 LOGIN_URL = '/log_in/'
 LOGIN_REDIRECT_URL = '/'

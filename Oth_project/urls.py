@@ -21,6 +21,8 @@ from django.views.static import serve
 
 
 urlpatterns = [
+    path('', include('django.contrib.auth.urls')),
+   
     path('admin/', admin.site.urls),
     path('' , include('Post.urls' , namespace = 'Post')),
     path('' , include('Oth_app.urls', namespace='oth')),

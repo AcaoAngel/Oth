@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+
+{% block body %}
+
+
+
+<head>
+    <style>
+ .white-bg li a{
+        margin-left: 98%;
+        font-size:25px;
+        color: red;
+        position: absolute;
+        width: 45px;
+        height: 35px;/*height: auto;*/
+        border: 0px solid #d6d6d6;
+        z-index: 99;
+        padding: 0px;
+        text-align: center;
+        background:  white;
+        transition: 0.5s all;
+        animation: pulsate 3s ease-in-out;
+        animation-iteration-count:infinite ;
+        border-radius: 3px;
+        margin-top: -11%;
+        
+    } 
+    .white-bg h4{
+        color: #267af7;
+		font-family: 'Kenia', cursive;
+		font-weight: bold;
+        font-size: 30px;
+        margin-top: 7%;
+        text-align: center;
+        
+    }  
+     .profile_details_area{
+       
+    width: 50%;
+    height: 100%;
+    margin-left: 25%;
+    background: #090a0a;
+    margin-top: 100px; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      -webkit-box-shadow: 0 4px 8px 0 rgba(206, 132, 132, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border-radius: 1rem;
+      z-index: 999;
+      border: 2px solid rgba(255,255,255,0.2); 
+  
+      }
+    .form-group span{
+        font-family: 'Kenia', cursive;
+        margin-left:-8%;
+        margin-top: 10px;
+        font-size: 20px;
+        
+    }
+    .form-group input{
+        margin-top: 10px;
+        margin-left: 8%;
+        max-width: 350px; 
+        max-height: 38;
+       
+    }
+
+    .form-group small{
+        margin-left: 23%;
+        font-size: 15px;
+    }
+
+    .input-group-append{
+        width: 93px;
+        height: 48px;
+    }
+
+    .w-50{
+        margin-left: 35%;
+        background: #0e24a0  !important;
+		color: white !important;
+		font-family: 'Kenia', cursive;
+		font-weight: bold;
+		font-size: 20px;
+        margin-top: 5%;
+        border-radius: 0.3rem;
+    }
+
+    </style>
+  
+</head>
+ 
+
+   
+    <div class="profile_details_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="update_profile_form white-bg">
+                        <div>
+                        <h4>Update your profile</h4>
+                        <li><a  href="{% url 'Oth_app:index' %}"><i class="fa fa-close" ></i></a></li>
+                        </div>
+                        <form method= "POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                
+                                <div class="input-group mb-3">
+     							    <div class="input-group-append">
+     								    <span for="id_username">Username</span>
+     							    </div>
+     							    <input type="text" name="username" value="" maxlength="150" class="form-control" placeholder="Username" title="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only." required="" id="id_username">
+     						    </div>
+                                    
+                                    <small class="form-text text-muted">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+                                 
+                                    
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">    
+                                        <span for="id_first_name">First name</span>
+                                    </div>    
+                                    <input type="text" name="first_name" maxlength="150" class="form-control" placeholder="First name" title="" id="id_first_name">  
+                                </div>
+                                   
+                                    
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">  
+                                        <span for="id_last_name">Last name</span>
+                                    </div> 
+                                    <input type="text" name="last_name" maxlength="150" class="form-control" placeholder="Last name" title="" id="id_last_name">
+                                    </div> 
+                                    
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">  
+                                        <span for="id_email">Email</span>
+                                    </div>     
+                                    <input type="email" name="email" value=""  class="form-control" placeholder="Email" title="" required="" id="id_email">
+                                </div> 
+                                    
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">  
+                                        <span for="id_bio">Bio</span>
+                                    </div> 
+                                    <input type="text" name="bio" maxlength="150" class="form-control" placeholder="Bio" title="" id="id_bio">
+                                </div>     
+                                   
+                                    
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">  
+                                        <span for="id_web">Web</span>
+                                        </div>         
+                                        <input type="url" name="web" maxlength="150" class="form-control" placeholder="Web" title="" id="id_web">
+                                    </div>     
+                                    
+                            </div> 
+                            {% buttons %}
+                                <button class="boxed-btn3 w-50" type="submit">Save</button>
+
+                                
+                            {% endbuttons %} 
+                        
+                        </form>
+                           
+                            
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock body %}
+
+
+
+    <!-- <button class="boxed-btn3 w-100" type="submit">Apply Now</button>
+
+                               
+    <div class="form-group">
+                                
+        <label for="id_username">Username</label><input type="text" name="username" value="admin" maxlength="150" class="form-control" placeholder="Username" title="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only." required="" id="id_username">
+        
+        
+        
+        <small class="form-text text-muted">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+     
+        <label for="id_first_name">First name</label><input type="text" name="first_name" maxlength="150" class="form-control" placeholder="First name" title="" id="id_first_name">
+        <label for="id_last_name">Last name</label><input type="text" name="last_name" maxlength="150" class="form-control" placeholder="Last name" title="" id="id_last_name">
+        <label for="id_email">Email</label><input type="email" name="email" value="" class="form-control" placeholder="Email" title="" required="" id="id_email">
+        <label for="id_bio">Bio</label><input type="text" name="bio" maxlength="255" class="form-control" placeholder="Bio" title="" id="id_bio">
+        <label for="id_web">Web</label><input type="url" name="web" maxlength="200" class="form-control" placeholder="Web" title="" id="id_web">
+
+        <button class="boxed-btn3 w-100" type="submit">Post Now</button>
+    </div>  -->

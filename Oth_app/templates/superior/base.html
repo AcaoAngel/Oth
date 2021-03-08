@@ -50,14 +50,14 @@
 				<li><a href="{% url 'Oth_app:index' %}">Tietoa Oth:sta</a></li>
 				<li><a href="{% url 'Contact:contact' %}"><i class="fa fa-phone" ></i>Ota yhteyttä</a></li>
             	{% if request.user.is_superuser %}
-           		<li><a href="{% url 'admin:index' %}">Admin Menu</a></li>  
+           		<li><a href="{% url 'admin:index' %}">Admin</a></li>  
             	{% endif %} 
 
 				
-            	{% if user.is_authenticated %}
+            	{% if user.is_authenticated%}
             	 
 				
-				 <li style="font-weight: bold;color:white;font-family: 'Kenia', cursive;font-size: 20px;" class="users">{{ user.username }}</li>
+				 <li><a href="{% url 'profiles:profile' %}" style="font-weight: bold;color:white;font-family: 'Kenia', cursive;font-size: 15px;" class="users">{{ user.username }} profile</a></li>
 
 
             	<li ><a href="{% url 'profiles:sign_out' %}">Logout</a></li>
@@ -73,13 +73,14 @@
 			</ul>
     	</nav>
 
- 
+		
 
 		{% block title %} {% endblock %}
    
-  
 		{% block body %}	{% endblock body %}
 		
+
+
 
 	<footer>
 		<h2 class="text-white">OTH-Omataloushallinta</h2>
@@ -102,3 +103,8 @@
 
 
 </html>
+
+
+
+
+

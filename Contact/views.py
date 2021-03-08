@@ -18,7 +18,7 @@ def contact(request):
             email=request.POST["email"]
             content="{}\n{}\n{}".format(name, email, request.POST['content'])
             email_from=settings.EMAIL_HOST_USER
-            recipient_list=["pythondevelopper0@gmail.com", "angel.acao92@gmail.com"]
+            recipient_list=["pythondevelopper0@gmail.com"]
             try:#Shows max 6 characters of the name in Gmail preview subject field 
                 name_subject = name[0:6] + " " + subject#using this variable we show the name and subject in the gmail preview subject field.
             except IndexError:

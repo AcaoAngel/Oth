@@ -89,7 +89,7 @@ nav ul li a{
 .active-home, a:hover{
 
 	background: white;
-	border: px solid white;
+	border: 2px solid white;
 	transition: 0.5s all;
 	/*-webkit-*/animation: pulsate 3s ease-in-out;
     /*-webkit-*/animation-iteration-count:infinite ;
@@ -399,19 +399,23 @@ a.btn.btn-primary.btn-lg{         /*---luo uusi julkisu buttom---*/
 .Post_form{
 	
 	width: 900px;
-	height: 1200px;
+	height: min-content;
 	margin-left: 250px;
 	z-index: 999;
-	margin-top: 30px;
+	margin-top:7%;
 	border-radius: 1rem;
     border: 2px solid rgba(255,255,255,0.2);
+	background-color: black;
 
     
 }
 
+
 .form-group{
 	background-color: black;
     color: white;
+	margin: 40px;
+	
 }
 
 
@@ -449,6 +453,8 @@ a.btn.btn-primary.btn-lg{         /*---luo uusi julkisu buttom---*/
 }
 
 .card-body{
+	background: #fff;
+	
 
 
 }
@@ -473,6 +479,7 @@ a.btn.btn-primary.btn-lg{         /*---luo uusi julkisu buttom---*/
 .card-body h5  {
 	color:#361bd3;
 	margin-top: -20px;
+	
 }
 
 .card-body p {
@@ -483,10 +490,10 @@ a.btn.btn-primary.btn-lg{         /*---luo uusi julkisu buttom---*/
 
 .single{
 	width: 60%;
-	height:min-content ;
+	height: 120%;
 	margin-left: 290px;
 	z-index: 999;
-	margin-top: 70px;
+	margin-top: 80px;
 
 	
 }
@@ -524,7 +531,7 @@ footer{
 	text-align: center;
  	z-index:9999 ;
 	margin-bottom:-25% ;
-	margin-top: 220px;
+	margin-top: 310px;
 	position:absolute;
   
 	

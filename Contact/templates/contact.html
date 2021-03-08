@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} Contact {% endblock %}
+{% block title %} {% endblock %}
 
 {% block body %}
 
@@ -18,8 +18,8 @@
 		
 		.user_card {
             width: 400px;
-            height:580px;
-			margin-top: 10px;
+            height:560px;
+			margin-top: 100px;
             margin-bottom: 30px;
             margin-left:-5%;
 			background: #090a0a;
@@ -38,13 +38,33 @@
 
         #form-title{
             color: #267af7;
-            margin-top: -35px;
+            margin-top: 7px;
             font-size: 30px;
             margin-right: -5px;
             font-family: 'Kenia', cursive;
             font-weight:bold;
             
         }
+
+        .user_card li a{
+            margin-left: 10%;
+            font-size:25px;
+            color: red;
+            position: absolute;
+            width: 45px;
+            height: 35px;/*height: auto;*/
+            border: 0px solid #d6d6d6;
+            z-index: 99;
+            padding: 0px;
+            text-align: center;
+            background:  white;
+            transition: 0.5s all;
+            animation: pulsate 3s ease-in-out;
+            animation-iteration-count:infinite ;
+            border-radius: 3px;
+            
+         }
+
 
         .libele{
             color: rgb(243, 240, 255);
@@ -92,6 +112,7 @@
 			    <div class="d-flex justify-content-center">
                    
                     <h3 id="form-title"> Ota  yhteyttä </h3>
+                    <li><a  href="{% url 'Oth_app:index' %}"><i class="fa fa-close" ></i></a></li>
                     
                 </div>
                 <div class= 'libele'>
@@ -104,6 +125,13 @@
                     </form>
                     <p class="message-error">{{form.errors}}</p>
                     
+                </div>
+                    <!-- {% if name %}
+                    <center>
+                        <h2>Tanks {{ name }}</h2>
+                        <p>We received your email and will put in contact with you as soon as possible.</p>
+                    </center>
+                    {% endif %} -->
 
                 </div>
             </div>
@@ -115,6 +143,11 @@
 </html>   
 
 {% endblock %}
+
+
+
+
+
 
 
 

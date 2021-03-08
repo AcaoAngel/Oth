@@ -16,8 +16,8 @@
 	<style>
 		
 		.user_card {
-            width: 400px;
-            height: 680px;
+            width: 40%;
+            height: 90%;
 		      	margin-top: 20px;
             margin-bottom: 30px;
             margin-left: -5px;
@@ -40,17 +40,18 @@
             color: #267af7;
             margin-top: 10px;
             font-size: 25px;
-            margin-right: 5px;
+            margin-right: 10px;
             font-family: 'Kenia', cursive;
             font-weight:bold;
         }
 
         .libele{
             color: azure;
-            margin-left: 20px;
+            margin-left: 9%;
             margin-top: 40px;
             font-family: 'Kenia', cursive;
             font-size: 15px;
+            
         }
         .libele label{
            
@@ -59,11 +60,24 @@
            width: 70px;
            height: 24px;
            margin-bottom: 0px;
+           
        }
 
        textarea{
            width: 340px;
        }
+       .libele input{
+        border-radius: 3px;
+           
+     
+           
+       }
+
+
+
+
+
+
        .btn-primary{
            background: #0e24a0 !important;
            color: white !important;
@@ -82,6 +96,25 @@
           
        }
 
+       .user_card li a{
+            margin-left: -1%;
+            font-size:25px;
+            color: red;
+            position: absolute;
+            width: 45px;
+            height: 35px;/*height: auto;*/
+            border: 0px solid #d6d6d6;
+            z-index: 99;
+            padding: 0px;
+            text-align: center;
+            background:  white;
+            transition: 0.5s all;
+            animation: pulsate 3s ease-in-out;
+            animation-iteration-count:infinite ;
+            border-radius: 3px;
+            margin-top: -2%;
+         }
+
 	</style>
 </head>
 
@@ -95,61 +128,59 @@
 			<div class="user_card">
 				<div class="d-flex justify-content-center">
                     
-                    <h3 id="form-title">Insert new payment details</h3>
-                   
-                </div>
-                <div class= 'libele'>
-               <div>
-                    <form action="" method="POST">
-                    {% csrf_token %}
-
-          
-
-
-            {% if messages %}
-                {% for message in messages %}
-                  <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-                {% endfor %}
-            {% endif %}
-        
-            {% if form.errors %}
-                <div class="alert alert-error">
-                  <h4>Please fix the following errors</h4>
-                  <ul>
-                    {% for field in form %}
-                      {% if field.errors %}
-                        {% for error in field.errors %}
-                          <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
-                        {% endfor %}
-                      {% endif %}
+          <h3 id="form-title">Insert new payment details</h3>
+          <li><a  href="{% url 'accounts:account_detail' account_id %}"><i class="fa fa-close" ></i></a></li>
+        </div>
+        <div class= 'libele'>
+          <div>
+            <form action="" method="POST">
+               {% csrf_token %}
+               {% if messages %}
+                   {% for message in messages %}
+                     <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+                   {% endfor %}
+               {% endif %}
+           
+               {% if form.errors %}
+            <div class="alert alert-error">
+              <h4>Please fix the following errors</h4>
+              <ul>
+                {% for field in form %}
+                  {% if field.errors %}
+                    {% for error in field.errors %}
+                      <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
                     {% endfor %}
-                  </ul>
-                  {% if form.non_field_errors %}
-                    {{ form.non_field_errors }}
                   {% endif %}
-                </div>
-            {% endif %}
-
-
-
-            {% for field in form %}
-                <label>{{ field.label_tag }}</label>
-                {{ field }}
-                <hr>
+                {% endfor %}
+              </ul>
+              {% if form.non_field_errors %}
+                {{ form.non_field_errors }}
+              {% endif %}
+            </div>
+              {% endif %}
+              {% for field in form %}
+              <label>{{ field.label_tag }}</label>
+              {{ field }}
+              <hr>
             {% endfor %}
             
             <input type="submit" class="btn btn-primary" value="Save">
-            <a href="{% url 'accounts:account_detail' account_id %}"class="btn btn-">Cancel</a>
+            <a href="{% url 'accounts:account_detail' account_id %}"class="btn btn-">Back</a>
             
-        </form>
+            </form>
         
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
-
-</div>
 
 </body>
 </html>
 {% endblock %}
+
+
+
+
+
+

@@ -3,16 +3,56 @@
 
 {% block body %}
 
+<head>
+<style>
+
+.single a{
+  margin-left: 56%;
+  font-size:25px;
+  color: #d6d6d6;
+    position: absolute;
+    width: 45px;
+    height: 35px;/*height: auto;*/
+    border: 0px solid #d6d6d6;
+    z-index: 99;
+    padding: 0px;
+    text-align: center;
+    background:  red;
+    transition: 0.5s all;
+    animation: pulsate 3s ease-in-out;
+    animation-iteration-count:infinite ;
+    border-radius: 3px;
+    margin-top: 1%;
+
+         
+
+
+  
+         }
+
+  
+
+
+
+
+</style>
+
+</head>
+
+
 
 {% if request.user.is_staff or request.user.is_superuser %}
   <div class='edit' >
     <a class="btn btn-primary btn-lg" href="{% url 'Post:edit_post' post.id %}" role="button">Muokkaa julkaisuasi </a>   
 </div>
 {% endif %} 
-          <div class=" card single">
-           
+
+
+         
+          <div class="single">
+            <a  href="{% url 'Post:all_posts' %}"><i class="fas fa-close" ></i></a>
               <img class="card-img-top" src="{{post.img.url}}" alt="Card image cap">
-          
+            
             <div class="card-body">
 
             	<!-- <div>

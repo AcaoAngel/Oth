@@ -4,79 +4,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Done {% endblock %}</title>
+    <title>{% block title %}  {% endblock %}</title>
     {% block body %}
 
 	<style>
 
+.user_card {
+    top:5%;
+    left: 0;
+	width: 70%;
+	height: 210px;
+	margin-top: 100px;
+    margin-bottom: auto;
+    margin-left:-5%;
+	background-color: #9ABBFB;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 1rem;
+    z-index: 999;
+    border: 2px solid rgba(255,255,255,0.2);
+			
+    }
 
+.user_card li a{
+    margin-left: 12%;
+    font-size:25px;
+    color: red;
+    position: absolute;
+    width: 45px;
+    height: 35px;/*height: auto;*/
+    border: 0px solid #d6d6d6;
+    z-index: 99;
+    padding: 0px;
+    text-align: center;
+    background:  white;
+    transition: 0.5s all;
+    animation: pulsate 3s ease-in-out;
+    animation-iteration-count:infinite ;
+    border-radius: 3px;
+    margin-top:0;
+}
 
-
-
-
-        .tabs{
+.btm a{
+    color: #041657;
+    font-weight:bold;
+    font-size:20px;
+    font-family: 'Kenia', cursive;
+    margin-left: 30px;
         
-        position: absolute;
-        top:40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 1000px;
-        height: min-content;
-        background: #eee;
-        overflow: hidden;
-        box-shadow: 2px 2px 5px 2px #ccc; 
-        display:flex;
-        background-color: #9ABBFB;
-        z-index: 999;
-        
-        border: 2px solid rgba(255,255,255,0.2);
-                    box-shadow: 2px 2px 5px 2px #ccc; 
-                    display:flex;  
-                    border-radius: 0.5rem;
-        }
-        
-        .tab a{
-            color: #041657;
-            font-weight:bold;
-            font-size:20px;
-            font-family: 'Kenia', cursive;
-            margin-left: 30px;
-         
-        
-            
-        }
-        #form-title{
-            color: #042496;
-            margin-top: 20px;
-            font-size: 35px;
-         margin-left: 250px;
-            font-family: 'Kenia', cursive;
-            font-weight:bold;
-            margin-bottom: 35px;
-        }
+    }
+.user_card h3{
+    color: #042496;
+    margin-top: 5%;
+    bottom: 10%;
+    font-size: 35px;
+    margin-left:0;
+    font-family: 'Kenia', cursive;
+    font-weight:bold;
+    margin-bottom: 35px;
+}
+
+.bt{
+    margin-left: 0.6%; 
+    margin-bottom: 40px;
+    margin-right: 2%;
+    background: #0e24a0 !important;
+    color: white !important;
+    margin-top:0;
+   
+    float:left;
+    font-size: 18px;
+    font-weight:bold;
+    
+    height: max-content;
+    
+    font-family: 'Kenia', cursive;
+    border: 0px solid #d6d6d6;
+    z-index: 99;
+
+
+
+
+
+    }    
+
+
+
+
 
 </style>
 
 </head>
 
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card">
+                <div class="d-flex justify-content-center">
+                    <h3>Transaction done succesfully</h3>
+
+                    <li><a  href="{% url 'accounts:account_detail' account_id %}"><i class="fa fa-close" ></i></a></li>
+                    </div>
 
 
-<body>
-    <div class ="tabs">
-		
-		<div class="tab">
-			<h1 id="form-title">Transaction done succesfully</h1>  
+                        <div class= 'libele'>
+                
+                       <a href="{% url 'accounts:account_detail' account_id %}" class="btn bt">Come back to Account details</a>
+                
+                       <a href="{% url 'accounts:pay_form' %}" class="btn bt">Insert new payment</a>
+              
+                       <a href="{% url 'accounts:movements_form' %}" class="btn bt" > Move to own account</a>
+                        </div>    
 
-    <h3><a href="{% url 'accounts:account_detail' account_id %}">Come back to Account details</a></h3><br>
-    <h3><a href="{% url 'accounts:pay_form' %}">Insert new payment</a></h3><br>
-    <h3><a href="{% url 'accounts:movements_form' %}">Move to own account</a></h3><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
 
-</div>
- </div>
-    
-
-</body>
 
 {% endblock %}
 
-</html>
+
+
+

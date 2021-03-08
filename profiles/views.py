@@ -8,10 +8,18 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .forms import  UserUpdateForm , ProfileUpdateForm
+from django.urls import reverse
 
-
-
-
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.models import User
+from django.template.loader import render_to_string
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
 # Create your views here.
 
 # we create views using classes importing as parameter the functions
@@ -46,6 +54,38 @@ class SignOutView(LogoutView):
 
 
 
+def profile(request):
+    profile = Profile.objects.get(user=request.user)  # this is the current user who is login in.   Profile= model
+    return render(request, 'templates/profile.html', {'profile': profile})
+
+
+def profile_edit(request):
+    profile = Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        userupdateform= UserUpdateForm(request.POST, instance=request.user)
+        profileupdateform = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=profile)
+
+        if userupdateform.is_valid() and profileupdateform.is_valid():
+            userupdateform.save()
+            myprofile = profileupdateform.save(commit=False)
+            myprofile.user = request.user
+            myprofile.save()
+            success_message = "Your profile was updated successfully"
+            return redirect(reverse('profiles:profile'))
+    
+    
+    else:
+        userupdateform = UserUpdateForm(instance=request.user)
+        profileupdateform = ProfileUpdateForm(instance=profile)
+    context = {
+     
+        'UserUpdateForm': userupdateform,
+        'ProfileUpdateForm': profileupdateform
+    }
+  
+    return render(request, 'templates/profile_edit.html',context)
 
 
 
@@ -53,12 +93,24 @@ class SignOutView(LogoutView):
 
 
 
+#     profile = Profile.objects.get(user=request.user)
+
+#     return render(request, 'templates/profile.html', {'profile': profile})
 
 
 
+# def profile_edit(request):
+#     profile = Profile.objects.get(user=request.user)
 
 
 
+#     if request.method == 'POST':
+#         pass
+
+
+#     else :
+#         UserUpdateForm = UserUpdateForm(instance=request.user)
+#         ProfileUpdateForm = ProfileUpdateForm(instance=profile)
 
 
 

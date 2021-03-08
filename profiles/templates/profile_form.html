@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Registrate{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
 
@@ -44,6 +44,7 @@
 			color: #267af7;
 			font-family: 'Kenia', cursive;
 			font-weight: bold;
+			margin-top: 20px;
 			
 		}
 		.login_btn {
@@ -89,6 +90,24 @@
 			color: rgb(255, 15, 15) !important;
 
 		}
+		.user_card li a{
+            margin-left: 13%;
+            font-size:25px;
+            color: red;
+            position: absolute;
+            width: 45px;
+            height: 35px;/*height: auto;*/
+            border: 0px solid #d6d6d6;
+            z-index: 99;
+            padding: 0px;
+            text-align: center;
+            background:  white;
+            transition: 0.5s all;
+            animation: pulsate 3s ease-in-out;
+            animation-iteration-count:infinite ;
+            border-radius: 3px;
+            
+         }
 
 	</style>
 
@@ -99,6 +118,7 @@
 			<div class="user_card">
 				<div class="d-flex justify-content-center">
 					<h3 id="form-title">REGISTER </h3>
+					<li><a  href="{% url 'Oth_app:index' %}"><i class="fa fa-close" ></i></a></li>
 				</div>
 				<div class="d-flex justify-content-center form_container">
 

@@ -3,6 +3,61 @@
 {% load bootstrap4 %}
 {% block body %}
  
+
+
+<head>
+	
+	<style>
+
+.fati li a{
+     margin-left: 72%;
+     
+     font-size:25px;
+     color: red;
+     position: absolute;
+     width: 45px;
+     height: 35px;/*height: auto;*/
+     border: 0px solid #d6d6d6;
+     z-index: 99;
+     padding: 0px;
+     text-align: center;
+     background:  white;
+     transition: 0.5s all;
+     animation: pulsate 3s ease-in-out;
+     animation-iteration-count:infinite ;
+     border-radius: 3px;
+     margin-top: 8%;
+     
+}	
+
+
+.form-group label{
+  
+  color: #3bacf8;
+  font-family: 'Kenia', cursive;
+}
+.btn-primary{
+  font-family: 'Kenia', cursive;
+  font-size: 20px ;
+  background: #0e24a0 !important;
+	margin-left: 77%;
+	color: white !important;
+	margin-top: -20%;	
+  
+      }
+
+
+</style>
+
+</head>
+
+
+<div class= fati>
+  <li><a  href="{% url 'Oth_app:index' %}"><i class="fa fa-close" ></i></a></li>
+</div>
+
+
+
 <div class='Post_form'>
   <form method="post" enctype="multipart/form-data" >
     {% csrf_token %}

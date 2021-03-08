@@ -9,6 +9,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, 
                                     on_delete=models.CASCADE,#When user deleted profile should be deleted too
                                     null=False, blank=False)#This line tells that cant be a profile without a user
+    
     bio = models.CharField(max_length=255, blank=True)
     web = models.URLField(blank=True)
 
@@ -30,3 +31,5 @@ def save_profile_user(sender, instance, **kwargs):
 #     if created:
 #         Profile.objects.create(user=instance)
 #     instance.profile.save()
+
+

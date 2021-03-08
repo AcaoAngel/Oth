@@ -14,5 +14,7 @@ urlpatterns = [
     path('account_created/', views.account_created, name="account_created"),
     path('pay_form/<int:id>/', views.edit_pay_form, name="edit_pay_form"),
     path('movements_form/<int:id>/', views.edit_movement_form, name="edit_movement_form"),
-      
+    path('bank_statement/', views.upload_file, name="upload_file"),
+    path('file_uploaded/', views.file_uploaded, name="file_uploaded"),
+
 ]

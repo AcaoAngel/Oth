@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import Create_account_form, Pay_form, Movement_form
+from .forms import Create_account_form, Pay_form, Movement_form, UploadFileForm
 from .models import Account_value, Movements
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.detail import SingleObjectMixin
 from django.contrib.auth.models import User
 from decimal import Decimal
+import accounts.read_tiliote
 
 # Create your views here.
 
@@ -33,7 +34,7 @@ def account_detail(request, id):
     movements = Movements.objects.filter(account_id_id=id)
 
     context = {'account':account, 'movements':movements}
-      
+        
     return render(request, "account_detail.html", context)
 
 def sure_delete(request, id, movement_id):
@@ -230,13 +231,6 @@ def edit_movement_form(request, id):
    
     form = Movement_form(current_account ,instance=current_obj, initial={"amount":current_obj.amount*-1})#the initial shows the amount as possitive number 
     return render(request, "movements_form.html", {"form":form, "account_id":request.session["account_id"]})
-    
-
-
-
-
-
-
 
 
 
@@ -251,5 +245,47 @@ def transaction_done(request):
 def account_created(request):
 
     return render(request, "account_created.html")
+
+
+def upload_file(request):#TODO Read about a faster way to access datebase only once and save all the events, I have a video abount that named bulk update
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            statements = accounts.read_tiliote.extract_info(request.FILES['file'], request.user, request.POST['year'])
+            statement_list = list()
+            for statement in statements:
+                print("view", statement)
+                new_form = UploadFileForm(request.POST, request.FILES).save(commit = False)
+                account_id = Account_value.objects.get(id=request.session["account_id"])#TODO I can merge this line with the next
+                new_form.account_id = account_id
+                # print(f"{request.POST['year']}-{statement[0][3:5]}-{statement[0][:2]}")
+                new_form.date = f"{request.POST['year']}-{statement[0][3:5]}-{statement[0][:2]}"
+                # print(type(float(statement[3][:-1].replace(".","").replace(",","."))), statement[3][:-1].replace(".","").replace(",","."))
+                if statement[3][-1] == "-":
+                    new_form.amount = Decimal(statement[3][:-1].replace(".","").replace(",",".")) *-1
+                else:
+                    new_form.amount = Decimal(statement[3][:-1].replace(".","").replace(",","."))
+                new_form.message = statement[1]
+                statement_list.append(new_form)
+                # new_form.save()
+            for i in statement_list:
+                i.save()
+            return redirect("/file_uploaded/")
+    context = UploadFileForm()
+    return render(request, "upload_file.html", {"form":context})
+
+def file_uploaded(request):
+    return render(request, "file_uploaded.html")
+
+
+
+
+
+
+
+
+
+
+
 
 

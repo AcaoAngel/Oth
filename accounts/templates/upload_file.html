@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+    <form method="POST" enctype="multipart/form-data">  
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <label>{{ field.label_tag }}</label>
+            {{ field }}
+            <hr>
+        {% endfor %}
+        
+        <input type="submit" class="btn btn-primary" value="Upload">
+        <a href="{% url 'accounts:view_accounts'  %}" class="btn btn-back" role="button">Back</a><br>
+    </form>
+
+{% endblock %}

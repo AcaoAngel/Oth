@@ -33,7 +33,7 @@ def account_detail(request, id):
     movements = Movements.objects.filter(account_id_id=id)
 
     context = {'account':account, 'movements':movements}
-        
+      
     return render(request, "account_detail.html", context)
 
 def sure_delete(request, id, movement_id):

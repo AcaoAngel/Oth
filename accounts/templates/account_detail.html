@@ -196,6 +196,7 @@
                     <a href="{% url 'accounts:pay_form' %}"class="btn bt">Insert new payment</a>
                     <a href="{% url 'accounts:movements_form' %}"class="btn bt">Move to own account</a>
                     <a href="{% url 'accounts:upload_file' %}"class="btn bt">Load bank statement</a>
+                    <a href="{% url 'accounts:delete_account' account.id %}"class="btn bt">Delete account</a>
                     <a href="{% url 'accounts:view_accounts'  %}"class="btn bt">Back</a>
                 </div>
             </div>
@@ -206,15 +207,13 @@
     
     
     {% if sure_delete %}
-    <div class="container-delete">
-        <div class="d-flex justify-content-center h-100">
-            <div class="usercard">
-                <div class="d-flex justify-content-center">
+        <div class="container-delete">
+            <div class="d-flex justify-content-center h-100">
+                <div class="usercard">
+                    <div class="d-flex justify-content-center">
+        
+        <style>.user_card {filter: blur(4px);}</style>
     
-    <style>.user_card {filter: blur(4px);
-    }
-</style>
-
         <h2 id="formtitle">You are deleting movement:</h2>
                 </div> 
         <h3>{{deleting_movement.date.date}}  |  Event: {{deleting_movement.event}}  |  Amount: {{deleting_movement.amount}}  |  Saldo after movement: {{deleting_movement.account_value_after}}</h3>
@@ -224,6 +223,25 @@
             {% csrf_token %}
             <input type="submit" class="btn btnn" value="Yes">
         </form>
+    {% elif delete_account %}
+        <div class="container-delete">
+            <div class="d-flex justify-content-center h-100">
+                <div class="usercard">
+                    <div class="d-flex justify-content-center">
+        
+        <style>.user_card {filter: blur(4px);}</style>
+
+        <h2 id="formtitle">You are deleting account:</h2>
+                </div> 
+        <h3>{{account.account_name}}  |  Amount: {{account.account_value}}</h3>
+        <h3>Are you sure?</h3>
+        <a href="{% url 'accounts:account_detail' account.id %}" class="btn btnn" role="button">no</a>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btnn" value="Yes">
+        </form>
+
+
     {% endif %}
 
 </div> </div> 

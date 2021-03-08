@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}  {% endblock %}</title>
+    {% block body %}
+
+	<style>
+
+.user_card {
+    top:5%;
+    left: 0;
+	width: 70%;
+	height: 210px;
+	margin-top: 100px;
+    margin-bottom: auto;
+    margin-left:-5%;
+	background-color: #9ABBFB;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 1rem;
+    z-index: 999;
+    border: 2px solid rgba(255,255,255,0.2);
+			
+    }
+
+.user_card li a{
+    margin-left: 12%;
+    font-size:25px;
+    color: red;
+    position: absolute;
+    width: 45px;
+    height: 35px;/*height: auto;*/
+    border: 0px solid #d6d6d6;
+    z-index: 99;
+    padding: 0px;
+    text-align: center;
+    background:  white;
+    transition: 0.5s all;
+    animation: pulsate 3s ease-in-out;
+    animation-iteration-count:infinite ;
+    border-radius: 3px;
+    margin-top:0;
+}
+
+.btm a{
+    color: #041657;
+    font-weight:bold;
+    font-size:20px;
+    font-family: 'Kenia', cursive;
+    margin-left: 30px;
+        
+    }
+.user_card h3{
+    color: #042496;
+    margin-top: 5%;
+    bottom: 10%;
+    font-size: 35px;
+    margin-left:0;
+    font-family: 'Kenia', cursive;
+    font-weight:bold;
+    margin-bottom: 35px;
+}
+
+.bt{
+    margin-left: 0.6%; 
+    margin-bottom: 40px;
+    margin-right: 2%;
+    background: #0e24a0 !important;
+    color: white !important;
+    margin-top:0;
+   
+    float:left;
+    font-size: 18px;
+    font-weight:bold;
+    
+    height: max-content;
+    
+    font-family: 'Kenia', cursive;
+    border: 0px solid #d6d6d6;
+    z-index: 99;
+
+
+
+
+
+    }    
+
+
+
+
+
+</style>
+
+</head>
+
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card">
+                <div class="d-flex justify-content-center">
+                    <h3>Account deleted succesfully</h3>
+
+                    </div>
+
+
+                        <div class= 'libele'>
+                
+                            <a href="{% url 'accounts:view_accounts' %}" class="btn bt">Come back to accounts</a>
+
+                        </div>    
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+{% endblock %}
+
+
+
+

@@ -40,7 +40,8 @@
 			<label for= "check " class="checkbtn">
 				 <i class="fas fa-bars"></i> 
 			 </label>
-			<label class="title-box" >OTH-Omataloushallinta </label> 
+			<!-- <label class="title-box" >OTH-Omataloushallinta</label>  -->
+			<img src="/static/media/img/logo.png" alt="Logo image"> 
 			
 			
 			<ul>
@@ -50,14 +51,14 @@
 				<li><a href="{% url 'Oth_app:index' %}">Tietoa Oth:sta</a></li>
 				<li><a href="{% url 'Contact:contact' %}"><i class="fa fa-phone" ></i>Ota yhteyttä</a></li>
             	{% if request.user.is_superuser %}
-           		<li><a href="{% url 'admin:index' %}">Admin</a></li>  
+           		<li><a href="{% url 'admin:index' %}">Admin Menu</a></li>  
             	{% endif %} 
 
 				
-            	{% if user.is_authenticated%}
+            	{% if user.is_authenticated %}
             	 
 				
-				 <li><a href="{% url 'profiles:profile' %}" style="font-weight: bold;color:white;font-family: 'Kenia', cursive;font-size: 15px;" class="users">{{ user.username }} profile</a></li>
+				 <li style="font-weight: bold;color:white;font-family: 'Kenia', cursive;font-size: 20px;" class="users">{{ user.username }}</li>
 
 
             	<li ><a href="{% url 'profiles:sign_out' %}">Logout</a></li>
@@ -73,18 +74,18 @@
 			</ul>
     	</nav>
 
-		
+ 
 
 		{% block title %} {% endblock %}
    
+  
 		{% block body %}	{% endblock body %}
 		
-
-
 
 	<footer>
 		<h2 class="text-white">OTH-Omataloushallinta</h2>
 				  <p>Copyright &copy; LynCao - 2021-2022 - All Right Reserved</p>
+				  <a href="{% url 'Oth_app:data_protection' %}">Data protection</a>
 		
 	</footer> 
 
@@ -103,8 +104,3 @@
 
 
 </html>
-
-
-
-
-

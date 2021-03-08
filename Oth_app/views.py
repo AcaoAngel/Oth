@@ -11,3 +11,5 @@ def blog(request):
 def reports(request):
     return render(request, "reports.html")
 
+def data_protection(request):
+    return render(request, "data_protection.html")

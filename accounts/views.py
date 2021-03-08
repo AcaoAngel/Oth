@@ -25,6 +25,7 @@ class view_accounts(ListView):
         self.template_name = "access_denied_accounts.html"
 
 
+
 def account_detail(request, id):
     print("loading from account detail")
    
@@ -38,7 +39,7 @@ def account_detail(request, id):
     return render(request, "account_detail.html", context)
 
 def sure_delete(request, id, movement_id):
-    print("loading from sure delete")
+    print("loading form sure delete")
     account = Account_value.objects.get(id=id)
     print(type(account.id), account.id)
     request.session["account_id"] = id 
@@ -55,6 +56,22 @@ def sure_delete(request, id, movement_id):
     context = {'account':account, 'movements':movements, 'sure_delete':True, "deleting_movement":deleting_movement}
 
     return render(request, "account_detail.html", context)
+
+def delete_account(request, id):
+    account = Account_value.objects.get(id=id)
+    if request.method == "POST":
+        
+        print("post done succesfully")
+        account.delete()
+        return redirect("/account_deleted/")
+
+
+    context = {'account':account, 'delete_account':True}
+
+    return render(request, "account_detail.html", context)
+
+
+
 
 
 #------------------------------------------------------------------------------------
@@ -236,14 +253,14 @@ def edit_movement_form(request, id):
 
 
 def transaction_done(request):
-
     context = {"account_id":request.session["account_id"]}
     return render(request, "transaction_done.html", context)
 
+def account_deleted(request):
+    return render(request, "account_deleted.html")
 
 
 def account_created(request):
-
     return render(request, "account_created.html")
 
 

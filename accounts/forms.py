@@ -44,7 +44,7 @@ class Movement_form(forms.ModelForm):
 
     # account_id = forms.ModelChoiceField(label="From account", queryset=Movements.objects.filter(id=))
     date = forms.DateField(label="Date", initial=date.today)
-    amount = forms.DecimalField(label='Amount', required=True, max_digits=11, decimal_places=2, validators=[validate_positive])
+    amount = forms.DecimalField(label='Amount', required=True, max_digits=11, decimal_places=2, validators=[validate_positive])#TODO validate positive is not needed anymore
     move_to_account = forms.ModelChoiceField(label="Moving to...", queryset=Account_value.objects.all())
     message = forms.CharField(label="Content", widget=forms.Textarea)
     # account_value_before = forms.DecimalField(label='Account value before', required=False)
@@ -82,3 +82,23 @@ class Movement_form(forms.ModelForm):
         #         choices.append(tuple(inside_list))
         #     print(choices)
         #     return choices
+
+
+class UploadFileForm(forms.ModelForm):
+    year = forms.IntegerField(validators=[validate_positive])
+    file = forms.FileField()
+
+    class Meta():
+        model = Movements
+        fields = ["year", "file"]
+
+
+
+
+
+
+
+
+
+
+

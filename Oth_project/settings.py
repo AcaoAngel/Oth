@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fontawesome-free',
     'bootstrap4',
-    'crispy_forms',
     'django_forms_bootstrap',
     'ckeditor',
     'ckeditor_uploader' ,

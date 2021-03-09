@@ -153,21 +153,18 @@
 	</style>
 </head>
 
-<body>
     
     <div class="container h-100">
         <div class="d-flex justify-content-center h-100">
             <div class="user_card">
-                <div class="d-flex justify-content-center">
-                    
-                    <h3 id="form-title">Account information</h3>
-                  
-                    </div>
+                <div class="d-flex justify-content-center"> 
+                    <h3 id="form-title">Bank account information</h3>
+                </div>
                 <div class= 'libele'>
                    <ul>
-                       <li style="font-weight: bold;">{{account.account_name}}</li>
-                       <li style="font-weight: bold;">{{account.account_value}}</li>
-                       <li style="font-weight: bold;">{{account.info}}</li>
+                       <li style="font-weight: bold;"> * Account name: {{account.account_name}}</li>
+                       <li style="font-weight: bold;"> * Account value: {{account.account_value}} €</li>
+                       <li style="font-weight: bold;"> * Accoun info: {{account.info}}</li>
                        <!-- <li style="font-weight: bold;">{{account.save_percent}}</li>
                        <li style="font-weight: bold;">{{account.saving_time}}</li> -->
                    </ul><hr>
@@ -176,7 +173,7 @@
                     <ul>
         
                         {% if i.second_account_movement_id %}
-                        <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
+                        <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}} |  Saldo after movement: {{i.account_value_after}}</li>
             
                         {% if i.moved_from_account %}
                         <p>Movement received. You can only edit or delete from the sending account</p>
@@ -191,6 +188,8 @@
                         {% endif %}
                     </ul>
                      {% endfor %}
+                
+
                     <hr>
 
                     <a href="{% url 'accounts:pay_form' %}"class="btn bt">Insert new payment</a>
@@ -212,45 +211,45 @@
                 <div class="usercard">
                     <div class="d-flex justify-content-center">
         
-        <style>.user_card {filter: blur(4px);}</style>
+                        <style>.user_card {filter: blur(4px);}</style>
     
-        <h2 id="formtitle">You are deleting movement:</h2>
+                        <h2 id="formtitle">You are deleting movement:</h2>
+                    </div> 
+                        <h3>{{deleting_movement.date.date}}  |  Event: {{deleting_movement.event}}  |  Amount: {{deleting_movement.amount}}  |  Saldo after movement: {{deleting_movement.account_value_after}}</h3>
+                        <h3>Are you sure?</h3>
+                        <a href="{% url 'accounts:account_detail' account.id %}" class="btn btnn" role="button">no</a>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btnn" value="Yes">
+                    </form>
+                        {% elif delete_account %}
+                    <div class="container-delete">
+                        <div class="d-flex justify-content-center h-100">
+                            <div class="usercard">
+                                <div class="d-flex justify-content-center">
+                                    <style>.user_card {filter: blur(4px);}</style>
+                                    <h2 id="formtitle">You are deleting account:</h2>
+                                </div> 
+                                    <h3>{{account.account_name}}  |  Amount: {{account.account_value}}</h3>
+                                    <h3>Are you sure?</h3>
+                                    <a href="{% url 'accounts:account_detail' account.id %}" class="btn btnn" role="button">no</a>
+                                <form action="" method="POST">
+                                     {% csrf_token %}
+                                    <input type="submit" class="btn btnn" value="Yes">
+                                </form>
+                                    {% endif %}
+
+                            </div> 
+                        </div> 
+                    </div> 
                 </div> 
-        <h3>{{deleting_movement.date.date}}  |  Event: {{deleting_movement.event}}  |  Amount: {{deleting_movement.amount}}  |  Saldo after movement: {{deleting_movement.account_value_after}}</h3>
-        <h3>Are you sure?</h3>
-        <a href="{% url 'accounts:account_detail' account.id %}" class="btn btnn" role="button">no</a>
-        <form action="" method="POST">
-            {% csrf_token %}
-            <input type="submit" class="btn btnn" value="Yes">
-        </form>
-    {% elif delete_account %}
-        <div class="container-delete">
-            <div class="d-flex justify-content-center h-100">
-                <div class="usercard">
-                    <div class="d-flex justify-content-center">
-        
-        <style>.user_card {filter: blur(4px);}</style>
+            </div> 
+        </div> 
+     
 
-        <h2 id="formtitle">You are deleting account:</h2>
-                </div> 
-        <h3>{{account.account_name}}  |  Amount: {{account.account_value}}</h3>
-        <h3>Are you sure?</h3>
-        <a href="{% url 'accounts:account_detail' account.id %}" class="btn btnn" role="button">no</a>
-        <form action="" method="POST">
-            {% csrf_token %}
-            <input type="submit" class="btn btnn" value="Yes">
-        </form>
-
-
-    {% endif %}
-
-</div> </div> 
-</div> </div> 
-
-</body>
 {% endblock %}
 
-</html>
+
 
     
     

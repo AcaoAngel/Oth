@@ -17,6 +17,6 @@ urlpatterns = [
     path('pay_form/<int:id>/', views.edit_pay_form, name="edit_pay_form"),
     path('movements_form/<int:id>/', views.edit_movement_form, name="edit_movement_form"),
     path('bank_statement/', views.upload_file, name="upload_file"),
-    path('file_uploaded/', views.file_uploaded, name="file_uploaded"),
+    path('readed_successfully/', views.readed_successfully, name="readed_successfully"),
 
 ]

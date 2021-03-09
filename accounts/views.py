@@ -287,12 +287,13 @@ def upload_file(request):#TODO Read about a faster way to access datebase only o
                 # new_form.save()
             for i in statement_list:
                 i.save()
-            return redirect("/file_uploaded/")
+            return redirect("/readed_successfully/")
     context = UploadFileForm()
     return render(request, "upload_file.html", {"form":context})
 
-def file_uploaded(request):
-    return render(request, "file_uploaded.html")
+def readed_successfully(request):
+    context = {"account_id":request.session["account_id"]}
+    return render(request, "readed_successfully.html", context)
 
 
 

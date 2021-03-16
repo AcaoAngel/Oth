@@ -13,12 +13,13 @@
    
 	<style>
 		
-		.user_card {
-            width: 35%;
-            height: 80%;
-		      	margin-top: 20px;
-            margin-bottom: 30px;
-            margin-left: -5px;
+		.h-100s {
+            width: 32%;
+            height: min-content;
+		      	margin-top: 100px;
+           
+            margin-left: 30%;
+           
        			background: #090a0a;
        			position: relative;
        			display: flex;
@@ -30,24 +31,27 @@
        			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			      border-radius: 1rem;
             z-index: 999;
-            border: 2px solid rgba(255,255,255,0.2);
-            
+            border: 2px solid rgba(255,255,255,0.2)
 		}
 
+    .alert-error ul li a{
+        white-space:nowrap;
+        font-size: 20px;
+        color: red;
+        font-weight:bold;
+       
+      }
+
     #form-title{
-            color: #267af7;
-            margin-top: -22%;
+            color: hsl(216, 93%, 56%);
+            margin-top: 5%;
             font-size: 30px;
-            margin-right:-70px;
-            padding : 10px;
-            margin-left: 30px;
+            margin-right: 5px;
             font-family: 'Kenia', cursive;
             font-weight:bold;
-            white-space: nowrap;
             text-align: center;
-
-            
         }
+
 
         .libele{
             color: azure;
@@ -55,6 +59,7 @@
             margin-top: 40px;
             font-family: 'Kenia', cursive;
             font-size: 15px;
+            
             
         }
         .libele label{
@@ -111,8 +116,8 @@
           
        }
 
-       .user_card li a{
-            margin-left: -1%;
+       .user_cards li a{
+            margin-left:86%;
             font-size:25px;
             color: red;
             position: absolute;
@@ -127,7 +132,12 @@
             animation: pulsate 3s ease-in-out;
             animation-iteration-count:infinite ;
             border-radius: 3px;
-            margin-top: -2%;
+            margin-top: 0;
+         }
+         .user_cards p{
+          text-align: center;
+          margin-left: 2%;
+
          }
 
 	</style>
@@ -137,17 +147,19 @@
 
 
 <body>
-
-  <div class="container h-100">
+  
+  <div class="container h-100s">
 		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
+			<div class="user_cards">
+        <li><a  href="{% url 'accounts:view_accounts' %}"><i class="fa fa-close" ></i></a></li>
 				<div class="d-flex justify-content-center">
-                    
+            
           <h3 id="form-title">Load Pdf document</h3>
           
+          
         </div>
-        <p style="color: white;">Check the year of the bank statement and insert it before document reading</p>
-        <p style="color: white;">Currently we only support bank statements from Nordea and S-Pankki. Select your bank in the bank choices</p>
+        <p style="color: white;">Check the year of the bank statement and insert it before document reading.</p>
+        <p style="color: white;">Currently we only support bank statements from Nordea and S-Pankki. Select your bank in the bank choices.</p>
 
 
         <ul class="message-error">

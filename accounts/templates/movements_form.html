@@ -15,12 +15,13 @@
    
 	<style>
 		
-		.user_card {
-            width: 37%;
-            height: 680px;
-		      	margin-top: 20px;
-            margin-bottom: 30px;
-            margin-left:-5px;
+		.h-100k {
+      width: 30%;
+            height: 80%;
+		      	margin-top: 100px;
+           
+            margin-left: 35%;
+           
        			background: #090a0a;
        			position: relative;
        			display: flex;
@@ -30,25 +31,34 @@
        			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
        			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
        			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            border-radius: 1rem;
+			      border-radius: 1rem;
             z-index: 999;
-            border: 2px solid rgba(255,255,255,0.2);    
-            
-		}
+            border: 2px solid rgba(255,255,255,0.2)
+   
+      }
+
+      .alert-error ul li a{
+        white-space:nowrap;
+        font-size: 20px;
+        color: red;
+        font-weight:bold;
+       
+      }
 
     #form-title{
             color: hsl(216, 93%, 56%);
-            margin-top: 15%;
-            font-size: 20px;
+            margin-top: 5%;
+            font-size: 30px;
             margin-right: 5px;
             font-family: 'Kenia', cursive;
             font-weight:bold;
+            text-align: center;
         }
 
         .libele{
             color: azure;
             margin-left: 20px;
-            margin-top: 40px;
+            margin-top: 30px;
             font-family: 'Kenia', cursive;
             font-size: 15px;
         }
@@ -75,7 +85,7 @@
           
        }
 
-       .user_card li a{
+       .user_cardk li a{
             margin-left: -10%;
             font-size:25px;
             color: red;
@@ -91,7 +101,7 @@
             animation: pulsate 3s ease-in-out;
             animation-iteration-count:infinite ;
             border-radius: 3px;
-            margin-top: 3%;
+            margin-top: 1%;
          }
 
          .btn-{
@@ -112,9 +122,9 @@
 
 <body>
 
-  <div class="container h-100">
+  <div class="container h-100k">
 		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
+			<div class="user_cardk">
 				<div class="d-flex justify-content-center">
                     
                     <h3 id="form-title">Insert own-account movement details</h3>

@@ -25,7 +25,7 @@ from django.core.paginator import Paginator
 
 def view_accounts(request):
     current_user_account = Account_value.objects.filter(user_id=request.user.id)
-    paginator = Paginator(current_user_account, 8)
+    paginator = Paginator(current_user_account, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     

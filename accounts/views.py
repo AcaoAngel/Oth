@@ -6,6 +6,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django.contrib.auth.models import User
 from decimal import Decimal
 import accounts.read_tiliote
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -13,9 +14,10 @@ import accounts.read_tiliote
 
 
 class view_accounts(ListView):
-
+    paginate_by = 5
     def get_queryset(self):
-        account = Account_value.objects.all()
+        # account = Account_value.objects.all()
+        
             
         if self.request.user.is_authenticated:
             self.template_name = "view_accounts.html"
@@ -27,14 +29,18 @@ class view_accounts(ListView):
 
 
 def account_detail(request, id):
-    print("loading from account detail")
+    # print("loading from account detail")
    
     account = Account_value.objects.get(id=id)
-    print(type(account.id), account.id)
+    # print(type(account.id), account.id)
     request.session["account_id"] = id 
-    movements = Movements.objects.filter(account_id_id=id)
 
-    context = {'account':account, 'movements':movements}
+    movements = Movements.objects.filter(account_id_id=id)
+    paginator = Paginator(movements, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'account':account, 'movements':page_obj}
         
     return render(request, "account_detail.html", context)
 
@@ -52,8 +58,12 @@ def sure_delete(request, id, movement_id):
         to_delete.delete()
         return redirect("/transaction_done/")
 
+    movements = Movements.objects.filter(account_id_id=id)
+    paginator = Paginator(movements, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    context = {'account':account, 'movements':movements, 'sure_delete':True, "deleting_movement":deleting_movement}
+    context = {'account':account, 'movements':page_obj, 'sure_delete':True, "deleting_movement":deleting_movement}
 
     return render(request, "account_detail.html", context)
 
@@ -65,8 +75,12 @@ def delete_account(request, id):
         account.delete()
         return redirect("/account_deleted/")
 
+    movements = Movements.objects.filter(account_id_id=id)
+    paginator = Paginator(movements, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    context = {'account':account, 'delete_account':True}
+    context = {'account':account, 'delete_account':True, 'movements':page_obj}
 
     return render(request, "account_detail.html", context)
 

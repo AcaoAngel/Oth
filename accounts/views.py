@@ -6,35 +6,45 @@ from django.views.generic.detail import SingleObjectMixin
 from django.contrib.auth.models import User
 from decimal import Decimal
 import accounts.read_tiliote
-
-# Create your views here.
-
+from django.core.paginator import Paginator
 
 
 
-class view_accounts(ListView):
+# class view_accounts(ListView):
+    
+#     def get_queryset(self):
+#         if self.request.user.is_authenticated:
+#             paginate_by = 4
+#             self.template_name = "view_accounts.html"
 
-    def get_queryset(self):
-        account = Account_value.objects.all()
+#             current_user_account = Account_value.objects.filter(user_id=self.request.user.id)
+
+#             return current_user_account
             
-        if self.request.user.is_authenticated:
-            self.template_name = "view_accounts.html"
-            current_user_account = Account_value.objects.filter(user_id=self.request.user.id)
-            return current_user_account
-            
-        self.template_name = "access_denied_accounts.html"
+#         self.template_name = "access_denied_accounts.html"
 
+def view_accounts(request):
+    current_user_account = Account_value.objects.filter(user_id=request.user.id)
+    paginator = Paginator(current_user_account, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
 
+    return render(request, "view_accounts.html", {"object_list": current_user_account, "page_obj": page_obj })
 
 def account_detail(request, id):
-    print("loading from account detail")
+    # print("loading from account detail")
    
     account = Account_value.objects.get(id=id)
-    print(type(account.id), account.id)
+    # print(type(account.id), account.id)
     request.session["account_id"] = id 
-    movements = Movements.objects.filter(account_id_id=id)
 
-    context = {'account':account, 'movements':movements}
+    movements = Movements.objects.filter(account_id_id=id)
+    paginator = Paginator(movements, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'account':account, 'movements':page_obj}
         
     return render(request, "account_detail.html", context)
 
@@ -52,8 +62,12 @@ def sure_delete(request, id, movement_id):
         to_delete.delete()
         return redirect("/transaction_done/")
 
+    movements = Movements.objects.filter(account_id_id=id)
+    paginator = Paginator(movements, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    context = {'account':account, 'movements':movements, 'sure_delete':True, "deleting_movement":deleting_movement}
+    context = {'account':account, 'movements':page_obj, 'sure_delete':True, "deleting_movement":deleting_movement}
 
     return render(request, "account_detail.html", context)
 
@@ -65,16 +79,15 @@ def delete_account(request, id):
         account.delete()
         return redirect("/account_deleted/")
 
+    movements = Movements.objects.filter(account_id_id=id)
+    paginator = Paginator(movements, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    context = {'account':account, 'delete_account':True}
+    context = {'account':account, 'delete_account':True, 'movements':page_obj}
 
     return render(request, "account_detail.html", context)
 
-
-
-
-
-#------------------------------------------------------------------------------------
 def create_account(request):
     if request.method == "POST":
         form = Create_account_form(request.POST)
@@ -94,18 +107,6 @@ def create_account(request):
     
     form = Create_account_form()
     return render(request, "account_value_form.html", {"form":form})
-
-# class create_account(CreateView):
-#     template_name = "account_value_form.html"
-#     # success_message = "Your account was created successfully"
-#     model = Account_value
-#     # form_class = Create_account_form
-#     fields = ['user', 'account_name', 'account_value', 'info', 'save_percent', 'saving_time']
-
-#     def form_valid(self, form):
-#         form.save()
-#         return redirect("/")
-
 
 def movements_form(request):#account id is sended using the parameter through url
 
@@ -138,7 +139,7 @@ def movements_form(request):#account id is sended using the parameter through ur
             form.message = request.POST["message"]
             form.save()
             # return render(request, 'transaction_done.html', {"accont_id":account_id})
-            return redirect("/transaction_done/")
+            return render(request, "transaction_done.html", {'movement':True, "account_id":request.session['account_id']})
         else:
             return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
             print("form is not valid")
@@ -170,22 +171,17 @@ def pay_form(request):#Account id is sended using seccions, it is saved in accou
             form.payee_payer = request.POST["payee_payer"]
             # form.move_to_account = request.POST["move_to_account"]
             form.event = request.POST["event"]
+            print("event is:", request.POST['event'], "---", type(request.POST['event']))
             form.message = request.POST["message"]
             form.save()
             # return render(request, 'transaction_done.html', {"accont_id":account_id})
-            return redirect("/transaction_done/")
+            return render(request, "transaction_done.html", {'movement':False, "account_id":request.session['account_id'], "event":request.POST['event']})
         else:#send the form again in case of errors
             print("form is not valid")
             return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
 
     movements_form = Pay_form()
     return render(request, "pay_form.html", {"form":movements_form, "account_id":request.session["account_id"]})
-
-
-
-
-
-
 
 def edit_pay_form(request, id):
     current_obj = get_object_or_404(Movements, id=id)
@@ -220,7 +216,6 @@ def edit_pay_form(request, id):
     form = Pay_form(instance=current_obj, initial={"amount":current_obj.amount*-1})#the initial shows the amount as possitive number 
     return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
     
-
 def edit_movement_form(request, id):
     current_obj = get_object_or_404(Movements, id=id)#we get the object to render it in the form call
     current_account = get_object_or_404(Account_value, id = request.session["account_id"])#Need this object to the move_to_account field rendered in init
@@ -249,9 +244,6 @@ def edit_movement_form(request, id):
     form = Movement_form(current_account ,instance=current_obj, initial={"amount":current_obj.amount*-1})#the initial shows the amount as possitive number 
     return render(request, "movements_form.html", {"form":form, "account_id":request.session["account_id"]})
 
-
-
-
 def transaction_done(request):
     context = {"account_id":request.session["account_id"]}
     return render(request, "transaction_done.html", context)
@@ -259,16 +251,15 @@ def transaction_done(request):
 def account_deleted(request):
     return render(request, "account_deleted.html")
 
-
 def account_created(request):
     return render(request, "account_created.html")
-
 
 def upload_file(request):#TODO Read about a faster way to access datebase only once and save all the events, I have a video abount that named bulk update
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            statements = accounts.read_tiliote.extract_info(request.FILES['file'], request.user, request.POST['year'])
+            print("fffffffffffff", request.POST['bank'])
+            statements = accounts.read_tiliote.extract_info(request.FILES['file'], request.user, request.POST['year'], request.POST['bank'])
             statement_list = list()
             for statement in statements:
                 print("view", statement)
@@ -276,18 +267,40 @@ def upload_file(request):#TODO Read about a faster way to access datebase only o
                 account_id = Account_value.objects.get(id=request.session["account_id"])#TODO I can merge this line with the next
                 new_form.account_id = account_id
                 # print(f"{request.POST['year']}-{statement[0][3:5]}-{statement[0][:2]}")
-                new_form.date = f"{request.POST['year']}-{statement[0][3:5]}-{statement[0][:2]}"
-                # print(type(float(statement[3][:-1].replace(".","").replace(",","."))), statement[3][:-1].replace(".","").replace(",","."))
-                if statement[3][-1] == "-":
-                    new_form.amount = Decimal(statement[3][:-1].replace(".","").replace(",",".")) *-1
-                else:
-                    new_form.amount = Decimal(statement[3][:-1].replace(".","").replace(",","."))
-                new_form.message = statement[1]
-                statement_list.append(new_form)
-                # new_form.save()
+                
+                
+                if request.POST['bank'] == "nordea":
+                    #Date
+                    new_form.date = f"{request.POST['year']}-{statement[0][3:5]}-{statement[0][:2]}"
+                    #Amount
+                    if statement[3][-1] == "-":
+                        new_form.amount = Decimal(statement[3][:-1].replace(".","").replace(",",".")) *-1
+                    else:
+                        new_form.amount = Decimal(statement[3][:-1].replace(".","").replace(",","."))
+                    #Message
+                    new_form.message = statement[1]
+                    
+                    statement_list.append(new_form)
+    
+                elif request.POST['bank'] == "sp":
+                    #Date
+                    new_form.date = f"{request.POST['year']}-{statement[0][2:4]}-{statement[0][:2]}"
+                    #Amount
+                    if statement[2][-1] == "-":
+                        new_form.amount = Decimal(statement[2][:-1].replace(".","").replace(",",".")) *-1
+                    else:
+                        new_form.amount = Decimal(statement[2][:-1].replace(".","").replace(",","."))
+                    #Message
+                    new_form.message = statement[1]
+                    
+                    statement_list.append(new_form)
+            
+            #Write movements in database
             for i in statement_list:
                 i.save()
             return redirect("/readed_successfully/")
+        else:
+            return render(request, "upload_file.html", {"form":form})
     context = UploadFileForm()
     return render(request, "upload_file.html", {"form":context})
 

@@ -18,3 +18,11 @@ def validate_positive(value):
             _('Please inster an amount value, it can not be 0'),
             params={'value': value},
         )
+
+def validate_no_empty(value):
+
+    if value == "empty":
+        raise ValidationError(
+            _('Bank name field can not be empty'),
+            params={'value': value},
+        )

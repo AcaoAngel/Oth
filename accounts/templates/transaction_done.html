@@ -106,11 +106,16 @@
         <div class="d-flex justify-content-center h-100">
             <div class="user_card">
                 <div class="d-flex justify-content-center">
-                    <h3>Transaction done succesfully</h3>
+                    {% if movement %}
+                    <h3>Movement to own account saved successfully</h3>
+                    {% elif event == "deposit" %}
+                    <h3>Deposit saved successfully</h3>
+                    {% else %}
+                    <h3>Payment saved successfully</h3>
+                    {% endif%}
 
                     <li><a  href="{% url 'accounts:account_detail' account_id %}"><i class="fa fa-close" ></i></a></li>
                     </div>
-
 
                         <div class= 'libele'>
                 

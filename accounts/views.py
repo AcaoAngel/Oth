@@ -8,9 +8,6 @@ from decimal import Decimal
 import accounts.read_tiliote
 from django.core.paginator import Paginator
 
-# Create your views here.
-
-
 
 
 class view_accounts(ListView):
@@ -25,8 +22,6 @@ class view_accounts(ListView):
             return current_user_account
             
         self.template_name = "access_denied_accounts.html"
-
-
 
 def account_detail(request, id):
     # print("loading from account detail")
@@ -84,11 +79,6 @@ def delete_account(request, id):
 
     return render(request, "account_detail.html", context)
 
-
-
-
-
-#------------------------------------------------------------------------------------
 def create_account(request):
     if request.method == "POST":
         form = Create_account_form(request.POST)
@@ -108,18 +98,6 @@ def create_account(request):
     
     form = Create_account_form()
     return render(request, "account_value_form.html", {"form":form})
-
-# class create_account(CreateView):
-#     template_name = "account_value_form.html"
-#     # success_message = "Your account was created successfully"
-#     model = Account_value
-#     # form_class = Create_account_form
-#     fields = ['user', 'account_name', 'account_value', 'info', 'save_percent', 'saving_time']
-
-#     def form_valid(self, form):
-#         form.save()
-#         return redirect("/")
-
 
 def movements_form(request):#account id is sended using the parameter through url
 
@@ -152,7 +130,7 @@ def movements_form(request):#account id is sended using the parameter through ur
             form.message = request.POST["message"]
             form.save()
             # return render(request, 'transaction_done.html', {"accont_id":account_id})
-            return redirect("/transaction_done/")
+            return render(request, "transaction_done.html", {'movement':True, "account_id":request.session['account_id']})
         else:
             return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
             print("form is not valid")
@@ -184,22 +162,17 @@ def pay_form(request):#Account id is sended using seccions, it is saved in accou
             form.payee_payer = request.POST["payee_payer"]
             # form.move_to_account = request.POST["move_to_account"]
             form.event = request.POST["event"]
+            print("event is:", request.POST['event'], "---", type(request.POST['event']))
             form.message = request.POST["message"]
             form.save()
             # return render(request, 'transaction_done.html', {"accont_id":account_id})
-            return redirect("/transaction_done/")
+            return render(request, "transaction_done.html", {'movement':False, "account_id":request.session['account_id'], "event":request.POST['event']})
         else:#send the form again in case of errors
             print("form is not valid")
             return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
 
     movements_form = Pay_form()
     return render(request, "pay_form.html", {"form":movements_form, "account_id":request.session["account_id"]})
-
-
-
-
-
-
 
 def edit_pay_form(request, id):
     current_obj = get_object_or_404(Movements, id=id)
@@ -234,7 +207,6 @@ def edit_pay_form(request, id):
     form = Pay_form(instance=current_obj, initial={"amount":current_obj.amount*-1})#the initial shows the amount as possitive number 
     return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
     
-
 def edit_movement_form(request, id):
     current_obj = get_object_or_404(Movements, id=id)#we get the object to render it in the form call
     current_account = get_object_or_404(Account_value, id = request.session["account_id"])#Need this object to the move_to_account field rendered in init
@@ -263,9 +235,6 @@ def edit_movement_form(request, id):
     form = Movement_form(current_account ,instance=current_obj, initial={"amount":current_obj.amount*-1})#the initial shows the amount as possitive number 
     return render(request, "movements_form.html", {"form":form, "account_id":request.session["account_id"]})
 
-
-
-
 def transaction_done(request):
     context = {"account_id":request.session["account_id"]}
     return render(request, "transaction_done.html", context)
@@ -273,10 +242,8 @@ def transaction_done(request):
 def account_deleted(request):
     return render(request, "account_deleted.html")
 
-
 def account_created(request):
     return render(request, "account_created.html")
-
 
 def upload_file(request):#TODO Read about a faster way to access datebase only once and save all the events, I have a video abount that named bulk update
     if request.method == "POST":

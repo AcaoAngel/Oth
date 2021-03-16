@@ -23,7 +23,7 @@
             z-index: 999;
             border: 5px solid rgba(255,255,255,0.2);
             padding: 10px;
-
+			
 
 		}
 
@@ -44,7 +44,7 @@
 
 
 		#form-title{
-			color: #042496;
+			color: red;
 			margin-top: 20px;
 			font-size: 35px;
 			margin-left: 40px;
@@ -74,28 +74,47 @@
 
 	}
 
-		.user_card {
-			width: 400px;
-			height: 210px;
-			margin-top: 130px;
-            margin-bottom: auto;
-            margin-left:-5%;
-			background: #090a0a;
-			position: relative;
-			display: flex;
-			justify-content: center;
-			flex-direction: column;
-			padding: 10px;
-			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			border-radius: 1rem;
-            z-index: 999;
-            border: 2px solid rgba(255,255,255,0.2);
-			
-
+		.h-100cc {
+			width: 30%;
+			height: min-content;
+     
+	 margin-top: 150px;
+	 margin-bottom: auto;
+	 margin-left: 35%;
+	 background: #090a0a;
+	 position: relative;
+	 display: flex;
+	 justify-content: center;
+	 flex-direction: column;
+	 padding: 10px;
+	 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	 -webkit-box-shadow: 0 4px 8px 0 rgba(206, 132, 132, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	 -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	 border-radius: 1rem;
+	 z-index: 999;
+	 border: 2px solid rgba(255,255,255,0.2);
+   
 		}
-
+			
+.h-100cc li a{
+	left: 88%;
+    font-size:25px;
+    color: red;
+    position: absolute;
+    width: 45px;
+    height: 35px;/*height: auto;*/
+    border: 0px solid #d6d6d6;
+    z-index: 99;
+    padding: 0px;
+    text-align: center;
+    background:  white;
+    transition: 0.5s all;
+    animation: pulsate 3s ease-in-out;
+    animation-iteration-count:infinite ;
+    border-radius: 3px;
+    margin-top: 0;
+    
+         }
 
 		.login_btn{
            margin-bottom: -50px;
@@ -190,10 +209,6 @@
 	</style>
 
 
-
-
-
-
 </head>
 
      {% if object_list %}
@@ -201,18 +216,20 @@
 	 <div class ="tabs">
 		<div class="tab">	
 			<div class= fati>
-				
 				<li><a  href="{% url 'Oth_app:index' %}"><i class="fa fa-close" ></i></a></li>
-			<h3 style="margin-left: 30%; " id="form-title"> Account information</h3>
+				<h3 style="margin-left: 30%; " id="form-title"> Bank account list</h3>
 			</div>
 
 			<div class= "btn">
 				<a href="{% url 'accounts:create_account' %}" class="_btn" role="button">Luo uusi tili</a> 
 			</div>
-			 {% for user_accounts in object_list %}
-			<ul>
+			
+			{% for user_accounts in object_list %}
+			
+				<ul>
 				 <li> * <a  href="{% url 'accounts:account_detail' user_accounts.id %}">{{user_accounts.account_name}} Amount: {{user_accounts.account_value}}</a><br>{% empty %} </li>
-			  </ul> 
+			   </ul> 
+			  
 			  {% endfor %} 
 			  <div class="pagination">
 				<span class="step-links">
@@ -233,13 +250,17 @@
 			</div>
 
 		
-			</div>	
+		</div>	
 				 
-		</div>
-		{% else %}
-			<div class="container h-100">
+	</div>
+			{% else %}
+			<div class="container h-100cc">
+				<div class= fatii>
+					<li><a  href="{% url 'Oth_app:index' %}"><i class="fa fa-close" ></i></a></li>
+				
+				</div>
 				<div class="d-flex justify-content-center h-100">
-					<div class="user_card">
+					<div class="user_cardc">
 						<div class="d-flex justify-content-center">
 							<h3 id="form-title"> Ei tili käytössä</h3>
 						</div>

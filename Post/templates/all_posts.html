@@ -4,23 +4,19 @@
 
 {% block body %}  
 
- 
- 
 
-
-
-    
-<div class='add' >
- 
-      <button> {% if request.user.is_staff or request.user.is_superuser %}
-        
-      <a class="btn btn-primary btn-lg" href="{% url 'Post:create_post' %}" role="button">Luo uusi julkaisu </a>  </button>
- 
+     {% if request.user.is_staff or request.user.is_superuser %}
+     <div class ='add'>
+         <a class="btn-lg" href="{% url 'Post:create_post' %}" role="button">Luo uusi julkaisu </a> 
+      
+        </div>
     <!-- <a class="btn btn-primary btn-lg" href="{% url 'Post:create_post' %}" role="button">Luo uusi julkaisu </a> -->  
   
-  </div> 
+  
     
   {% endif %} 
+
+
     <div class="post-container">
 
       
@@ -41,13 +37,8 @@
         {% endfor %}
       </div>
     </div>
+ 
 
-
-  
-
-
-
-    
 {% endblock %}
 
       

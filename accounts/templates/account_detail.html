@@ -21,12 +21,12 @@
 
 	<style>
 		
-		.user_card {
-            width: 1000px;
+		.h-100ii {
+            width: 1100px;
             height: min-content;
-			margin-top: 60px;
+			margin-top: 150px;
             margin-bottom: 30px;
-            margin-left:-5%;
+            margin-left:15%;
 			background-color: #9ABBFB;
 			position: relative;
             float:center;
@@ -70,6 +70,9 @@
             font-weight:bold;
             font-family: 'Kenia', cursive;
         }
+
+      
+        
         .btn{
 
             background: #0e24a0 !important;
@@ -144,6 +147,7 @@
             margin-right: 5px;
             font-family: 'Kenia', cursive;
             font-weight:bold;
+            
       }
 .usercard h3{
     font-family: 'Kenia', cursive;
@@ -154,9 +158,9 @@
 </head>
 
     
-    <div class="container h-100">
+    <div class="container h-100ii">
         <div class="d-flex justify-content-center h-100">
-            <div class="user_card">
+            <div class="user_cardii">
                 <div class="d-flex justify-content-center"> 
                     <h3 id="form-title">Bank account information</h3>
                 </div>
@@ -194,7 +198,7 @@
 
                     <a href="{% url 'accounts:pay_form' %}"class="btn bt">Insert new payment</a>
                     <a href="{% url 'accounts:movements_form' %}"class="btn bt">Move to own account</a>
-                    <a href="{% url 'accounts:upload_file' %}"class="btn bt">Load bank statement</a>
+                    <a href="{% url 'accounts:upload_file' %}"class="btn bt">Load bank statement <i style= ' font-size:28px; color: rgb(255, 70, 70);' class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                     <a href="{% url 'accounts:delete_account' account.id %}"class="btn bt">Delete account</a>
                     <a href="{% url 'accounts:view_accounts'  %}"class="btn bt">Back</a>
                 </div>

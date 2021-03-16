@@ -32,28 +32,23 @@
 
   
 
-
-
-
 </style>
 
 </head>
 
 
 
-{% if request.user.is_staff or request.user.is_superuser %}
-  <div class='edit' >
-    <a class="btn btn-primary btn-lg" href="{% url 'Post:edit_post' post.id %}" role="button">Muokkaa julkaisuasi </a>   
-</div>
-{% endif %} 
+     {% if request.user.is_staff or request.user.is_superuser %}
+     <div class ='edit'>
+            <a class="btn-lgg" href="{% url 'Post:edit_post' post.id %}" role="button">Muokkaa julkaisuasi </a>  
+          </div>
+      {% endif %} 
 
-
-         
-          <div class="single">
-            <a  href="{% url 'Post:all_posts' %}"><i>x</i></a>
-              <img class="card-img-top" src="{{post.img.url}}" alt="Card image cap">
+      <div class="single">
+         <a  href="{% url 'Post:all_posts' %}"><i>x</i></a>
+          <img class="card-img-top" src="{{post.img.url}}" alt="Card image cap">
             
-            <div class="card-body">
+        <div class="card-body">
 
             	<!-- <div>
                     <a class="btn btn-primary btn-lg"  href="{% url 'Post:edit_post' post.id %}" role="button">Muokkaa </a>
@@ -78,26 +73,10 @@
 
 
               <p class="card-text">{{post.content|safe}}</p> 
-            </div>
+        </div>
+      </div>
 
 
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-          </div>
-          
 {% endblock body %}
 
 

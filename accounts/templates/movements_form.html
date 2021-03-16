@@ -4,7 +4,6 @@
 
 {% block body %}
 
-
     
 <!DOCTYPE html>
 <html>    
@@ -17,63 +16,39 @@
 	<style>
 		
 		.user_card {
-      /* width: 400px;
-            height: 700px;
-			margin-top: 20px;
+            width: 37%;
+            height: 680px;
+		      	margin-top: 20px;
             margin-bottom: 30px;
-            margin-right:-55%;
-			background: #090a0a;
-		
-			display: flex;
-			justify-content: center;
-			flex-direction: column;
-			padding: 10px;
-			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			border-radius: 1rem;
+            margin-left:-5px;
+       			background: #090a0a;
+       			position: relative;
+       			display: flex;
+       			justify-content: center;
+       			flex-direction: column;
+       			padding: 10px;
+       			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+       			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+       			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 1rem;
             z-index: 999;
-            border: 2px solid rgba(255,255,255,0.2); */
-
-            width: 400px;
-            height: 700px;
-			margin-top: 60px;
-            margin-bottom: 30px;
-            margin-left:-5%;
-			background-color: #090a0a;;
-			position: relative;
-            float:center;
-			justify-content: center;
-			
-	
-			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			border-radius: 1rem;
-            z-index: 999;
-            border: 2px solid rgba(255,255,255,0.2);
-            box-shadow: 2px 2px 5px 2px #ccc; 
-
+            border: 2px solid rgba(255,255,255,0.2);    
             
 		}
 
     #form-title{
-      color: #267af7;
-            margin-top: 170%;
-            font-size: 25px;
-            margin-left: 40%;
+            color: hsl(216, 93%, 56%);
+            margin-top: 15%;
+            font-size: 20px;
+            margin-right: 5px;
             font-family: 'Kenia', cursive;
             font-weight:bold;
-            clear: both;
-        display: inline-block;
-        white-space: nowrap;
-        
         }
 
         .libele{
             color: azure;
-            margin-left: 10%;
-            margin-top: 0%;
+            margin-left: 20px;
+            margin-top: 40px;
             font-family: 'Kenia', cursive;
             font-size: 15px;
         }
@@ -93,22 +68,21 @@
        .btn-primary{
            background: #0e24a0 !important;
            color: white !important;
-           margin-top:-20%;
+           margin-top: -5px;
            margin-left: 267px;
            font-size: 20px;
            font-weight:bold;
           
-          
        }
 
-       .fafa{
-            /* margin-left: 70%;
+       .user_card li a{
+            margin-left: -10%;
             font-size:25px;
             color: red;
             position: absolute;
             width: 45px;
             height: 35px;/*height: auto;*/
-            /* border: 0px solid #d6d6d6;
+            border: 0px solid #d6d6d6;
             z-index: 99;
             padding: 0px;
             text-align: center;
@@ -117,31 +91,17 @@
             animation: pulsate 3s ease-in-out;
             animation-iteration-count:infinite ;
             border-radius: 3px;
-            margin-top: -20%;   */ 
+            margin-top: 3%;
          }
 
          .btn-{
            background: #0e24a0 !important;
            color: white !important;
-           margin-bottom:140%;
+           margin-top: -65px;
        
            font-size: 20px;
-           font-weight:bold; 
-       }
-       .alert-error ul a{
-         font-size: 15px;
-        
-         clear: both;
-        display: inline-block;
-        white-space: nowrap;
-      
-        color:red;
-       
-       }
-       #id_message{
-         width: 220px;
-         height: 130px;
-        
+           font-weight:bold;
+          
        }
 
 	</style>
@@ -151,58 +111,61 @@
 
 
 <body>
-	<div class="container h-100">
+
+  <div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
-				<div class="d-flex justify-content-center"> 
-            <div class= 'title'>       
-                <h3 id="form-title">Insert own-account <br> movement details</h3>
-            </div> 
-            <div class= 'fafa'>
-                <li><a  href="{% url 'accounts:account_detail' account_id %}"><i class="fa fa-close" ></i></a></li>
-            </div>
-        </div>
-          <div class= 'libele'>
-            <div>
-              <form method="POST">
-                {% csrf_token %}
+				<div class="d-flex justify-content-center">
+                    
+                    <h3 id="form-title">Insert own-account movement details</h3>
+                    <li><a  href="{% url 'accounts:account_detail' account_id %}"><i class="fa fa-close" ></i></a></li>
+                </div>
+                <div class= 'libele'>
 
-                {% if messages %}
-                {% for message in messages %}
-                  <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-                    {% endfor %}
-                    {% endif %}
-                    {% for field in form %}
-                    <label>{{ field.label_tag }}</label>
-                    {{ field }}
-                    <hr>
-                    {% endfor %}
-                    {% if form.errors %}
-                    <div class="alert alert-error">
-                      <h4 style="font-size: 15px;margin-top:-10%; color: red;text-align: left;margin-top: 5%;" >Please fix the following errors:</h4>
-                      <ul>
-                        {% for field in form %}
-                          {% if field.errors %}
-                            {% for error in field.errors %}
-                            <a href="#id_{{ field.name }}" class="error"> ¨{{ error|escape }}¨</a>
-                            {% endfor %}
+                  <div>
+                      <form method="POST">
+                          {% csrf_token %}
+
+                          {% if messages %}
+                              {% for message in messages %}
+                                <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+                              {% endfor %}
                           {% endif %}
-                        {% endfor %}
-                      </ul>
-                        {% if form.non_field_errors %}
-                            {{ form.non_field_errors }}
-                        {% endif %}
-                    </div>
-                      {% endif %}
-                    <input type="submit" class="btn btn-primary" value="Save">
-                    <a href="{% url 'accounts:account_detail' account_id %}"class="btn btn-">Back</a>
-              </form>
-            </div>
-          </div>
-      </div>
-    </div> 
-  </div>   
-   
+                          
+                          {% if form.errors %}
+                              <div class="alert alert-error">
+                                <h4>Please fix the following errors</h4>
+                                <ul>
+                                  {% for field in form %}
+                                    {% if field.errors %}
+                                      {% for error in field.errors %}
+                                        <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+                                      {% endfor %}
+                                    {% endif %}
+                                  {% endfor %}
+                                </ul>
+                                {% if form.non_field_errors %}
+                                  {{ form.non_field_errors }}
+                                {% endif %}
+                              </div>
+                          {% endif %}
+              
+                          {% for field in form %}
+                              <label>{{ field.label_tag }}</label>
+                              {{ field }}
+                              <hr>
+                          {% endfor %}
+                          <input type="submit" class="btn btn-primary" value="Save">
+                          <a href="{% url 'accounts:account_detail' account_id %}"class="btn btn-">Back</a>
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div> 
+          </div>   
+
+              </body>
+              </html>
               {% endblock %}
 
 

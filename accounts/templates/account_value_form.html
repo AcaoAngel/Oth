@@ -15,12 +15,11 @@
    
 	<style>
 		
-		.user_card {
+		.h-100ee {
             width: 400px;
-            height: 650px;
-			margin-top: 20px;
-            margin-bottom: 30px;
-            margin-left:-5%;
+            height: min-content;
+			margin-top: 7%;
+            margin-left:35%;
 			background: #090a0a;
 			position: relative;
 			display: flex;
@@ -82,7 +81,7 @@
            font-size: 20px;
            font-weight:bold;
        }
-       .user_card li a{
+       .user_cardff li a{
             margin-left: 52%;
             font-size:25px;
             color: red;
@@ -98,7 +97,7 @@
             animation: pulsate 3s ease-in-out;
             animation-iteration-count:infinite ;
             border-radius: 3px;
-            margin-top: -2%;
+            margin-top: 1%;
          }
 
 
@@ -106,9 +105,9 @@
 </head>
 <body>
 
-	<div class="container h-100">
+	<div class="container h-100ee">
 		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
+			<div class="user_cardff">
 				<div class="d-flex justify-content-center">
                     <li><a  href="{% url 'accounts:view_accounts'  %}"><i class="fa fa-close" ></i></a></li>
                     <h3 id="form-title">Luo tili</h3>

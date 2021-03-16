@@ -40,7 +40,7 @@ import re
 
 
 # convert PDF into CSV
-def extract_info(tiliote, user, date):
+def extract_info(tiliote, user, date, bank):
     tapahtumat_list = list()
     nested_list = list()
     tabula.convert_into(tiliote, f"accounts/bank_statements/{date}_{user}_tili.csv", output_format="csv", pages='all')
@@ -48,7 +48,10 @@ def extract_info(tiliote, user, date):
     
     with open(f"accounts/bank_statements/{date}_{user}_tili.csv", "r") as f:
         read_file = f.read()
-        tapahtumat_object = re.compile(r'(\d{2}\.\d{2}\s\d{2}\.\d{2})(.*?)(,,,,,+)"(\d*\.?\d*\.?\d{1,3},\d{2}[+-])"')#read only line with amount
+        if bank == "nordea":
+            tapahtumat_object = re.compile(r'(\d{2}\.\d{2}\s\d{2}\.\d{2})(.*?)(,,,,,+)"(\d*\.?\d*\.?\d{1,3},\d{2}[+-])"')#read only line with amount
+        elif bank == "sp":
+            tapahtumat_object = re.compile(r'\d*,(\d{4})(.*),,\d+,,"(\d*\.?\d*\.?\d{1,3},\d{2}[+-])"')
         matches = tapahtumat_object.finditer(read_file)
         for match in matches:
             print("function", match)

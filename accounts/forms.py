@@ -1,7 +1,7 @@
 from django import forms
 from datetime import date
 from .models import Account_value, Movements
-from .functions import validate_positive
+from .functions import validate_positive, validate_no_empty
 from django.forms import ModelChoiceField
 from django.contrib.auth.models import User
 
@@ -86,11 +86,17 @@ class Movement_form(forms.ModelForm):
 
 class UploadFileForm(forms.ModelForm):
     year = forms.IntegerField(validators=[validate_positive])
+    BANK_CHOICES = [
+        ("empty",""),
+        ("nordea", "Nordea"),
+        ("sp", "S-Pankki"),
+    ]
+    bank = forms.ChoiceField(label='Bank', choices = BANK_CHOICES, required=True, validators=[validate_no_empty])
     file = forms.FileField()
 
     class Meta():
         model = Movements
-        fields = ["year", "file"]
+        fields = ["year", "bank", "file"]
 
 
 

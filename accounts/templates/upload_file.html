@@ -127,8 +127,19 @@
 				<div class="d-flex justify-content-center">
                     
           <h3 id="form-title">Load Pdf document</h3>
-          <h4>Check the year of the bank statement and insert it before document reading</h4>
+          
         </div>
+        <p style="color: white;">Check the year of the bank statement and insert it before document reading</p>
+        <p style="color: white;">Currently we only support bank statements from Nordea and S-Pankki. Select your bank in the bank choices</p>
+
+
+        <ul class="message-error">
+          {% for key, value in form.errors.items %}
+          <li style="color: red;">{{ value }}</li>
+          {% endfor %}
+        </ul>
+
+
         <div class= 'libele'>
           <div>
             <form method="POST" enctype="multipart/form-data">  

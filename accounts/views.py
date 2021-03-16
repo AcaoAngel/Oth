@@ -249,7 +249,8 @@ def upload_file(request):#TODO Read about a faster way to access datebase only o
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            statements = accounts.read_tiliote.extract_info(request.FILES['file'], request.user, request.POST['year'])
+            print("fffffffffffff", request.POST['bank'])
+            statements = accounts.read_tiliote.extract_info(request.FILES['file'], request.user, request.POST['year'], request.POST['bank'])
             statement_list = list()
             for statement in statements:
                 print("view", statement)
@@ -257,18 +258,40 @@ def upload_file(request):#TODO Read about a faster way to access datebase only o
                 account_id = Account_value.objects.get(id=request.session["account_id"])#TODO I can merge this line with the next
                 new_form.account_id = account_id
                 # print(f"{request.POST['year']}-{statement[0][3:5]}-{statement[0][:2]}")
-                new_form.date = f"{request.POST['year']}-{statement[0][3:5]}-{statement[0][:2]}"
-                # print(type(float(statement[3][:-1].replace(".","").replace(",","."))), statement[3][:-1].replace(".","").replace(",","."))
-                if statement[3][-1] == "-":
-                    new_form.amount = Decimal(statement[3][:-1].replace(".","").replace(",",".")) *-1
-                else:
-                    new_form.amount = Decimal(statement[3][:-1].replace(".","").replace(",","."))
-                new_form.message = statement[1]
-                statement_list.append(new_form)
-                # new_form.save()
+                
+                
+                if request.POST['bank'] == "nordea":
+                    #Date
+                    new_form.date = f"{request.POST['year']}-{statement[0][3:5]}-{statement[0][:2]}"
+                    #Amount
+                    if statement[3][-1] == "-":
+                        new_form.amount = Decimal(statement[3][:-1].replace(".","").replace(",",".")) *-1
+                    else:
+                        new_form.amount = Decimal(statement[3][:-1].replace(".","").replace(",","."))
+                    #Message
+                    new_form.message = statement[1]
+                    
+                    statement_list.append(new_form)
+    
+                elif request.POST['bank'] == "sp":
+                    #Date
+                    new_form.date = f"{request.POST['year']}-{statement[0][2:4]}-{statement[0][:2]}"
+                    #Amount
+                    if statement[2][-1] == "-":
+                        new_form.amount = Decimal(statement[2][:-1].replace(".","").replace(",",".")) *-1
+                    else:
+                        new_form.amount = Decimal(statement[2][:-1].replace(".","").replace(",","."))
+                    #Message
+                    new_form.message = statement[1]
+                    
+                    statement_list.append(new_form)
+            
+            #Write movements in database
             for i in statement_list:
                 i.save()
             return redirect("/readed_successfully/")
+        else:
+            return render(request, "upload_file.html", {"form":form})
     context = UploadFileForm()
     return render(request, "upload_file.html", {"form":context})
 

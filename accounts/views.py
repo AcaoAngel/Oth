@@ -141,7 +141,7 @@ def movements_form(request):#account id is sended using the parameter through ur
             # return render(request, 'transaction_done.html', {"accont_id":account_id})
             return render(request, "transaction_done.html", {'movement':True, "account_id":request.session['account_id']})
         else:
-            return render(request, "pay_form.html", {"form":form, "account_id":request.session["account_id"]})
+            return render(request, "movements_form.html", {"form":form, "account_id":request.session["account_id"]})
             print("form is not valid")
         
     

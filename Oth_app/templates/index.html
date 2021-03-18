@@ -43,6 +43,22 @@
 		</a>		
 	</div> -->
 
+	<h1>Take control of your money</h1>
+	<h4>Start controlling your spences and save money to reach your goals</h4>
+
+	<h2>Create your accounts</h2>
+	<h4>In a simply way  you can create your accounts and set the start amount for theese</h4>
+
+	<h2>Save your spences</h2>
+	<h4>You can manually or authomatically store your bank events and spences into your created account</h4>
+
+	
+	{% if user.is_authenticated %}
+	{% else %}
+	<h1>Start saving money with us and experience a real change of life</h1>
+	<a href="{% url 'profiles:sign_up' %}">Open your account for free</a>
+	{% endif %}
+
 
 
 	

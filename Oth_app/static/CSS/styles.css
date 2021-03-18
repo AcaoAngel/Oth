@@ -268,6 +268,7 @@ nav ul li a{
 	}
 	nav ul li a{
 		font-size: 20px;
+		
 	}
 	a:hover, a.active-home{
 		border: none;
@@ -620,60 +621,63 @@ position: absolute;
 
 /* footer */
 
-footer{
-	
-	
-
-	padding-bottom: 0;
-	width: 100%;
-	background-color: black;
-	color: white;
-	text-align: center;
- 	z-index:9999 ;
-	margin-bottom:-25% ;
-	margin-top: 220px;
-	position:absolute;
-  
-	
-}
-
 .text-white{
 	text-align: center;
 	font-size: 20px;
 
 }
 
-
-
-
 .footer-basic{
-	
-	
-	padding: 0;
-	width: 100%;
+
+   
+
+
+	 position:absolute;
 	background-color: black;
 	color: white;
 	text-align: center;
+	padding-bottom: 0;
+	padding: 0;
+	width: 100%;
+
+	
+	
+	margin-bottom:-900px ;
+	margin-top: 250px;
  
 	bottom:0;
-	margin-bottom:0;
-	
-	position:absolute; 
-	
+
+
+	/* width: 100%;
+	position: fixed;        
+	background:black;
+	padding:0px 0;
+	color: #fff;
+	bottom: 0; */
 	
 }
+/* .block{
+	line-height: 200px;
+	margin: 0 auto; Center the DIV horizontally
+} */
 
-.footer-basic ul {
+
+
+
+ .footer-basic ul {
 	padding:0;
 	list-style:none;
 	text-align:center;
 	font-size:18px;
 	line-height:1.6;
 	margin-bottom:0;
+	bottom: auto;
 	
   }
   
  
+
+
   
   .footer-basic ul a {
 	color:inherit;
@@ -695,7 +699,7 @@ footer{
 	text-align: center;
 	
 
-} 
+}
 
 
 
@@ -836,3 +840,33 @@ footer{
 
 
 
+/* 
+  
+  @media (max-width:767px) {
+	.footer-basic {
+	  text-align:center;
+	  padding-bottom:20px;
+	}
+  }
+
+  @media (max-width:767px) {
+	.footer-basic {
+	  margin-bottom:0;
+	}
+  }
+  
+
+  
+
+  @media (max-width:991px) {
+	.footer-basic {
+	  text-align:center;
+	  margin-top:20px;
+	}
+  }
+ 
+  .footer-basic {
+	opacity:0.9;
+  }
+   */
+ 

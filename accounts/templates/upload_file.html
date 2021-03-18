@@ -15,7 +15,7 @@
 		
 		.h-100s {
             width: 32%;
-            height: min-content;
+           height: min-content;
 		      	margin-top: 100px;
            
             margin-left: 30%;
@@ -35,6 +35,7 @@
 		}
 
     .alert-error ul li a{
+     
         white-space:nowrap;
         font-size: 20px;
         color: red;
@@ -61,26 +62,17 @@
             font-size: 15px;
             
             
-        }
-        .libele label{
-           
-           margin-left: 0px;
-           margin-right: 50px;
-           width: 70px;
-           height: 24px;
-           margin-bottom: 0px;
-           
-       }
+        } 
+  
 
        textarea{
            width: 340px;
        }
-       .libele input{
-        border-radius: 3px;
+      
            
      
            
-       }
+      
 .justify-content-center p{
   font-size: 17px;
            
@@ -98,23 +90,18 @@
 
 
 
-       .btn-primary{
+       input.btn.btn-primary{
            background: #0e24a0 !important;
            color: white !important;
            margin-top: -20px;
            margin-left: 167px;
            font-size: 20px;
            font-weight:bold;
+           background-size: 40px;
        }
-       .btn-{
-           background: #0e24a0 !important;
-           color: white !important;
-           margin-top: -70px;
-       
-           font-size: 20px;
-           font-weight:bold;
+   
           
-       }
+     
 
        .user_cards li a{
             margin-left:86%;
@@ -140,6 +127,63 @@
 
          }
 
+
+         .libele label{
+        font-family: 'Kenia', cursive;
+        margin-left:0;
+        width: 30px; 
+        height: 38;
+        font-size: 15px;
+      
+           margin-right: 30px;
+        
+        
+    }
+    
+        
+
+    .libele input{
+        margin-top: 10px;
+        margin-left: 8%;
+        width: 300px; 
+        height: 38;
+    
+        border-radius: 3px;
+       
+    }
+
+    .libele select{
+        margin-top: 10px;
+        margin-left: 8%;
+        width: 300px; 
+        height: 38;
+    
+        border-radius: 3px;
+       
+    }
+
+    .upload input {
+      width: 100px;
+     margin-left: 0px;
+     background: #0e24a0 !important;
+           color: white !important;
+        
+           font-size: 20px;
+           font-weight:bold;   
+    }
+
+    .btn-back{
+        width: 100px;
+     margin-left: 300px;
+     background: #0e24a0 !important;
+           color: white !important;
+        
+           font-size: 20px;
+           font-weight:bold;   
+           margin-top: -17%;
+    }
+
+
 	</style>
 </head>
 
@@ -158,7 +202,7 @@
           
           
         </div>
-        <p style="color: white;">Check the year of the bank statement and insert it before document reading.</p>
+        <p style="color: white; margin-top: 5%;">Check the year of the bank statement and insert it before document reading.</p>
         <p style="color: white;">Currently we only support bank statements from Nordea and S-Pankki. Select your bank in the bank choices.</p>
 
 
@@ -179,9 +223,11 @@
                     {{ field }}
                     <hr>
                 {% endfor %}
-                
-                <input type="submit" class="btn btn-primary" value="Upload">
+                <div class = 'upload'>
+                <input type="submit" class="btn primary" value="Upload">
                 <a href="{% url 'accounts:view_accounts' %}" class="btn btn-back" role="button">Back</a><br>
+
+              </div>
             </form>
         
           </div>

@@ -15,12 +15,13 @@
    
 	<style>
 		
-		.user_card {
-            width: 40%;
-            height: 90%;
-		      	margin-top: 20px;
-            margin-bottom: 30px;
-            margin-left: -5px;
+		.h-100h {
+            width: 30%;
+            height: 80%;
+		      	margin-top: 100px;
+           
+            margin-left: 35%;
+           
        			background: #090a0a;
        			position: relative;
        			display: flex;
@@ -32,17 +33,33 @@
        			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			      border-radius: 1rem;
             z-index: 999;
-            border: 2px solid rgba(255,255,255,0.2);
-            
-		}
+            border: 2px solid rgba(255,255,255,0.2)
+   
+      }
+
+      .alert-error ul li a{
+        white-space:nowrap;
+        font-size: 20px;
+        color: red;
+        font-weight:bold;
+       
+      }
+    
+    
+  
+       
+        
+     
 
     #form-title{
             color: #267af7;
             margin-top: 10px;
             font-size: 25px;
-            margin-right: 10px;
+            margin-left: 30px;
             font-family: 'Kenia', cursive;
             font-weight:bold;
+            text-align: center;
+
         }
 
         .libele{
@@ -96,8 +113,8 @@
           
        }
 
-       .user_card li a{
-            margin-left: -1%;
+       .justify-content-centerr li a{
+            margin-left:5%;
             font-size:25px;
             color: red;
             position: absolute;
@@ -112,7 +129,7 @@
             animation: pulsate 3s ease-in-out;
             animation-iteration-count:infinite ;
             border-radius: 3px;
-            margin-top: -2%;
+            
          }
 
 	</style>
@@ -123,10 +140,10 @@
 
 <body>
 
-  <div class="container h-100">
+  <div class="container h-100h">
 		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
-				<div class="d-flex justify-content-center">
+			<div class="user_cardh">
+				<div class="d-flex justify-content-centerr">
                     
           <h3 id="form-title">Insert new payment details</h3>
           <li><a  href="{% url 'accounts:account_detail' account_id %}"><i class="fa fa-close" ></i></a></li>
@@ -143,7 +160,7 @@
            
                {% if form.errors %}
             <div class="alert alert-error">
-              <h4>Please fix the following errors</h4>
+              <h6 style='color:red;margin-top:-5%'>Please fix the following errors</h6>
               <ul>
                 {% for field in form %}
                   {% if field.errors %}

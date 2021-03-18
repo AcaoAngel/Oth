@@ -206,12 +206,85 @@
     margin-top: 10%;
 	
 }	
+
+table {
+	margin-top:-20%;
+    margin-left:10px;
+	font-family: 'Kenia', cursive;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+ 
+td, th {
+  border: 2px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr th{
+	color: black !important; font-size: 25px;font-weight:bold;
+}
+
+.pagination{
+	width:100%;
+    text-align: center;
+}
+
+.pagination span a{
+	display: inline-block;
+ 
+  color: black !important;
+
+  
+  font-weight:bold;
+
+
+  width: 70px;
+   height: 45px;
+   border: 1px solid #EAEAEA;
+   -webkit-border-radius: 50%;
+   -moz-border-radius: 50%;
+   border-radius: 50%;
+  
+   text-align: center;
+   line-height: 38px;
+   display: inline-block;
+ background-color: rgb(217, 217, 235);
+   font-size: 20px;
+   margin: 0 4px;
+}
+
+
+
+.next-last{
+    margin-left: 750px;
+    margin-top: -30px ;
+    float:right;
+	padding: auto;
+
+	
+  
+}
+.first-previous{
+   
+    float:left;
+    margin-top: 2%;
+	padding: auto;
+}
+
+
+
 	</style>
 
 
 </head>
 
-     {% if object_list %}
+
+
+
+
+  {% if object_list %}
 
 	 <div class ="tabs">
 		<div class="tab">	
@@ -224,6 +297,113 @@
 				<a href="{% url 'accounts:create_account' %}" class="_btn" role="button">Luo uusi tili</a> 
 			</div>
 			
+
+
+		<table>
+				<tr>
+				  <th>Bank account name</th>
+				  <th>Bank account amount</th>
+				</tr>
+
+			{% for user_accounts in object_list %}
+			
+				<ul>
+				 <li> <tr><td><a style='color: #0e24a0 !important; font-size: 20px;font-weight:bold;'href="{% url 'accounts:account_detail' user_accounts.id %}">{{user_accounts.account_name}}</td><td style='color: #0e24a0 !important; font-size: 20px;font-weight:bold;'>{{user_accounts.account_value}} €</a></tr><tr><br>{% empty %} </tr</li>
+			   </ul> 
+			  
+			{% endfor %} 
+		</table>
+
+			<div class="pagination">
+				<span class="step-links">
+					<div class='first-previous'>
+					    {% if page_obj.has_previous %}
+						<a href="?page=1"> first</a>
+						<a style='width: 100px; 'href="?page={{ page_obj.previous_page_number }}">&laquo; previous</a>
+					   {% endif %}
+					</div>
+					<div class='pagnber' > 
+					   <span  style='font-weight:bold; justify-content: center;' class="current">
+						  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+					   </span>
+				    </div>
+					<div class='next-last'>
+					  {% if page_obj.has_next %}
+						<a href="?page={{ page_obj.next_page_number }}">next &raquo;</a>
+						<a href="?page={{ page_obj.paginator.num_pages }}">last </a>
+					  {% endif %}
+					</div>	
+				</span>
+			</div>
+	
+		
+		
+		</div>	
+				 
+	</div>
+
+			{% else %}
+			<div class="container h-100cc">
+				<div class= fatii>
+					<li><a  href="{% url 'Oth_app:index' %}"><i class="fa fa-close" ></i></a></li>
+				
+				</div>
+				<div class="d-flex justify-content-center h-100">
+					<div class="user_cardc">
+						<div class="d-flex justify-content-center">
+							<h3 id="form-title"> Ei tili käytössä</h3>
+						</div>
+						<div class="d-flex justify-content-center form_container">
+							<form method="POST" action="">
+								{% csrf_token %}
+								<div class="input-group mb-3">
+									<div class="d-flex justify-content-center mt-3 login_container">
+										<div class="not-account">
+											<a href="{% url 'accounts:create_account' %}" class="btn __btn" role="button">Luo uusi tili</a> 
+										</div> 
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div> 
+	    {% endif %}
+		
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     <!-- {% if object_list %}
+
+	 <div class ="tabs">
+		<div class="tab">	
+			<div class= fati>
+				<li><a  href="{% url 'Oth_app:index' %}"><i class="fa fa-close" ></i></a></li>
+				<h3 style="margin-left: 30%; " id="form-title"> Bank account list</h3>
+			</div>
+
+			<div class= "btn">
+				<a href="{% url 'accounts:create_account' %}" class="_btn" role="button">Luo uusi tili</a> 
+			</div>
+			
+
+
+
 			{% for user_accounts in object_list %}
 			
 				<ul>
@@ -282,11 +462,11 @@
 	    {% endif %}
 		
 
-{% endblock %}
 
 
 
 
+ -->
 
 
 

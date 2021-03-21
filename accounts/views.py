@@ -24,13 +24,13 @@ from django.core.paginator import Paginator
 #         self.template_name = "access_denied_accounts.html"
 
 def view_accounts(request):
-    current_user_account = Account_value.objects.filter(user_id=request.user.id)
-    paginator = Paginator(current_user_account, 2)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-
-    return render(request, "view_accounts.html", {"object_list": current_user_account, "page_obj": page_obj })
+    if request.user.is_authenticated:
+        current_user_account = Account_value.objects.filter(user_id=request.user.id)
+        paginator = Paginator(current_user_account, 2)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, "view_accounts.html", {"object_list": current_user_account, "page_obj": page_obj })
+    return render(request, "access_denied_accounts.html")
 
 def account_detail(request, id):
     # print("loading from account detail")

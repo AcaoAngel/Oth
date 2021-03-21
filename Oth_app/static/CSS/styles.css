@@ -695,12 +695,7 @@ position: absolute;
 	line-height:1.6;
 	margin-bottom:0;
 	bottom: auto;
-	
   }
-  
- 
-
-
   
   .footer-basic ul a {
 	color:inherit;
@@ -712,7 +707,6 @@ position: absolute;
 	opacity:1;
   }
   
-
 .footer-basic ul a{
 	text-align: center;
 	font-size: 20px;
@@ -723,13 +717,6 @@ position: absolute;
 	
 
 }
-
-
-
-
-
-
-
 
 .log-alert{
 	color: rgb(250, 51, 51);
@@ -854,6 +841,15 @@ position: absolute;
 			margin-top: 10px;
 		}
 
+.flexed {
+	display: flex;
+	margin: auto;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+.flex {
+	flex: 50%;
+}
 
 
 /* Account form */

@@ -2,53 +2,111 @@
 {% load static %}
 
 
+
+
 	
 	 
     {% block body %}
 
-
-	<!-- contenu sous form de boite-->	
-	<!-- <div class = "container">
-		<a href = "{% url 'accounts:view_accounts' %}" class="box" >
-
-			<div class= "icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-			<div class="content">
-				<h3>Tilit</h3>				
-			</div>
-
-
-			
-
-		</a>
-		<a href="yhteenveto.html" class="box">
-			<div class= "icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
-			<div class="content">
-				<h3>Yhteenveto</h3>
-				
-			</div>
-		</a>
-		<a href="raportti.html" class="box">
-			<div class= "icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
-			<div class="content">
-				<h3>Raportit</h3>
-				
-			</div>
-		</a>		
-		<a href="haku.html " class="box">
-			<div class= "icon"><i class="fa fa-search" aria-hidden="true"></i></div>
-			<div class="content">
-				<h3>Haku</h3>
-				
-			</div>
-		</a>		
-	</div> -->
-
-
-
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
 	
+		<style>
+			.container{
+				display: flex;
+				padding: 2px;
+				width: 80%;
+			}
+	
+			.flexed{
+				flex: 50%;
+				padding: 5px;
+			}
+			.center_text{
+				position: relative;
+                top: 50%;
+                transform: translateY(-50%);	
+			}
+			.title_text{
+				font-size: 1.9cm;
+				text-align: center;
+			}
+			.new_account_button{
+			    color: brown;
+				background-color: aqua;
+				text-align: center;
+
+			}
+	
+	
+		</style>
+	</head>
+	
+
+    <br><br><br><br><br><br><br><br><br><br>
+
+
+    <div class="container">
+	    <div class="flexed">
+			<img src="{% static 'media/img/money_bag.gif' %}" alt="money bag">
+		</div>
+	    <div class="flexed">
+			<div class="center_text">
+	            <h1 class="title_text">Take control of your money</h1>
+	            <h4>Start controlling your spences and save money to reach your goals</h4>
+		    </div>
+        </div>
+	</div>
+
+	<br><br><br><br><br><br><br><br><br><br><br><br>
+ 
+
+	<div class="container">
+	    <div class="flexed">
+			<div class="center_text">
+	            <h1 class="title_text">Create your accounts</h1>
+	            <h4>In a simply way  you can create your accounts and set the start amount for theese</h4>
+		    </div>
+			
+		</div>
+	    <div class="flexed">
+			<img src="{% static 'media/img/hand_coin.png' %}" alt="hand coin">
+        </div>
+	</div>
+	
+	<br><br><br><br><br><br><br><br><br><br>
+
+
+    <div class="container">
+	    <div class="flexed">
+			<img src="{% static 'media/img/money_save.png' %}" alt="Money save">
+		</div>
+	    <div class="flexed">
+			<div class="center_text">
+	            <h1 class="title_text">Save your spences</h1>
+	            <h4>You can manually or authomatically store your bank events and spences into your created account</h4>
+		    </div>
+        </div>
+	</div>
+
+	<br><br><br><br><br><br><br><br><br><br>
+	
+	{% if user.is_authenticated %}
+	{% else %}
+	    <h1 class="title_text">Start saving money with us and experience a real change of life</h1>
+	    <div class="new_account_button"><a href="{% url 'profiles:sign_up' %}">Open your account for free</a></div>	
+	{% endif %}
+
+	<br><br><br><br><br><br><br><br><br><br>
+
 	{% endblock %}		
 
-
+	</html>
 
 
 

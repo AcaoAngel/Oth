@@ -20,6 +20,14 @@
 
 
 	<style>
+
+.user_cardii{
+    margin-top: 170px;
+            margin-bottom: 150px;
+            padding-bottom: 70px;
+
+
+}
 		
 		.c-buttons {
             width: 1100px;
@@ -43,25 +51,25 @@
             font-weight:bold;
            
       }
-
-      .libele{
+    
+      .user_cardii{
             color: #042496;
             
-            margin-top: 40px;
+         
             font-size: 20px;
             font-family: 'Kenia', cursive;
             background-color: #9ABBFB;
 
             width: 1100px;
             height: min-content;
-			margin-top: 170px;
+			
           
             margin-left:15%;
 			background-color: #9ABBFB;
 			position: relative;
             justify-content: center;
 			
-			padding: 10px;
+			
 		
 			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -71,10 +79,7 @@
             border: 2px solid rgba(255,255,255,0.2);
             box-shadow: 2px 2px 5px 2px #ccc; 
             overflow: hidden;
-
-            margin-bottom: 250px;
-
-
+           
         }
 
         .libele a{
@@ -98,21 +103,42 @@
             float: right;
            
         }
-
-
-        .user_cardia{
-
+        .delete-account{
+            
             width:550px;
             height: min-content;
 			background-color: #7ea7fa;
-			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			border-radius: 1rem;
+			border-radius: 1rem; 
             z-index: 999;
             border: 5px solid rgba(8, 122, 236, 0.2);
             box-shadow: 2px 2px 5px 2px blue; 
-            position: fixed;
+            top:250px;
+           justify-content: center;
+           overflow: hidden;
+           position:fixed;
+           margin-left:250px;
+        }
+
+        .delete-movement{
+          
+            width:550px;
+            height: min-content;
+			background-color: #7ea7fa;
+			 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 1rem; 
+            z-index: 999;
+            border: 5px solid rgba(8, 122, 236, 0.2);
+            box-shadow: 2px 2px 5px 2px blue; 
+            top:250px;
+           justify-content: center;
+           overflow: hidden;
+           position:fixed;
+           margin-left:250px;
 
         }
 
@@ -140,10 +166,7 @@
            margin-right:40px;
             height: max-content;
             margin-bottom: 40px;
-          
 
-          
-       
         }
 
 
@@ -156,7 +179,11 @@
             font-weight:bold;
             
       }
-.user_cardia h3{
+.delete-movement h3{
+    font-family: 'Kenia', cursive;
+    margin-top: 35px;
+}
+.delete-account h3{
     font-family: 'Kenia', cursive;
     margin-top: 35px;
 }
@@ -230,7 +257,7 @@ transition: 0.5s all;
 animation: pulsate 3s ease-in-out;
 animation-iteration-count:infinite ;
 border-radius: 3px;
-margin-top: 0%;
+margin-top: 1%;
 
 }	
 
@@ -333,31 +360,22 @@ tr th{
 	</style>
 </head>
  
-   
- 
-            <!-- <div class="user_cardii">
-                <div class="d-flex justify-content-center"> 
-                    <li><a  href="{% url 'accounts:view_accounts'  %}"><i class="fa fa-close" ></i></a></li>
-                    <h1 id="form-title">Bank account information</h1>
-                </div>
-
-                            -->
-                
+<div class="user_cardii"> 
+    <div class="d-flex justify-content-center"> 
+                    <!-- <li><a  href="{% url 'accounts:view_accounts'  %}"><i class="fa fa-close" ></i></a></li>
+                    <h1 id="form-title">Bank account information</h1> -->
+        
                 <div class= 'libele'>
                     <div class="d-flex justify-content-center"> 
                         <li><a  href="{% url 'accounts:view_accounts'  %}"><i class="fa fa-close" ></i></a></li>
-                        <h1 id="form-title">Bank account information</h1>
-                    </div>
+                        <h1 style='margin-top:30px' id="form-title">Bank account information</h1>
+                    </div> 
 
                     <div class="buttons">
                         <a style='float:right; margin-right:10px; margin-top: 170px;' href="{% url 'accounts:delete_account' account.id %}"class="btn bt">Delete account</a>
                     </div>   
                     <br> 
-                       <!-- <li style="font-weight: bold;"> * Account name: {{account.account_name}}</li>
-                       <li style="font-weight: bold;"> * Account value: {{account.account_value}} €</li>
-                       <li style="font-weight: bold;"> * Account info: {{account.info}}</li> -->
-                       <!-- <li style="font-weight: bold;">{{account.save_percent}}</li>
-                       <li style="font-weight: bold;">{{account.saving_time}}</li> -->
+                      
                     <table id="standings" style="border-collapse:collapse;background-color: #0a2c6e;">
                        <div class ="tableee">	
                         
@@ -429,34 +447,7 @@ tr th{
                         </div>    
 
                     </table> 
-              
-     
-
-                   <!-- </ul><hr>
-                        <h2>Events</h2>
-                        {% for i in movements %}
-                            <ul>
-                
-                                {% if i.second_account_movement_id %}
-                                <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
-                    
-                                {% if i.moved_from_account %}
-                                <p>Movement received. You can only edit or delete from the sending account</p>
-                                {% else %}
-                                <a href="{% url 'accounts:edit_movement_form' i.id %}" class="btn btn" role="button">Edit</a>
-                                <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
-                                {% endif %}
-                                {% else %}
-                                <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after Payment: {{i.account_value_after}}</li>
-                                <a href="{% url 'accounts:edit_pay_form' i.id %}" class="btn btn" role="button">Edit</a>
-                                <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
-                                {% endif %}
-                            </ul>
-                        {% endfor %}
-                        <hr> -->
-                     
-                    
-                 
+                            
                         <div class="pagination">
 
                             <span class="step-links">
@@ -491,58 +482,49 @@ tr th{
                         </div>  
                       
                 </div>
+            </div>    
+                {% if sure_delete %}
+                <div  class="delete-movement">
+                    <div class="d-flex justify-content-center">
+                           <style>.libele{filter: blur(4px);}</style>
+                        <h2 id="formtitle">You are deleting movement:</h2>
+                      </div> 
+                        <h3>{{deleting_movement.date.date}}  |  Event: {{deleting_movement.event}}  |  Amount: {{deleting_movement.amount}}  |  Saldo after movement: {{deleting_movement.account_value_after}}</h3>
+                        <h3>Are you sure?</h3>
+                        <a href="{% url 'accounts:account_detail' account.id %}" class="btn btnn" role="button">no</a>
+                        <form action="" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btnn" value="Yes">
+                       </form>
                 </div> 
+             
 
-            </div>         
-                       
-            
-                         {% if sure_delete %}
-                   
-                                <div class="user_cardia">
-                              
-                                    <div class="d-flex justify-content-center">
-                        
-                                        <style>.libele{filter: blur(4px);}</style>
-                    
-                                        <h2 id="formtitle">You are deleting movement:</h2>
-                                    </div> 
-                                        <h3>{{deleting_movement.date.date}}  |  Event: {{deleting_movement.event}}  |  Amount: {{deleting_movement.amount}}  |  Saldo after movement: {{deleting_movement.account_value_after}}</h3>
-                                        <h3>Are you sure?</h3>
-                                        <a href="{% url 'accounts:account_detail' account.id %}" class="btn btnn" role="button">no</a>
-                                    <form action="" method="POST">
-                                        {% csrf_token %}
-                                        <input type="submit" class="btn btnn" value="Yes">
-                                    </form>
-                                        {% elif delete_account %}
-                                    <div class="container-delete">
-                                        <div class="d-flex justify-content-center h-100">
-                                            <div class="usercard">
-                                                <div class="d-flex justify-content-center">
-                                                    <style>.libele {filter: blur(4px);}</style>
-                                                    <h2 id="formtitle">You are deleting account:</h2>
-                                                </div> 
-                                                    <h3>{{account.account_name}}  |  Amount: {{account.account_value}}</h3>
-                                                    <h3>Are you sure?</h3>
-                                                    <a href="{% url 'accounts:account_detail' account.id %}" class="btn btnn" role="button">no</a>
-                                                <form action="" method="POST">
-                                                     {% csrf_token %}
-                                                    <input type="submit" class="btn btnn" value="Yes">
-                                                </form>
-                                                    
-                
-                                            </div> 
-                                        </div> 
-                                    </div> 
-                                   
+                        {% elif delete_account %}
+                    <div class="delete-account">
+                        <div class="d-flex justify-content-center h-100">
+                            <div class="usercard">
+                                <div class="d-flex justify-content-center">
+                                    <style>.libele {filter: blur(4px);}</style>
+                                    <h2 id="formtitle">You are deleting account:</h2>
                                 </div> 
-                        
-                     
-                        {% endif %}   
-                   
-
-           
+                                    <h3>{{account.account_name}}  |  Amount: {{account.account_value}}</h3>
+                                    <h3>Are you sure?</h3>
+                                    <a href="{% url 'accounts:account_detail' account.id %}" class="btn btnn" role="button">no</a>
+                                <form action="" method="POST">
+                                     {% csrf_token %}
+                                    <input type="submit" class="btn btnn" value="Yes">
+                                </form>
             
- 
+                            </div> 
+                        </div> 
+                    </div> 
+                   
+                </div> 
+                {% endif %}   
+     
+           
+   
+</div>
         
 {% endblock %}
 
@@ -552,8 +534,12 @@ tr th{
     
     
     
+     <!-- <li style="font-weight: bold;"> * Account name: {{account.account_name}}</li>
+                       <li style="font-weight: bold;"> * Account value: {{account.account_value}} €</li>
+                       <li style="font-weight: bold;"> * Account info: {{account.info}}</li> -->
+                       <!-- <li style="font-weight: bold;">{{account.save_percent}}</li>
+                       <li style="font-weight: bold;">{{account.saving_time}}</li> -->
     
-    
 
 
 
@@ -563,6 +549,29 @@ tr th{
 
 
 
+                   <!-- </ul><hr>
+                        <h2>Events</h2>
+                        {% for i in movements %}
+                            <ul>
+                
+                                {% if i.second_account_movement_id %}
+                                <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after movement: {{i.account_value_after}}</li>
+                    
+                                {% if i.moved_from_account %}
+                                <p>Movement received. You can only edit or delete from the sending account</p>
+                                {% else %}
+                                <a href="{% url 'accounts:edit_movement_form' i.id %}" class="btn btn" role="button">Edit</a>
+                                <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
+                                {% endif %}
+                                {% else %}
+                                <li style="font-weight: bold;">{{i.date}}  |  Amount: {{i.amount}}  |  Saldo after Payment: {{i.account_value_after}}</li>
+                                <a href="{% url 'accounts:edit_pay_form' i.id %}" class="btn btn" role="button">Edit</a>
+                                <a href="{% url 'accounts:sure_delete' account.id i.id %}" class="btn btn" role="button">Delete</a>
+                                {% endif %}
+                            </ul>
+                        {% endfor %}
+                        <hr> -->
+                     
 
 
 
@@ -613,9 +622,3 @@ tr th{
     </html> -->
     
     
-    
-    
-    
-    
-
-

@@ -60,7 +60,8 @@ def profile(request):
 
 
 def profile_edit(request):
-    profile = Profile.objects.get(user=request.user)
+    profile = Profile.objects.get(id=request.user.id)
+    user = User.objects.get(id=request.user.id)
     if request.method == 'POST':
         userupdateform= UserUpdateForm(request.POST, instance=request.user)
         profileupdateform = ProfileUpdateForm(request.POST,
@@ -77,7 +78,7 @@ def profile_edit(request):
     
     
     else:
-        userupdateform = UserUpdateForm(instance=request.user)
+        userupdateform = UserUpdateForm(instance=user)
         profileupdateform = ProfileUpdateForm(instance=profile)
     context = {
      

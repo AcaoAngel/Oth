@@ -10,8 +10,8 @@
 	
 	<style>
 
-.fati li a{
-     margin-left: 72%;
+.clo li a{
+     margin-left: 55%;
      
      font-size:25px;
      color: red;
@@ -27,7 +27,7 @@
      animation: pulsate 3s ease-in-out;
      animation-iteration-count:infinite ;
      border-radius: 3px;
-     margin-top: 8%;
+     
      
 }	
 
@@ -37,15 +37,18 @@
   color: #3bacf8;
   font-family: 'Kenia', cursive;
 }
+
 .btn-primary{
   font-family: 'Kenia', cursive;
   font-size: 20px ;
   background: #0e24a0 !important;
 	margin-left: 77%;
 	color: white !important;
-	margin-top: -40%;	
+	margin-top: -20%;	
   
       }
+  
+  
 
 
 </style>
@@ -53,25 +56,37 @@
 </head>
 
 
-<div class= fati>
-  <li><a  href="{% url 'Oth_app:index' %}"><i class="fa fa-close" ></i></a></li>
-</div>
-<div class='Post_form'>
-    <form method="post" enctype="multipart/form-data">
 
-      {% csrf_token %}
-      {{ form.media }}
+
+  
+    <div style='margin-bottom: 200px;' class="user_cardss">
+      <div class="clo">
+        <li><a  href="{% url 'Post:all_posts' %}"><i class="fa fa-close" ></i></a></li>
+      </div>  
+
+        <div class='Postform'>
+
+          <form method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            {{ form.media }}
      
-      {% bootstrap_form form %}
+            {% bootstrap_form form %}
 
-      {% buttons %}
-          <button type="submit" class="btn btn-primary">Tallenna julkaisu</button>     
-      {% endbuttons %}
-
-    </form>
-  </div>
-
+               
+                  {% buttons %}
+                    <button type="submit" class="btn btn-primary" >Tallenna julkaisu</button>     
+                  {% endbuttons %}
+         
+          </form>
+        </div>
+     
+    </div>
+  
 {% endblock body %}
+
+
+
 
 
 

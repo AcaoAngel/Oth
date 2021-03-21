@@ -35,7 +35,7 @@
 				
 				
 		   <div class="logo">
-			<img style= 'float: left;width: 30%;margin:0; 'src="/static/media/img/logo.png" alt="Logo image" ><span>Omataloushallinta</span>
+			<img style= 'float: left;width: 35%;margin:0; 'src="/static/media/img/logo.png" alt="Logo image" ><span style='font-size: 19px;'>Omataloushallinta</span>
 		   </div>
 <!-- <img style= 'width: 11%; margin: 0;'src="/static/media/img/logo.png" alt="Logo image" ><label class="title-box" >OTH-Omataloushallinta</label> -->
         </header>
@@ -56,7 +56,7 @@
 				<li><a class="active-home" href="{% url 'Oth_app:index' %}"><i class="fa fa-home" ></i>Koti</a> </li>
 				<li><a href="{% url 'Post:all_posts' %}">Julkaisut</a></li>
 				<li><a href="{% url 'accounts:view_accounts' %}">Tilit</a></li>
-				<li><a href="{% url 'Oth_app:index' %}">Tietoa Oth:sta</a></li>
+				<li><a href="{% url 'Oth_app:about_us' %}">Tietoa Oth:sta</a></li>
 				<li><a href="{% url 'Contact:contact' %}"><i class="fa fa-phone" ></i>Ota yhteyttä</a></li>
             	{% if request.user.is_superuser %}
            		<li><a href="{% url 'admin:index' %}">Admin Menu</a></li>  

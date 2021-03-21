@@ -9,17 +9,17 @@
 
 	<style>
 
-.user_card {
-    top:5%;
-    left: 0;
-	width: 70%;
+.h-100ab {
+   
+   
+	width: 40%;
 	height: 210px;
-	margin-top: 100px;
-    margin-bottom: auto;
-    margin-left:-5%;
+	margin-top: 150px;
+ 
+    
 	background-color: #9ABBFB;
 	position: relative;
-	display: flex;
+	
 	justify-content: center;
 	flex-direction: column;
 	padding: 10px;
@@ -32,8 +32,8 @@
 			
     }
 
-.user_card li a{
-    margin-left: 12%;
+.user_cardab li a{
+    margin-left: 2%;
     font-size:25px;
     color: red;
     position: absolute;
@@ -59,7 +59,7 @@
     margin-left: 30px;
         
     }
-.user_card h3{
+.user_cardab h3{
     color: #042496;
     margin-top: 5%;
     bottom: 10%;
@@ -102,12 +102,12 @@
 
 </head>
 
-    <div class="container h-100">
+    <div class="container h-100ab">
         <div class="d-flex justify-content-center h-100">
-            <div class="user_card">
+            <div class="user_cardab">
                 <div class="d-flex justify-content-center">
                     <h3>Account deleted succesfully</h3>
-
+                    <li><a  href="{% url 'accounts:view_accounts' %}"><i class="fa fa-close" ></i></a></li>
                     </div>
 
 

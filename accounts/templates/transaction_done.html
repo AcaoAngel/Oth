@@ -9,20 +9,19 @@
 
 	<style>
 
-.user_card {
-    top:5%;
-    left: 0;
-	width: 70%;
-	height: 210px;
-	margin-top: 100px;
-    margin-bottom: auto;
-    margin-left:-5%;
+.h-100abb{
+    
+    
+	width: 68%;
+	height: 200px;
+	margin-top: 150px;
+ 
+    
 	background-color: #9ABBFB;
-	position: relative;
-	display: flex;
-	justify-content: center;
+	
+
 	flex-direction: column;
-	padding: 10px;
+
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -32,8 +31,8 @@
 			
     }
 
-.user_card li a{
-    margin-left: 12%;
+.user_cardabb li a{
+    margin-left: 160px !important;
     font-size:25px;
     color: red;
     position: absolute;
@@ -41,83 +40,79 @@
     height: 35px;/*height: auto;*/
     border: 0px solid #d6d6d6;
     z-index: 99;
-    padding: 0px;
+ 
     text-align: center;
     background:  white;
     transition: 0.5s all;
     animation: pulsate 3s ease-in-out;
     animation-iteration-count:infinite ;
     border-radius: 3px;
-    margin-top:0;
+    margin-top:10px;
 }
 
-.btm a{
-    color: #041657;
-    font-weight:bold;
-    font-size:20px;
-    font-family: 'Kenia', cursive;
-    margin-left: 30px;
-        
-    }
-.user_card h3{
+.user_cardabb h1{
     color: #042496;
     margin-top: 5%;
-    bottom: 10%;
-    font-size: 35px;
-    margin-left:0;
+    margin-bottom: 35px;
+   
+ 
     font-family: 'Kenia', cursive;
     font-weight:bold;
+    
+}
+.user_cardabb h3{
+    color: #042496;
+    margin-top: 5%;
     margin-bottom: 35px;
+   
+ 
+    font-family: 'Kenia', cursive;
+    font-weight:bold;
+    
 }
 
 .bt{
-    margin-left: 0.6%; 
-    margin-bottom: 40px;
-    margin-right: 2%;
+  
+   
+  
     background: #0e24a0 !important;
     color: white !important;
-    margin-top:0;
-   
-    float:left;
     font-size: 18px;
-    font-weight:bold;
-    
+    font-weight:bold; 
     height: max-content;
-    
     font-family: 'Kenia', cursive;
     border: 0px solid #d6d6d6;
     z-index: 99;
-
-
-
-
+    margin-left: 10px;
 
     }    
-
-
-
+.libelee{
+    margin-bottom: 40px;
+  
+}
+    
 
 
 </style>
 
 </head>
 
-    <div class="container h-100">
+    <div class="container h-100abb">
         <div class="d-flex justify-content-center h-100">
-            <div class="user_card">
+            <div class="user_cardabb">
                 <div class="d-flex justify-content-center">
                     {% if movement %}
                     <h3>Movement to own account saved successfully</h3>
                     {% elif event == "deposit" %}
                     <h3>Deposit saved successfully</h3>
                     {% else %}
-                    <h3>Payment saved successfully</h3>
+                    <h1>Payment saved successfully</h1>
                     {% endif%}
 
                     <li><a  href="{% url 'accounts:account_detail' account_id %}"><i class="fa fa-close" ></i></a></li>
                     </div>
 
-                        <div class= 'libele'>
+                        <div class= 'libelee'>
                 
                        <a href="{% url 'accounts:account_detail' account_id %}" class="btn bt">Come back to Account details</a>
                 

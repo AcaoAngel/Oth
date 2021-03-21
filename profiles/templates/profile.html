@@ -22,7 +22,7 @@
       background: #090a0a;
       position: relative;
       display: flex;
-      justify-content: center;
+ 
       flex-direction: column;
       padding: 10px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -33,16 +33,25 @@
       border: 2px solid rgba(255,255,255,0.2);
     }
     
-    .user_cardd h1{
+    .profile_contents{
+  margin-left: 2% !important;
+
+   
+    
+    }
+
+    .justifycontentcenter h1{
       color: #267af7; 
       font-size: 30px;
-      margin-right: 1px;
+      margin-left: 40%;
       font-family: 'Kenia', cursive;
       font-weight:bold;
       margin-top: 2%;
+      text-align: center;
     }
-    .justify-content-center {
+    .justifycontentcenter {
       white-space:nowrap;
+     
       
     }
 
@@ -53,23 +62,46 @@
       font-family: 'Kenia', cursive;
       font-size: 20px;
       
+     
+     
     }
-  
+    .user_cardd ul p{
+      color: rgb(240, 232, 232) !important;
+      margin-top: 1%;    
+      font-family: 'Kenia', cursive;
+      font-size: 20px;
+      overflow-wrap:break-word;
+    }
     .user_cardd ul li span{
       color: #267af7 !important;
-      margin-left: 7%;
+      margin-left:3%;
+      white-space: pre-wrap;
+      
+      
     }
+
+    .user_cardd ul a{
+      color: #267af7 !important;
+      margin-left:7%;
+      white-space: pre-wrap;
+    }
+
+    /* style=' overflow-wrap:break-word; */
+
+
     .btn_info{
-        margin-top: 0; 
+        margin-top: 5%; 
         font-size: 20px;
         color: white;
         background-color: #267af7;
         font-family: 'Kenia', cursive;
         font-weight: bold;
-        margin-left: 5%;
+        margin-left: 2% !important;
+       
+
       }
-      .justify-content-center li a{
-            margin-left: 34%;
+      .button_cancel p b a{
+            margin-left:35%;
             font-size:25px;
             color: red;
             position: absolute;
@@ -100,18 +132,23 @@
     <div class="container h-100a">
       <div class="d-flex justify-content-center h-100">
         <div  class="user_cardd">
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justifycontentcenter">
               <h1>Profile Info</h1>
-              <li><a  href="{% url 'Oth_app:index' %}"><i class="fa fa-close" ></i></a></li>
+              <div class="button_cancel">
+              <p><b><a href="{% url 'Oth_app:index' %}"><i class="fa fa-close" ></i></a></b></p>
+            </div>
           </div>
-          <div class="profile_content">
+          <div class="profile_contents">
+            
             <ul>
               <li>Username: <span> {{profile}}</span></li>
              
               <li>Email: <span>{{profile.user.email}}</span></li>
               <li>bio: <span>{{profile.bio}}</span></li>
-              <li>web: <span>{{profile.web|striptags|slice:':50'}}</span></li>
-                              
+              <!-- <li>web: <span>{{profile.web}}</span></li> -->
+              <li>web: <span><a  href='{{profile.web}}' target='_blank'>{{profile.web|striptags|slice:':100'}}</span></a>
+         
+              <!-- |striptags|slice:':50' -->
               </ul>
           </div>
           <div class="btn-update">

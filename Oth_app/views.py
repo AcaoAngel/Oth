@@ -13,3 +13,6 @@ def reports(request):
 
 def data_protection(request):
     return render(request, "data_protection.html")
+
+def about_us(request):
+    return render(request, "about_us.html")

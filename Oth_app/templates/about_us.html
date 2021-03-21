@@ -1,0 +1,122 @@
+
+{% extends "base.html" %}
+{% block body %}
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/styles.css' %}"/>   
+</head>
+<body >
+    <div class="about-section">
+        <div class="inner-container">
+            <div  class="otsikko">
+            <h1>About Us</h1>
+            </div>
+            <div  class="text">
+            <h3 style= 'margin-top:20px;font-weight:bold;'>Projektin idea:</h3> <h5 style= 'margin-left:40px;'>  • Ohjelma auttaa ihmisiä hallitsemaan oma talousraha. </h5> 
+            </div> 
+          
+                <div  class="text1">
+                <h3 style= 'margin-top:20px;font-weight:bold;'> Projektin toteuttajat: </h3>
+                <h5 style= 'margin-left:40px;'> • Angel Acao </h5>
+                <h5 style= 'margin-left:40px;'> • Lynda Essed </h5>	
+                </div>       
+                <div  class="text2">
+                    <h3 style= 'margin-top:20px;font-weight:bold;'> Tietoa meistä: </h3>
+                    <h5 style= 'padding-right: 50px;margin-left:40px;'> Me olemme kaksi opiskelijat Taitotalosta, jotka ovat suorittamassa Tieto- ja viestintätekniikka suuntautunut Pythoon. Me olemme tehnyt yhdessä kouluharjoitukset ja tutustunut kurssin aikana. Päätyimme toteuta työelämä projekti yhdessä, kun projekti ideat ja osaamistaidot ovat soveltuva projektin idealle.  </h5>
+                    <h5 style= 'padding-right: 50px;margin-left:40px;'> Me molemmat kiinnostuvat talous asioista, kun olemme opiskellut silla alalla tutkintoa ja miellä on kokemusta rahan hallinnosta.   </h5>
+                </div> 
+                <div class="text3">   
+                    <h3 style= 'margin-top:20px;font-weight:bold;' >Työelämäprojekti toteudutaan Taitotalolle: </h3>	  
+                    <h5 style= 'padding-right: 1000px;margin-left:40px;'>Taitotalo, Valimotie 8, 00380 Helsinki | 010 80 80 90 | asiakaspalvelu@taitotalo.fi </h5>
+                </div> 
+                <div class="text4">
+                        <h3 style= 'margin-top:20px;font-weight:bold;'> Projektin Kuvaus</h3>
+                        <h5 style= 'padding-right: 50px;margin-left:40px;'>Ohjelma auttaa ihmisiä hallitsemaan oma talousraha. Käyttäjä mainitse omia käyttötarkoituksen tilliä esim</h5>
+                        <h5 style= 'margin-left:100px;'> • Ruoka tiili  </h5>
+                        <h5 style= 'margin-left:100px;'> • Matkustamiseen tiili </h5>	
+                        <h5 style= 'margin-left:100px;'> • Pitkäaikaisen säästö  </h5>
+                        <h5 style= 'margin-left:100px;'> • Viihtymisen rahaa </h5>	
+                        <h5 style= 'margin-left:100px;'> • Jne.       </h5>
+
+                        
+                     
+
+                    </div>
+                <div class="text5">     
+             
+                
+                        <h5 style= 'padding-right: 600px;margin-left:40px;'>Käyttäjä sivustomme avulla voi luoda useampia tiliä ja syötä niille tapahtumia sekä siirtää rahaa tilistä toiseen. Nain tiedon avulla ohjelma voi laskea ja antaa eri hyödyllistä tietoa, esim.  </p>	
+                        <h5 style= 'margin-left:100px;'> • Raportti maksuista.   </h5>
+                        <h5 style= 'margin-left:100px;'> • Lainan ottamisen kannattavuus  </h5>	
+                        <h5 style= 'margin-left:100px;'> • Säästötavan suositukset  </h5>
+                        <h5 style= 'margin-left:100px;'> • Jne.</h5>
+                    </div> 
+                <div class="text6">         
+                        <h5 style= 'padding-right: 950px;margin-left:40px;'> Sivussa käyttäjä löytyy julkaisuja, josta saa neuvoa sivuston käytöstä, ”Ottaa yhteyttää” toiminto, uutisia ja muita hyödyllistä tietoa.</p>   </p>
+                           
+                        </div> 
+                    
+                <div class="text7">
+                        <h3 style= 'margin-left:20px; margin-top:20px;font-weight:bold;'> Skills</h3>
+                        <h5 style= 'margin-left:50px;'> • Web Design  </h5>
+                        <h5 style= 'margin-left:50px;'> • Django </h5>	
+                        <h5 style= 'margin-left:50px;'> • Coding </h5>
+                
+               
+             
+                    <img style=' 
+                    -webkit-background-size: 100%;
+                    -moz-background-size: 100%;
+                    -o-background-size: 100%;
+                    background-size: 100%;
+                   margin-left: 130px;
+                    z-index: 999;
+                padding-bottom: 10px;margin-top: -700px;'src="/static/media/img/plante01.png" alt="image" >
+                   </div>
+                 
+            
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}
+
+
+
+
+
+    <!-- <div class="about-section">
+        <div class="inner-container">
+            <h1>About Us</h1>
+            <h2>Projektin idea  </h2>
+            <p  class="text">
+                <h3 style= 'margin-left:50px;font-weight:bold;'> Projektin toteuttajat: </h3>
+                <p style= 'margin-left:100px;font-weight:bold;'> • Angel Acao </p>
+                <p style= 'margin-left:100px;font-weight:bold;'> • Lynda Essed </p>	
+                    
+                <p  class="text1">
+                    <p style= 'margin-left:100px;font-weight:bold;'> Me olemme kaksi opiskelijat Taitotalosta, jotka ovat suorittamassa Tieto- ja viestintätekniikka suuntautunut Pythoon. Me olemme tehnyt yhdessä kouluharjoitukset ja tutustunut kurssin aikana. Päätyimme toteuta työelämä projekti yhdessä, kun projekti ideat ja osaamistaidot ovat soveltuva projektin idealle.  </p>
+                    <p style= 'margin-left:100px;font-weight:bold;'> • Me molemmat kiinnostuvat talous asioista, kun olemme opiskellut silla alalla tutkintoa ja miellä on kokemusta rahan hallinnosta.   </p>
+                    <p style= 'margin-left:100px;font-weight:bold;' > • Lynda Essed </p>	l    
+            
+
+            <div class="skills">
+                <div class="skill">
+                
+                <span>Web Design</span>
+                <span>Photoshop & Illustrator</span>
+                <span>Coding</span>
+            </div>
+        </div>
+    </div>
+</body> -->
+
+
+
